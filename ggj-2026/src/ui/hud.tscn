@@ -48,21 +48,13 @@ layout_mode = 2
 [node name="HBoxContainerScore" type="HBoxContainer" parent="MarginContainer/HBoxContainerScore/VBoxContainerScore" unique_id=1381202975]
 layout_mode = 2
 
-[node name="ScoreLabelTitre" type="Label" parent="MarginContainer/HBoxContainerScore/VBoxContainerScore/HBoxContainerScore" unique_id=477256994]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("2_4rn03")
-theme_override_font_sizes/font_size = 35
-text = "Score: "
-
 [node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainerScore/VBoxContainerScore/HBoxContainerScore" unique_id=819327578]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_fonts/font = ExtResource("2_4rn03")
 theme_override_font_sizes/font_size = 35
-text = "0"
+text = "Score: 0"
 
 [node name="TimerLabel" type="Label" parent="MarginContainer/HBoxContainerScore/VBoxContainerScore" unique_id=837479002]
 layout_mode = 2
@@ -84,6 +76,8 @@ theme_override_constants/separation = 5
 
 [node name="LivesLabelP2Coin" type="Label" parent="MarginContainer/HBoxContainerP2/VBoxContainerP2" unique_id=1413575276]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_4rn03")
+theme_override_font_sizes/font_size = 30
 text = "INSERT COIN"
 
 [node name="NameLabelP1" type="Label" parent="MarginContainer/HBoxContainerP2/VBoxContainerP2" unique_id=1591085974]
