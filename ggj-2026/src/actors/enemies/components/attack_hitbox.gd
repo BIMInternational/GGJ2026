@@ -43,11 +43,15 @@ func is_player_in_range() -> bool:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		print("[AttackHitbox] Joueur détecté")
 		_player_in_hitbox = true
 		player_in_range.emit(true)
 		
 		if _active:
+			print("[AttackHitbox] Hitbox active, inflige dégâts")
 			_deal_damage(body)
+		else:
+			print("[AttackHitbox] Hitbox inactive")
 
 
 func _on_body_exited(body: Node2D) -> void:
@@ -59,6 +63,12 @@ func _on_body_exited(body: Node2D) -> void:
 func _deal_damage(body: Node2D) -> void:
 	hit_landed.emit(body)
 	
-	if body.has_method("apply_knockback"):
-		var knockback_dir = (body.global_position - global_position).normalized()
-		body.apply_knockback(knockback_dir, knockback_force)
+	# Appliquer les dégâts au joueur
+	if body.has_method("take_damage"):
+		# Utiliser la position du parent (l'ennemi) au lieu de la hitbox
+		var enemy_position = get_parent().global_position if get_parent() else global_position
+		var knockback_dir = (body.global_position - enemy_position).normalized()
+		print("[AttackHitbox] Enemy pos=", enemy_position, " Player pos=", body.global_position, " Direction=", knockback_dir)
+		body.take_damage(damage, knockback_dir)
+	else:
+		print("[AttackHitbox] Joueur touché mais pas de méthode take_damage!")

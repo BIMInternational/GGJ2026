@@ -58,14 +58,20 @@ var _last_move_direction: Vector2 = Vector2.DOWN
 var _dash_timer: float = 0.0
 var _dash_cooldown_timer: float = 0.0
 var _attack_timer: float = 0.0
+var _invulnerability_timer: float = 0.0
+var _hurt_timer: float = 0.0
+var _mask_change_timer: float = 0.0
 
 # State flags
 var _is_attacking: bool = false
 var _is_dashing: bool = false
+var _is_hurt: bool = false
+var _is_changing_mask: bool = false
 
 # References
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer if has_node("AnimationPlayer") else null
+@onready var health_component: HealthComponent = $HealthComponent
 
 
 func _ready() -> void:
@@ -83,20 +89,25 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	_update_timers(delta)
 	
-	# Permettre de changer de masque à tout moment
-	if Input.is_action_just_pressed("switch_mask"):
+	# Permettre de changer de masque à tout moment (sauf si déjà en train de changer)
+	if Input.is_action_just_pressed("switch_mask") and not _is_changing_mask:
 		_switch_mask()
 	
-	# Ne pas traiter les autres inputs si en train d'attaquer ou de dasher
-	if not _is_attacking and not _is_dashing:
+	# Ne pas traiter les autres inputs si en train d'attaquer ou de dasher ou hurt ou mask change
+	if not _is_attacking and not _is_dashing and not _is_hurt and not _is_changing_mask:
 		_handle_input()
+	else:
+		# Forcer la direction à zéro si on ne peut pas bouger
+		if _is_hurt or _is_changing_mask:
+			direction = Vector2.ZERO
 	
 	# Appliquer le mouvement
 	_apply_movement(delta)
 	
 	# Rotation du sprite selon direction horizontale uniquement (beat'em all style)
-	if _velocity.x != 0:
-		sprite.flip_h = _velocity.x < 0
+	# Ne flip que si c'est un mouvement volontaire (pas du knockback)
+	if direction.x != 0:
+		sprite.flip_h = direction.x < 0
 	
 	set_velocity(_velocity)
 	move_and_slide()
@@ -113,8 +124,8 @@ func _update_animations() -> void:
 		print("AnimationPlayer n'existe pas!")
 		return
 	
-	# Ne pas changer l'animation pendant une attaque
-	if _is_attacking:
+	# Ne pas changer l'animation pendant une attaque, hurt ou mask change
+	if _is_attacking or _is_hurt or _is_changing_mask:
 		return
 	
 	# Vérifier si le personnage bouge
@@ -149,6 +160,25 @@ func _update_timers(delta: float) -> void:
 	
 	if _dash_cooldown_timer > 0:
 		_dash_cooldown_timer -= delta
+	
+	# Invulnerability timer
+	if _invulnerability_timer > 0:
+		_invulnerability_timer -= delta
+		if _invulnerability_timer <= 0:
+			print("[Player] Fin de l'invulnérabilité")
+	
+	# Hurt timer
+	if _is_hurt:
+		_hurt_timer -= delta
+		if _hurt_timer <= 0:
+			_is_hurt = false
+			print("[Player] Fin de l'état hurt")
+	
+	# Mask change timer
+	if _is_changing_mask:
+		_mask_change_timer -= delta
+		if _mask_change_timer <= 0:
+			_is_changing_mask = false
 
 
 func _handle_input() -> void:
@@ -175,6 +205,14 @@ func _apply_movement(_delta: float) -> void:
 	if _is_dashing:
 		# En dash, maintenir la vitesse constante
 		_velocity = _velocity
+	elif _is_hurt:
+		# En état hurt, appliquer une friction très légère pour laisser le knockback agir
+		var old_velocity = _velocity
+		_velocity *= 0.95
+		print("[Player] Hurt movement - velocity avant=", old_velocity, " après=", _velocity)
+	elif _is_changing_mask:
+		# En état mask change, ralentir progressivement
+		_velocity = lerp(_velocity, Vector2.ZERO, 0.2)
 	else:
 		# Calculer la vitesse cible
 		var speed_multiplier = speed_boost if _is_boosted else 1.0
@@ -203,6 +241,10 @@ func _start_attack() -> void:
 	_is_attacking = true
 	_attack_timer = attack_duration
 	attack_started.emit()
+	
+	# Lancer l'animation Attack
+	if animation_player and animation_player.has_animation("Attack"):
+		animation_player.play("Attack")
 
 
 func _end_attack() -> void:
@@ -231,8 +273,33 @@ func respawn(spawn_position: Vector2) -> void:
 
 
 ## Handles taking damage (optional health system integration)
-func take_damage(damage: int) -> void:
-	took_damage.emit(damage, 0)
+func take_damage(damage: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
+	print("[Player] take_damage appelé, damage=", damage, " knockback_dir=", knockback_dir)
+	# Ignorer si invulnérable
+	if _invulnerability_timer > 0:
+		print("[Player] Invulnérable, dégâts ignorés")
+		return
+	
+	if health_component:
+		health_component.take_damage(damage)
+		took_damage.emit(damage, health_component.current_health)
+		
+		# Activer l'état hurt
+		_is_hurt = true
+		_hurt_timer = 0.5  # Ne peut rien faire pendant 0.5s
+		_invulnerability_timer = 0.6  # Invulnérable pendant 0.6s
+		print("[Player] État hurt activé")
+		
+		# Lancer l'animation Domage
+		if animation_player and animation_player.has_animation("Domage"):
+			animation_player.play("Domage")
+		
+		# Appliquer le knockback
+		if knockback_dir != Vector2.ZERO:
+			_velocity = knockback_dir.normalized() * 800.0
+			print("[Player] Knockback appliqué: ", _velocity)
+		else:
+			print("[Player] Pas de knockback (direction = zero)")
 
 
 ## Triggers death
@@ -244,6 +311,19 @@ func die() -> void:
 func _switch_mask() -> void:
 	if available_masks.is_empty():
 		return
+	
+	# Activer l'état de changement de masque
+	_is_changing_mask = true
+	_mask_change_timer = 0.3
+	
+	# Lancer l'animation Mask_Change
+	if animation_player and animation_player.has_animation("Mask_Change"):
+		animation_player.play("Mask_Change")
+		print("[Player] Animation Mask_Change lancée")
+	elif animation_player:
+		print("[Player] Animation Mask_Change introuvable! Animations dispo: ", animation_player.get_animation_list())
+	else:
+		print("[Player] Pas d'AnimationPlayer!")
 	
 	# Cycle vers le masque suivant
 	current_mask_index = (current_mask_index + 1) % available_masks.size()

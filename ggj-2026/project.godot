@@ -180,7 +180,7 @@ dash={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://localization/translations.en.translation", "res://localization/translations.fr.translation", "res://localization/translations.Game Jam 2026.translation")
+locale/translations=PackedStringArray("res://localization/translations.en.translation", "res://localization/translations.fr.translation")
 locale/fallback="fr"
 
 [rendering]

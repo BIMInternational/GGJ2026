@@ -49,6 +49,9 @@ func _physics_process(delta: float) -> void:
 	# Appliquer la décélération du knockback
 	_knockback_velocity = lerp(_knockback_velocity, Vector2.ZERO, knockback_friction)
 
+	# Stocker la direction avant d'ajouter le knockback
+	var movement_direction = velocity.x
+	
 	# Combiner le mouvement AI avec le knockback
 	velocity += _knockback_velocity
 	move_and_slide()
@@ -56,9 +59,9 @@ func _physics_process(delta: float) -> void:
 	# Mise à jour du z_index pour le tri visuel
 	z_index = int(global_position.y)
 
-	# Orienter le sprite selon la direction
-	if velocity.x != 0:
-		sprite.flip_h = velocity.x < 0
+	# Orienter le sprite selon la direction (seulement si mouvement volontaire, pas knockback)
+	if movement_direction != 0:
+		sprite.flip_h = movement_direction < 0
 		
 	_update_hitbox_position()
 

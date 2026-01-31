@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dn2x4qw5cj2ev" path="res://src/actors/Player/particles/land_particles.tscn" id="4_hod3v"]
 [ext_resource type="Texture2D" uid="uid://b44f7medffo2m" path="res://assets/sprites/DonaRosa.png" id="6_6jq1w"]
 [ext_resource type="Script" uid="uid://bnef08cjc2l1j" path="res://src/scripts/particle_manager.gd" id="6_dmu6e"]
+[ext_resource type="Script" uid="uid://cc45vge2xbv2a" path="res://src/scripts/health_component.gd" id="7_health"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6jq1w"]
 radius = 127.0
@@ -28,6 +29,22 @@ tracks/0/keys = {
 "values": [8, 9]
 }
 
+[sub_resource type="Animation" id="Animation_7dnek"]
+resource_name = "Domage"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [12]
+}
+
 [sub_resource type="Animation" id="Animation_q4vh8"]
 resource_name = "Idle"
 length = 4.0
@@ -43,6 +60,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_lo26q"]
+resource_name = "Mask_Change"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
 }
 
 [sub_resource type="Animation" id="Animation_ksoi8"]
@@ -80,7 +113,9 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7dnek"]
 _data = {
 &"Attack": SubResource("Animation_6jq1w"),
+&"Domage": SubResource("Animation_7dnek"),
 &"Idle": SubResource("Animation_q4vh8"),
+&"Mask_Change": SubResource("Animation_lo26q"),
 &"Move": SubResource("Animation_ksoi8"),
 &"RESET": SubResource("Animation_7wa16")
 }
@@ -88,6 +123,9 @@ _data = {
 [node name="Player" type="CharacterBody2D" unique_id=775830643]
 collision_mask = 4
 script = ExtResource("1_player")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1597723280]
+script = ExtResource("7_health")
 
 [node name="PlayerEffects" type="Node2D" parent="." unique_id=1695013224]
 script = ExtResource("2_qdvcd")
@@ -103,7 +141,7 @@ hit_impact_particles = ExtResource("4_hod3v")
 script = ExtResource("6_dmu6e")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2125791359]
-position = Vector2(0, -32)
+scale = Vector2(2.1, 2.1)
 texture = ExtResource("6_6jq1w")
 hframes = 4
 vframes = 6
