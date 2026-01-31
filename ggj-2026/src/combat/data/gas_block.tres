@@ -9,5 +9,4 @@ damage = 0.0
 range_distance = 80.0
 dissipation_time = 45.0
 cooldown = 0.0
-speed = 0.0
 collision_radius = 30.0

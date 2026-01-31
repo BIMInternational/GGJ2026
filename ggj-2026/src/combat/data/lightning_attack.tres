@@ -9,7 +9,6 @@ damage = 18.0
 range_distance = 0.0
 dissipation_time = 0.3
 cooldown = 3.5
-speed = 0.0
 collision_radius = 250.0
 expand_over_time = true
 ignore_y_axis = true
