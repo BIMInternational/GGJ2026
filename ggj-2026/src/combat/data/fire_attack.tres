@@ -9,5 +9,5 @@ element_type = 1
 damage = 15.0
 range_distance = 60.0
 cooldown = 1.5
-speed = 400.0
+speed = 900.0
 visual_effect = ExtResource("2_effect")

@@ -5,7 +5,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fire"]
 shader = ExtResource("1_shader")
 shader_parameter/fire_speed = 2.3350000871625
-shader_parameter/fire_intensity = 1.1200000294499999
+shader_parameter/fire_intensity = 1.12000002945
 shader_parameter/noise_scale = 3.3970001138575
 shader_parameter/pulse_strength = 0.058000002755
 shader_parameter/color_core = Color(1, 1, 0.9, 1)
