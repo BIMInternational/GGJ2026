@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_gas"]
 [ext_resource type="Resource" uid="uid://b0catnltvlj0m" path="res://src/combat/data/gas_static.tres" id="2_gas_static"]
+[ext_resource type="PackedScene" uid="uid://dvjj2qjfpqhvw" path="res://src/combat/effects/gas_effect.tscn" id="3_4tkv7"]
 
 [resource]
 script = ExtResource("1_gas")
@@ -14,3 +15,4 @@ speed = 50.0
 reverse_direction = true
 trail_attack_data = ExtResource("2_gas_static")
 trail_spawn_distance = 20.0
+visual_effect = ExtResource("3_4tkv7")

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dvjj2qjfpqhvw"]
+
+[ext_resource type="Shader" uid="uid://kif0qboid0u6" path="res://src/combat/effects/gas_shader.gdshader" id="1_gas"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gas"]
+shader = ExtResource("1_gas")
+shader_parameter/gas_speed = 0.8
+shader_parameter/gas_density = 1.1660000316349999
+shader_parameter/noise_scale = 2.5
+shader_parameter/swirl_strength = 0.3
+shader_parameter/color_core = Color(0.4, 0.9, 0.3, 0.7)
+shader_parameter/color_mid = Color(0.3, 0.7, 0.2, 0.5)
+shader_parameter/color_outer = Color(0.2, 0.5, 0.15, 0.3)
+shader_parameter/color_edge = Color(0.1, 0.3, 0.1, 0)
+
+[sub_resource type="Gradient" id="Gradient_white"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1"]
+gradient = SubResource("Gradient_white")
+fill = 1
+
+[node name="GasEffect" type="Sprite2D" unique_id=236747100]
+material = SubResource("ShaderMaterial_gas")
+scale = Vector2(4, 4)
+texture = SubResource("GradientTexture2D_1")

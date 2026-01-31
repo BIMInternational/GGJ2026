@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://cy5k8m3n4p7ra"]
 
 [ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_water"]
-[ext_resource type="Resource" path="res://src/combat/data/water_static.tres" id="2_water_static"]
+[ext_resource type="Resource" uid="uid://b8h3j2lam5n7p" path="res://src/combat/data/water_static.tres" id="2_water_static"]
 
 [resource]
 script = ExtResource("1_water")
