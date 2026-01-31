@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://cy5k8m3n4p7ra"]
+
+[ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_water"]
+[ext_resource type="Resource" path="res://src/combat/data/water_static.tres" id="2_water_static"]
+
+[resource]
+script = ExtResource("1_water")
+element_type = 3
+damage = 8.0
+range_distance = 60.0
+dissipation_time = 5.0
+cooldown = 1.5
+speed = 400.0
+trail_attack_data = ExtResource("2_water_static")
+trail_spawn_distance = 25.0

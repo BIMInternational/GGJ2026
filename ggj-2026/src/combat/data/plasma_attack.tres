@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://bkgmxv1f4n7tl"]
+
+[ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_plasma"]
+
+[resource]
+script = ExtResource("1_plasma")
+element_type = 1
+damage = 37.0
+range_distance = 0.0
+dissipation_time = 0.5
+cooldown = 0.0
+collision_radius = 50.0
+expand_over_time = true

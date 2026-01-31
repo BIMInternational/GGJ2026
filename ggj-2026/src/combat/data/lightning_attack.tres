@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://b63ax6nr2wsfx"]
+
+[ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_lightning"]
+
+[resource]
+script = ExtResource("1_lightning")
+element_type = 5
+damage = 18.0
+range_distance = 0.0
+dissipation_time = 0.3
+cooldown = 3.5
+speed = 0.0
+collision_radius = 250.0
+expand_over_time = true
+ignore_y_axis = true

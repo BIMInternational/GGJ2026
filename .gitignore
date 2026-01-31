@@ -1,3 +1,7 @@
+.vscode/
+
+ggj-2026/publish/
+
 # Godot 4+ specific ignores
 .godot/
 .nomedia

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://cdrgg5vknq2qb"]
+
+[ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_gas_block"]
+
+[resource]
+script = ExtResource("1_gas_block")
+element_type = 7
+damage = 0.0
+range_distance = 80.0
+dissipation_time = 45.0
+cooldown = 0.0
+speed = 0.0
+collision_radius = 30.0

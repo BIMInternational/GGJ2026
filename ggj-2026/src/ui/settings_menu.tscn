@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://dhmpjbd2kaioa"]
+
+[ext_resource type="Script" uid="uid://c7sbgweecy5rx" path="res://src/ui/settings_menu.gd" id="1"]
+
+[node name="SettingsMenu" type="Control" unique_id=1103009533]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1515002182]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1780897707]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=946178562]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=254109163]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="ControlsButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1468004354]
+layout_mode = 2
+
+[node name="LanguageSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1928588713]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="LanguageLabel" type="Label" parent="MarginContainer/VBoxContainer/LanguageSection" unique_id=1552638219]
+layout_mode = 2
+text = "Langue / Language"
+
+[node name="LanguageOption" type="OptionButton" parent="MarginContainer/VBoxContainer/LanguageSection" unique_id=976724374]
+layout_mode = 2
+
+[node name="AudioSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=124910347]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MasterLabel" type="Label" parent="MarginContainer/VBoxContainer/AudioSection" unique_id=1174540258]
+layout_mode = 2
+
+[node name="MasterSlider" type="HSlider" parent="MarginContainer/VBoxContainer/AudioSection" unique_id=1872119122]
+layout_mode = 2
+value = 80.0
+
+[node name="MusicLabel" type="Label" parent="MarginContainer/VBoxContainer/AudioSection" unique_id=1921527712]
+layout_mode = 2
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/VBoxContainer/AudioSection" unique_id=1554984068]
+layout_mode = 2
+value = 80.0
+
+[node name="SFXLabel" type="Label" parent="MarginContainer/VBoxContainer/AudioSection" unique_id=44052321]
+layout_mode = 2
+
+[node name="SFXSlider" type="HSlider" parent="MarginContainer/VBoxContainer/AudioSection" unique_id=650334560]
+layout_mode = 2
+value = 100.0
+
+[node name="DisplaySection" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=764618523]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FullscreenCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/DisplaySection" unique_id=1539418899]
+layout_mode = 2
+
+[node name="VSyncCheck" type="CheckButton" parent="MarginContainer/VBoxContainer/DisplaySection" unique_id=1401480260]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer" unique_id=77049612]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ResetSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=667254817]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ResetLabel" type="Label" parent="MarginContainer/VBoxContainer/ResetSection" unique_id=1502434347]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="ResetButton" type="Button" parent="MarginContainer/VBoxContainer/ResetSection" unique_id=1952887363]
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2042020835]
+layout_mode = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/LanguageSection/LanguageOption" to="." method="_on_language_selected"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/AudioSection/MasterSlider" to="." method="_on_master_slider_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/AudioSection/MusicSlider" to="." method="_on_music_slider_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/AudioSection/SFXSlider" to="." method="_on_sfx_slider_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/DisplaySection/FullscreenCheck" to="." method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/DisplaySection/VSyncCheck" to="." method="_on_vsync_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ResetSection/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BackButton" to="." method="_on_back_pressed"]

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://i3rjhltnwrxw"]
+
+[ext_resource type="Script" uid="uid://ddftavpnj0tio" path="res://src/scenes/main/main.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://hud" path="res://src/ui/hud.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://src/ui/pause_menu.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://src/ui/game_over.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://c8vq3m2n4p5r6" path="res://src/scenes/levels/level_01.tscn" id="5"]
+
+[node name="Main" type="Node2D" unique_id=103620999]
+script = ExtResource("1")
+
+[node name="Level01" parent="." unique_id=182787318 instance=ExtResource("5")]
+
+[node name="HUD" parent="." unique_id=1230549986 instance=ExtResource("2")]
+
+[node name="PauseMenu" parent="." unique_id=2057100584 instance=ExtResource("3")]
+
+[node name="GameOver" parent="." unique_id=958626885 instance=ExtResource("4")]

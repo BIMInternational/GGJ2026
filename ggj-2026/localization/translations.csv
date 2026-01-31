@@ -1,0 +1,69 @@
+keys,fr,en
+MAIN_MENU_TITLE,Game Jam 2026,Game Jam 2026
+BTN_START,Démarrer,Start
+BTN_SETTINGS,Paramètres,Settings
+BTN_CREDITS,Crédits,Credits
+BTN_QUIT,Quitter,Quit
+BTN_BACK,Retour,Back
+
+SETTINGS_TITLE,PARAMÈTRES,SETTINGS
+SETTINGS_CONTROLS,Configuration des Touches,Controls Configuration
+SETTINGS_MASTER_VOLUME,Volume Principal,Master Volume
+SETTINGS_MUSIC_VOLUME,Volume Musique,Music Volume
+SETTINGS_SFX_VOLUME,Volume Effets Sonores,Sound Effects Volume
+SETTINGS_FULLSCREEN,Plein écran,Fullscreen
+SETTINGS_VSYNC,VSync,VSync
+SETTINGS_RESET_DATA,Réinitialiser toutes les données,Reset All Data
+SETTINGS_DANGER_ZONE,Danger Zone,Danger Zone
+
+CONTROLS_TITLE,CONFIGURATION DES TOUCHES,CONTROLS CONFIGURATION
+CONTROLS_INFO,Cliquez sur une touche puis appuyez sur la nouvelle touche souhaitée,Click on a key then press the new desired key
+CONTROLS_RESET,Réinitialiser aux valeurs par défaut,Reset to Defaults
+CONTROLS_WAITING,Appuyez sur une touche...,Press a key...
+
+ACTION_MOVE_LEFT,Déplacement Gauche,Move Left
+ACTION_MOVE_RIGHT,Déplacement Droite,Move Right
+ACTION_MOVE_UP,Déplacement Haut,Move Up
+ACTION_MOVE_DOWN,Déplacement Bas,Move Down
+ACTION_JUMP,Sauter,Jump
+ACTION_ACTION,Action/Interagir,Action/Interact
+ACTION_ATTACK,Attaquer,Attack
+ACTION_SWITCH_MASK,Changer de Masque,Switch Mask
+ACTION_DEFENSE,Défendre/Bloquer,Defend/Block
+ACTION_VALIDATE,Valider,Validate
+ACTION_CANCEL,Annuler/Retour,Cancel/Back
+ACTION_PAUSE,Pause,Pause
+
+CREDITS_TITLE,CRÉDITS,CREDITS
+CREDITS_GAME_JAM,Global Game Jam 2026,Global Game Jam 2026
+CREDITS_TEAM,ÉQUIPE,TEAM
+CREDITS_TOOLS,OUTILS UTILISÉS,TOOLS USED
+CREDITS_ASSETS,ASSETS & RESSOURCES,ASSETS & RESOURCES
+CREDITS_THANKS,REMERCIEMENTS SPÉCIAUX,SPECIAL THANKS
+CREDITS_COPYRIGHT,© 2026 - Créé pour la Global Game Jam,© 2026 - Created for Global Game Jam
+
+HUD_SCORE,Score: %d,Score: %d
+HUD_TIME,Time: %d:%02d,Time: %d:%02d
+
+PAUSE_TITLE,PAUSE,PAUSE
+PAUSE_RESUME,Reprendre,Resume
+PAUSE_RESTART,Recommencer,Restart
+PAUSE_MAIN_MENU,Menu Principal,Main Menu
+
+GAME_OVER_TITLE,GAME OVER,GAME OVER
+GAME_OVER_SCORE,Score: %d,Score: %d
+GAME_OVER_BEST_SCORE,Meilleur score: %d,Best Score: %d
+GAME_OVER_REPLAY,Rejouer,Play Again
+
+DIALOG_RESET_TITLE,Confirmation,Confirmation
+DIALOG_RESET_MESSAGE,"Êtes-vous sûr de vouloir réinitialiser toutes les données ?\n\nCela effacera :\n- Meilleur score\n- Tous les paramètres\n\nCette action est irréversible !","Are you sure you want to reset all data?\n\nThis will delete:\n- Best score\n- All settings\n\nThis action is irreversible!"
+DIALOG_RESET_CONFIRM,Oui; réinitialiser,"Yes, reset"
+DIALOG_RESET_CANCEL,Annuler,Cancel
+DIALOG_RESET_SUCCESS,Toutes les données ont été réinitialisées !,All data has been reset!
+DIALOG_SUCCESS,Succès,Success
+DIALOG_CONTROLS_RESET,Les touches ont été réinitialisées aux valeurs par défaut !,Controls have been reset to default values!
+
+KEY_UNASSIGNED,Non assigné,Unassigned
+KEY_LEFT_CLICK,Clic Gauche,Left Click
+KEY_RIGHT_CLICK,Clic Droit,Right Click
+KEY_MIDDLE_CLICK,Clic Molette,Middle Click
