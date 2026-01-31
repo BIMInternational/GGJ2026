@@ -5,7 +5,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gas"]
 shader = ExtResource("1_gas")
 shader_parameter/gas_speed = 0.8
-shader_parameter/gas_density = 1.2870000373825001
+shader_parameter/gas_density = 1.2870000373825
 shader_parameter/noise_scale = 2.526000072485
 shader_parameter/swirl_strength = 0.3
 shader_parameter/color_core = Color(0.40018785, 0.89979166, 0.29951698, 0.82000005)
