@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://begd7jmhiw87g"]
 
-[ext_resource type="Script" uid="uid://bwatertrailemit" path="res://src/combat/effects/water_trail_emitter.gd" id="1_emitter"]
+[ext_resource type="Script" path="res://src/combat/effects/water_trail_emitter.gd" id="1_emitter"]
 
 [sub_resource type="Gradient" id="Gradient_water"]
 offsets = PackedFloat32Array(0, 0.3, 0.7, 1)

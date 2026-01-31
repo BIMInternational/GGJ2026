@@ -5,7 +5,9 @@ class_name EnemySpawner
 ## Système de spawn d'ennemis aux bords de l'écran
 ## Les ennemis apparaissent à gauche ou à droite de l'écran visible
 
+@warning_ignore("unused_signal")
 signal wave_completed
+@warning_ignore("unused_signal")
 signal all_waves_completed
 
 @export var enemy_scene: PackedScene

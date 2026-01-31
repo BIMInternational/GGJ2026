@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://t2bj61snrvgi"]
 
-[ext_resource type="Script" uid="uid://b3gastrailemit" path="res://src/combat/effects/gas_trail_emitter.gd" id="1_emitter"]
+[ext_resource type="Script" path="res://src/combat/effects/gas_trail_emitter.gd" id="1_emitter"]
 
 [sub_resource type="Gradient" id="Gradient_gas"]
 offsets = PackedFloat32Array(0, 0.4, 0.7, 1)

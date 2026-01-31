@@ -2,6 +2,7 @@ extends Node
 class_name State
 ## Classe de base pour les états
 
+@warning_ignore("unused_signal")
 signal transition_requested(from_state: State, to_state_name: String)
 
 @onready var parent = get_parent()

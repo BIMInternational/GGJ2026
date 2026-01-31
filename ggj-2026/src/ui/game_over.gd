@@ -11,14 +11,29 @@ class_name GameOver
 @onready var quit_button: Button = $Control/VBoxContainer/ButtonsContainer/QuitButton
 
 var current_scene_path: String = ""
+var _auto_return_timer: float = 30.0
+var _timer_active: bool = false
 
 
 func _ready() -> void:
-	control.hide()
 	GameManager.game_over.connect(_on_game_over)
 	LocalizationManager.language_changed.connect(_update_texts)
 	_update_texts()
 	_setup_focus()
+	
+	# Si on arrive directement sur cette scène (après un changement de scène), afficher l'écran
+	if not GameManager.is_game_running:
+		# Attendre un frame pour que tous les noeuds soient prêts
+		await get_tree().process_frame
+		_show_game_over()
+
+
+func _process(delta: float) -> void:
+	if _timer_active:
+		_auto_return_timer -= delta
+		if _auto_return_timer <= 0:
+			_timer_active = false
+			_return_to_main_menu()
 
 
 func _update_texts(_locale: String = "") -> void:
@@ -29,6 +44,10 @@ func _update_texts(_locale: String = "") -> void:
 
 
 func _on_game_over() -> void:
+	_show_game_over()
+
+
+func _show_game_over() -> void:
 	if SceneManager.current_scene:
 		current_scene_path = SceneManager.current_scene.scene_file_path
 	score_label.text = tr("GAME_OVER_SCORE") % GameManager.score
@@ -41,8 +60,13 @@ func _on_game_over() -> void:
 	
 	best_score_label.text = tr("GAME_OVER_BEST_SCORE") % best_score
 	control.show()
-	get_tree().paused = true
+	get_tree().paused = false  # Ne pas mettre en pause pour permettre le timer
 	restart_button.grab_focus()
+	
+	# Démarrer le timer de retour automatique (30 secondes)
+	_auto_return_timer = 30.0
+	_timer_active = true
+	print("[GameOver] Timer de 30s démarré pour retour automatique au menu principal")
 
 
 func _on_restart_pressed() -> void:
@@ -52,8 +76,14 @@ func _on_restart_pressed() -> void:
 
 
 func _on_main_menu_pressed() -> void:
+	_return_to_main_menu()
+
+
+func _return_to_main_menu() -> void:
+	_timer_active = false
 	get_tree().paused = false
 	control.hide()
+	print("[GameOver] Retour au menu principal...")
 	SceneManager.change_scene(GameConstants.SCENE_MAIN_MENU)
 
 

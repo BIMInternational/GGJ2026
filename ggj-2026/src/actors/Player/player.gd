@@ -356,10 +356,15 @@ func die() -> void:
 	# Émettre le signal de mort
 	died.emit()
 	
-	# Retour au menu principal après 1.5 secondes
+	# Attendre la fin de l'animation de mort (1.5 secondes)
 	await get_tree().create_timer(1.5).timeout
-	print("[Player] Game Over! Retour au menu principal...")
-	get_tree().change_scene_to_file("res://src/ui/main_menu.tscn")
+	print("[Player] Game Over! Changement vers l'écran de fin...")
+	
+	# Déclencher le Game Over
+	GameManager.end_game()
+	
+	# Changer vers l'écran de game over
+	get_tree().change_scene_to_file("res://src/ui/game_over.tscn")
 
 
 ## Switch entre les masques disponibles
