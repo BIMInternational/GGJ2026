@@ -16,20 +16,24 @@ size = Vector2(98, 1573)
 
 [node name="Level01" type="Node2D" unique_id=1054281201]
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=542068778]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1853417546]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" unique_id=702070335]
+z_index = -100
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=542068778]
 position = Vector2(0, -750)
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("1_yqen0")
 
 [node name="Player" parent="." unique_id=1772990036 instance=ExtResource("1_player")]
-position = Vector2(-129, 144)
-speed = 600.0
+position = Vector2(-1538, 110)
 
 [node name="Camera2D" parent="Player" index="4" unique_id=1901156142]
-limit_left = -2872
-limit_top = -1223
-limit_right = 2883
-limit_bottom = 755
+limit_left = -2866
+limit_top = -400
+limit_right = 2854
+limit_bottom = 749
 
 [node name="Environment" type="Node2D" parent="." unique_id=1068240947]
 
