@@ -4,10 +4,10 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ice"]
 shader = ExtResource("1_ice")
-shader_parameter/ice_speed = 1.3960000630501201
-shader_parameter/shimmer_intensity = 0.58400002774
-shader_parameter/frost_amount = 0.72400003439
-shader_parameter/crystal_scale = 4.1550001498625
+shader_parameter/ice_speed = 0.90600003977512
+shader_parameter/shimmer_intensity = 0.838000039805
+shader_parameter/frost_amount = 1.0
+shader_parameter/crystal_scale = 6.72800027208
 shader_parameter/color_core = Color(0.85, 0.95, 1, 0.9)
 shader_parameter/color_mid = Color(0.5, 0.8, 1, 0.8)
 shader_parameter/color_outer = Color(0.3, 0.6, 0.9, 0.6)
@@ -22,5 +22,5 @@ fill = 1
 
 [node name="IceEffect" type="Sprite2D" unique_id=236747100]
 material = SubResource("ShaderMaterial_ice")
-scale = Vector2(4, 4)
+scale = Vector2(3, 3)
 texture = SubResource("GradientTexture2D_1")
