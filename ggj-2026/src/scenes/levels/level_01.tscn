@@ -74,13 +74,4 @@ shape = SubResource("RectangleShape2D_wall")
 script = ExtResource("3_spawner")
 enemy_scene = ExtResource("4_enemy")
 
-[node name="SpawnPoint1" type="Marker2D" parent="EnemySpawner" unique_id=1303134876]
-position = Vector2(-1089, 529)
-
-[node name="SpawnPoint2" type="Marker2D" parent="EnemySpawner" unique_id=2057384619]
-position = Vector2(1147, 592)
-
-[node name="SpawnPoint3" type="Marker2D" parent="EnemySpawner" unique_id=1549305652]
-position = Vector2(200, 550)
-
 [editable path="Player"]
