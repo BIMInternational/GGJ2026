@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://jrcg1vqnm2mb"]
 
 [ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_lightning_static"]
+[ext_resource type="PackedScene" uid="uid://ch3oejhq8m8y5" path="res://src/combat/effects/lightning_effect.tscn" id="2_sfobr"]
 
 [resource]
 script = ExtResource("1_lightning_static")
 element_type = 5
 damage = 15.0
 range_distance = 80.0
-dissipation_time = 3.0
 cooldown = 0.0
-speed = 0.0
 collision_radius = 30.0
+visual_effect = ExtResource("2_sfobr")

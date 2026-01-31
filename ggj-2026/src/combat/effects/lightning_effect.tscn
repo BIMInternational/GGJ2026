@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://ch3oejhq8m8y5"]
+
+[ext_resource type="Shader" uid="uid://jjblpf7nbqp1" path="res://src/combat/effects/lightning_shader.gdshader" id="1_lightning"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lightning"]
+shader = ExtResource("1_lightning")
+shader_parameter/electric_speed = 1.0
+shader_parameter/bolt_intensity = 0.77600003686
+shader_parameter/flicker_strength = 0.2110000100225
+shader_parameter/bolt_count = 3.162000007695
+shader_parameter/color_core = Color(1, 0.9362209, 0.6561027, 1)
+shader_parameter/color_inner = Color(0.8, 0.95, 1, 0.9)
+shader_parameter/color_bolt = Color(0.4, 0.7, 1, 0.8)
+shader_parameter/color_glow = Color(0.2, 0.4, 0.9, 0)
+
+[sub_resource type="Gradient" id="Gradient_white"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1"]
+gradient = SubResource("Gradient_white")
+fill = 1
+
+[node name="LightningEffect" type="Sprite2D" unique_id=712183120]
+material = SubResource("ShaderMaterial_lightning")
+scale = Vector2(30, 30)
+texture = SubResource("GradientTexture2D_1")
