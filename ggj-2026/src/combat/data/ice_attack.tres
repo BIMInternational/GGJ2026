@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://d3k7nap2q5r8t"]
 
 [ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_ice"]
+[ext_resource type="PackedScene" uid="uid://cweb2rugr1b8" path="res://src/combat/effects/ice_effect.tscn" id="2_088lu"]
 
 [resource]
 script = ExtResource("1_ice")
@@ -9,3 +10,4 @@ damage = 12.0
 range_distance = 100.0
 cooldown = 2.0
 speed = 300.0
+visual_effect = ExtResource("2_088lu")
