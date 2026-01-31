@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cenw7gy0m6jl1"]
+
+[ext_resource type="Script" uid="uid://28gh0tk4r4x4" path="res://src/actors/enemies/enemy_base.gd" id="1_enemy"]
+[ext_resource type="Script" uid="uid://cc45vge2xbv2a" path="res://src/scripts/health_component.gd" id="2_health"]
+[ext_resource type="Texture2D" uid="uid://co683j56ipyxb" path="res://assets/sprites/punk.png" id="2_k1ru1"]
+[ext_resource type="Script" uid="uid://bs6471secjsn" path="res://src/scripts/state_machine.gd" id="3_sm"]
+[ext_resource type="Script" uid="uid://dj63b1mquoys3" path="res://src/actors/enemies/states/enemy_idle.gd" id="4_idle"]
+[ext_resource type="Script" uid="uid://cywm0e4wtknag" path="res://src/actors/enemies/states/enemy_chase.gd" id="5_chase"]
+[ext_resource type="Script" uid="uid://bpej04ywkfsmn" path="res://src/actors/enemies/states/enemy_hurt.gd" id="6_hurt"]
+[ext_resource type="Script" uid="uid://difiev7vnjjug" path="res://src/actors/enemies/states/enemy_attack.gd" id="8_k1ru1"]
+[ext_resource type="Script" uid="uid://b1dkbs86jnsl1" path="res://src/actors/enemies/components/attack_hitbox.gd" id="9_vo0du"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
+radius = 84.0
+height = 246.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_frm3g"]
+size = Vector2(21.352478, 78.17346)
+
+[node name="EnemyBase" type="CharacterBody2D" unique_id=1397437944]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_enemy")
+speed = 100.0
+attack_range = 120.0
+knockback_friction = 0.2
+knockback_force = 60.0
+attack_cooldown = 2.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=88651236]
+modulate = Color(1, 0.4, 0.4, 1)
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_k1ru1")
+hframes = 2
+region_rect = Rect2(24.626266, 126.51555, 276.42212, 530.48444)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=397215438]
+position = Vector2(3, 2)
+shape = SubResource("CapsuleShape2D_1")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1332650829]
+script = ExtResource("2_health")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1769204968 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_sm")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1645741775]
+script = ExtResource("4_idle")
+
+[node name="Chase" type="Node" parent="StateMachine" unique_id=1099848958]
+script = ExtResource("5_chase")
+
+[node name="Hurt" type="Node" parent="StateMachine" unique_id=1886042722]
+script = ExtResource("6_hurt")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1432627408]
+script = ExtResource("8_k1ru1")
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=600063103]
+collision_layer = 0
+monitoring = false
+script = ExtResource("9_vo0du")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=670431089]
+position = Vector2(75, -40)
+scale = Vector2(5.5188, -0.7810318)
+shape = SubResource("RectangleShape2D_frm3g")
+
+[connection signal="hit_landed" from="AttackHitbox" to="." method="_on_attack_hit_landed"]

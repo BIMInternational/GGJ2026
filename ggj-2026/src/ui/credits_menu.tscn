@@ -1,0 +1,142 @@
+[gd_scene format=3 uid="uid://5m8o0h4wja1b"]
+
+[ext_resource type="Script" uid="uid://wel4te587ts0" path="res://src/ui/credits_menu.gd" id="1"]
+
+[node name="CreditsMenu" type="Control" unique_id=1033518399]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1717414926]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.05, 0.05, 0.05, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=2037643067]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="ScrollContainer" unique_id=1554011090]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer/MarginContainer" unique_id=316155650]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="Title" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1727902976]
+layout_mode = 2
+text = "CRÉDITS"
+horizontal_alignment = 1
+
+[node name="Separator1" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=497646217]
+layout_mode = 2
+
+[node name="GameJamInfo" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=512867590]
+layout_mode = 2
+text = "Global Game Jam 2026
+[Nom de votre équipe]"
+horizontal_alignment = 1
+
+[node name="Separator2" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=2004566664]
+layout_mode = 2
+
+[node name="TeamTitle" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1798716064]
+layout_mode = 2
+text = "ÉQUIPE"
+horizontal_alignment = 1
+
+[node name="TeamMembers" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=426009090]
+layout_mode = 2
+text = "Game Design: [Votre nom]
+Programming: [Votre nom]
+Art: [Votre nom]
+Audio: [Votre nom]
+Level Design: [Votre nom]"
+horizontal_alignment = 1
+
+[node name="Separator3" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=718640744]
+layout_mode = 2
+
+[node name="ToolsTitle" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1151939844]
+layout_mode = 2
+text = "OUTILS UTILISÉS"
+horizontal_alignment = 1
+
+[node name="Tools" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1272746707]
+layout_mode = 2
+text = "Godot Engine 4.x
+[Logiciel graphique utilisé]
+[Logiciel audio utilisé]"
+horizontal_alignment = 1
+
+[node name="Separator4" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1484560032]
+layout_mode = 2
+
+[node name="AssetsTitle" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=158783121]
+layout_mode = 2
+text = "ASSETS & RESSOURCES"
+horizontal_alignment = 1
+
+[node name="Assets" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1732553849]
+layout_mode = 2
+text = "[Listez ici les assets utilisés]
+[Noms des auteurs et liens si nécessaire]
+
+Musique: [Source]
+Sons: [Source]
+Polices: [Source]"
+horizontal_alignment = 1
+
+[node name="Separator5" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=849044881]
+layout_mode = 2
+
+[node name="SpecialThanks" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1028702871]
+layout_mode = 2
+text = "REMERCIEMENTS SPÉCIAUX
+
+[Personnes à remercier]
+[Sponsors/Organisateurs]"
+horizontal_alignment = 1
+
+[node name="Separator6" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=357526418]
+layout_mode = 2
+
+[node name="Copyright" type="Label" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=1336916123]
+layout_mode = 2
+text = "© 2026 - Créé pour la Global Game Jam"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="." unique_id=1689572050]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Retour"
+
+[connection signal="pressed" from="BackButton" to="." method="_on_back_pressed"]

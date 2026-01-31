@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c7xqm8p4l5vwn"]
+
+[ext_resource type="Script" uid="uid://bicie6no4lr1v" path="res://src/scenes/test/test_chemistry.gd" id="1_test"]
+
+[node name="TestChemistry" type="Node2D" unique_id=799969169]
+script = ExtResource("1_test")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1213158681]
+position = Vector2(640, 360)
+
+[node name="Background" type="ColorRect" parent="." unique_id=219584773]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.1, 0.1, 0.15, 1)
+
+[node name="Instructions" type="Label" parent="." unique_id=1527406739]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 700.0
+offset_bottom = 150.0
+text = "TEST DU SYSTÈME DE CHIMIE - RÉACTION EN CHAÎNE
+7 nuages de gaz verts (immobiles) sont placés au centre.
+FEU (rouge) + GAZ (vert mobile) = EXPLOSION (orange vif)
+EXPLOSION + GAZ (immobile) = NOUVELLE EXPLOSION !
+
+Appuyez sur ESPACE pour relancer le test"

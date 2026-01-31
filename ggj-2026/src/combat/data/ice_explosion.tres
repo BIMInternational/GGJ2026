@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://c3k8qam2n4r7s"]
+
+[ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_ice_explosion"]
+
+[resource]
+script = ExtResource("1_ice_explosion")
+element_type = 4
+damage = 20.0
+range_distance = 0.0
+dissipation_time = 0.4
+cooldown = 0.0
+speed = 0.0
+collision_radius = 150.0
+expand_over_time = true

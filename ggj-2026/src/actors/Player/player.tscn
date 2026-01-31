@@ -1,0 +1,133 @@
+[gd_scene format=3 uid="uid://bqy3xv8jmn6gp"]
+
+[ext_resource type="Script" uid="uid://b3mx7yeavjcym" path="res://src/actors/Player/player.gd" id="1_player"]
+[ext_resource type="Script" uid="uid://cqnjn3p74x8hy" path="res://src/actors/Player/player_effects.gd" id="2_qdvcd"]
+[ext_resource type="PackedScene" uid="uid://c357twnhlsi0x" path="res://src/actors/Player/particles/jump_particles.tscn" id="3_6llfm"]
+[ext_resource type="Script" uid="uid://bobwboiyxpw1q" path="res://src/actors/Player/player_sounds.gd" id="3_xj70e"]
+[ext_resource type="PackedScene" uid="uid://dn2x4qw5cj2ev" path="res://src/actors/Player/particles/land_particles.tscn" id="4_hod3v"]
+[ext_resource type="Texture2D" uid="uid://b44f7medffo2m" path="res://assets/sprites/DonaRosa.png" id="6_6jq1w"]
+[ext_resource type="Script" uid="uid://bnef08cjc2l1j" path="res://src/scripts/particle_manager.gd" id="6_dmu6e"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6jq1w"]
+radius = 127.0
+height = 298.0
+
+[sub_resource type="Animation" id="Animation_6jq1w"]
+resource_name = "Attack"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_q4vh8"]
+resource_name = "Idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_ksoi8"]
+resource_name = "Move"
+length = 4.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_7wa16"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7dnek"]
+_data = {
+&"Attack": SubResource("Animation_6jq1w"),
+&"Idle": SubResource("Animation_q4vh8"),
+&"Move": SubResource("Animation_ksoi8"),
+&"RESET": SubResource("Animation_7wa16")
+}
+
+[node name="Player" type="CharacterBody2D" unique_id=775830643]
+collision_mask = 4
+script = ExtResource("1_player")
+
+[node name="PlayerEffects" type="Node2D" parent="." unique_id=1695013224]
+script = ExtResource("2_qdvcd")
+jump_particles = ExtResource("3_6llfm")
+land_particles = ExtResource("4_hod3v")
+dash_burst_particles = ExtResource("3_6llfm")
+wall_slide_particles = ExtResource("4_hod3v")
+wall_jump_particles = ExtResource("3_6llfm")
+attack_trail_particles = ExtResource("3_6llfm")
+hit_impact_particles = ExtResource("4_hod3v")
+
+[node name="ParticleManager" type="Node2D" parent="PlayerEffects" unique_id=793878786]
+script = ExtResource("6_dmu6e")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2125791359]
+position = Vector2(0, -32)
+texture = ExtResource("6_6jq1w")
+hframes = 4
+vframes = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=55163954]
+position = Vector2(3, -7)
+shape = SubResource("CapsuleShape2D_6jq1w")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=17162992]
+libraries/ = SubResource("AnimationLibrary_7dnek")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1901156142]
+position = Vector2(-8, 0)
+offset = Vector2(0, -150)
+zoom = Vector2(0.5, 0.5)
+limit_left = -1400
+limit_top = -360
+limit_right = 1460
+limit_bottom = 600
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="PlayerSounds" type="Node" parent="." unique_id=1457896083]
+script = ExtResource("3_xj70e")

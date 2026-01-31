@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://8d40q07wpg2"]
+
+[ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_mega_explosion"]
+
+[resource]
+script = ExtResource("1_mega_explosion")
+element_type = 1
+damage = 45.0
+range_distance = 0.0
+dissipation_time = 0.5
+cooldown = 0.0
+speed = 0.0
+collision_radius = 500.0
+expand_over_time = true

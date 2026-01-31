@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://5p2m6p04165c"]
+
+[ext_resource type="Script" uid="uid://bbrmx7pdv6215" path="res://src/scenes/intro/intro.gd" id="1_ev6s2"]
+[ext_resource type="Texture2D" uid="uid://b2lim505iq25i" path="res://assets/background/BranquesInteractive.png" id="1_tk1dg"]
+[ext_resource type="Texture2D" uid="uid://ctuw4w12qunfv" path="res://assets/background/ArcEnCiel.png" id="2_kgw40"]
+[ext_resource type="Texture2D" uid="uid://c37uijxhhua23" path="res://assets/background/BranquesNoirEtBlanc.png" id="3_yoiw4"]
+[ext_resource type="Texture2D" uid="uid://duwahlaqs4o31" path="res://assets/background/White.png" id="5_blbjh"]
+[ext_resource type="AudioStream" uid="uid://bhj3o8yyqgap1" path="res://assets/music/BranquesInteractive.ogg" id="6_877ax"]
+[ext_resource type="Texture2D" uid="uid://dv7tv6a7hamor" path="res://assets/background/Internationnal.png" id="7_1u5t5"]
+[ext_resource type="Shader" uid="uid://bix7lksch7xvr" path="res://src/scenes/intro/Internationnal.gdshader" id="7_s1wkb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_enskf"]
+shader = ExtResource("7_s1wkb")
+shader_parameter/shine_color = Color(1, 1, 1, 1)
+shader_parameter/shine_speed = 2.0
+shader_parameter/shine_slope = 0.2
+shader_parameter/shine_width = 0.15000000642648
+shader_parameter/pause_duration = 2.000000095
+shader_parameter/progress = 0.0
+shader_parameter/alpha = 0.0
+
+[sub_resource type="Animation" id="Animation_logoshine"]
+resource_name = "LogoShine"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_reset"]
+resource_name = "RESET"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_main"]
+_data = {
+&"LogoShine": SubResource("Animation_logoshine"),
+&"RESET": SubResource("Animation_reset")
+}
+
+[node name="Intro" type="Node2D" unique_id=186925872]
+script = ExtResource("1_ev6s2")
+
+[node name="Background" type="Sprite2D" parent="." unique_id=771238255]
+position = Vector2(195, 0)
+texture = ExtResource("5_blbjh")
+
+[node name="BackgroundCouleur" type="Sprite2D" parent="." unique_id=1530020524]
+position = Vector2(220, 113)
+texture = ExtResource("1_tk1dg")
+offset = Vector2(479, 266)
+
+[node name="ArcEnCiel" type="Sprite2D" parent="." unique_id=1549263759]
+position = Vector2(201, 224)
+texture = ExtResource("2_kgw40")
+offset = Vector2(480, -999.5)
+
+[node name="BackgroundNoirEtBlanc" type="Sprite2D" parent="." unique_id=1980605]
+position = Vector2(201, 109)
+texture = ExtResource("3_yoiw4")
+offset = Vector2(479, 266)
+
+[node name="SonIntro" type="AudioStreamPlayer" parent="." unique_id=1506122311]
+stream = ExtResource("6_877ax")
+autoplay = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1855131459]
+material = SubResource("ShaderMaterial_enskf")
+position = Vector2(689, 589)
+texture = ExtResource("7_1u5t5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1509143384]
+libraries/ = SubResource("AnimationLibrary_main")
+
+[connection signal="finished" from="SonIntro" to="." method="_on_son_intro_finished"]
