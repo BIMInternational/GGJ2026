@@ -67,6 +67,7 @@ var _is_attacking: bool = false
 var _is_dashing: bool = false
 var _is_hurt: bool = false
 var _is_changing_mask: bool = false
+var _is_dead: bool = false
 
 # References
 @onready var sprite: Sprite2D = $Sprite2D
@@ -82,6 +83,11 @@ func _ready() -> void:
 
 	# Activer le tri en Y pour la profondeur (beat'em all style)
 	y_sort_enabled = true
+	
+	# Connecter le signal died du HealthComponent
+	if health_component:
+		health_component.died.connect(_on_health_depleted)
+		print("[Player] Points de vie: ", health_component.current_health, "/", health_component.max_health)
 
 	# Démarrer avec l'animation Idle
 	_update_animations()
@@ -89,6 +95,10 @@ func _ready() -> void:
 
 func _physics_process(delta: float) -> void:
 	_update_timers(delta)
+	
+	# Si mort, ne rien faire du tout
+	if _is_dead:
+		return
 	
 	# Permettre de changer de masque à tout moment (sauf si déjà en train de changer)
 	if Input.is_action_just_pressed("switch_mask") and not _is_changing_mask:
@@ -126,8 +136,8 @@ func _update_animations() -> void:
 		print("AnimationPlayer n'existe pas!")
 		return
 	
-	# Ne pas changer l'animation pendant une attaque, hurt ou mask change
-	if _is_attacking or _is_hurt or _is_changing_mask:
+	# Ne pas changer l'animation pendant une attaque, hurt, mask change ou mort
+	if _is_attacking or _is_hurt or _is_changing_mask or _is_dead:
 		return
 	
 	# Vérifier si le personnage bouge
@@ -282,14 +292,15 @@ func respawn(spawn_position: Vector2) -> void:
 ## Handles taking damage (optional health system integration)
 func take_damage(damage: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
 	print("[Player] take_damage appelé, damage=", damage, " knockback_dir=", knockback_dir)
-	# Ignorer si invulnérable
-	if _invulnerability_timer > 0:
-		print("[Player] Invulnérable, dégâts ignorés")
+	# Ignorer si mort ou invulnérable
+	if _is_dead or _invulnerability_timer > 0:
+		print("[Player] Invulnérable ou mort, dégâts ignorés")
 		return
 	
 	if health_component:
 		health_component.take_damage(damage)
 		took_damage.emit(damage, health_component.current_health)
+		print("[Player] PV restants: ", health_component.current_health, "/", health_component.max_health)
 		
 		# Activer l'état hurt
 		_is_hurt = true
@@ -297,6 +308,10 @@ func take_damage(damage: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
 		_invulnerability_timer = 0.6  # Invulnérable pendant 0.6s
 		print("[Player] État hurt activé")
 		
+		if(health_component.current_health <= 0):
+			print("[Player] PV à 0 ou moins, déclenchement de la mort")
+			_on_health_depleted()
+			return
 		# Lancer l'animation Domage
 		_play_animation("Domage", "Domage")
 		
@@ -308,9 +323,43 @@ func take_damage(damage: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
 			print("[Player] Pas de knockback (direction = zero)")
 
 
+## Appelé quand les points de vie atteignent 0
+func _on_health_depleted() -> void:
+	print("[Player] Points de vie épuisés!")
+	die()
+
+
 ## Triggers death
 func die() -> void:
+	if _is_dead:  # Déjà mort ou en train de mourir
+		return
+	
+	print("[Player] Mort du joueur")
+	
+	# Activer l'état de mort
+	_is_dead = true
+	
+	# Bloquer tous les mouvements et actions
+	_is_hurt = false
+	_is_attacking = false
+	_is_dashing = false
+	_is_changing_mask = false
+	_velocity = Vector2.ZERO
+	direction = Vector2.ZERO
+	
+	# Rendre invulnérable pendant la mort (1.5s)
+	_invulnerability_timer = 1.5
+	
+	# Animation de mort
+	_play_animation("Death", "Death")
+	
+	# Émettre le signal de mort
 	died.emit()
+	
+	# Retour au menu principal après 1.5 secondes
+	await get_tree().create_timer(1.5).timeout
+	print("[Player] Game Over! Retour au menu principal...")
+	get_tree().change_scene_to_file("res://src/ui/main_menu.tscn")
 
 
 ## Switch entre les masques disponibles
