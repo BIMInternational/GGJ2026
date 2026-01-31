@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cenw7gy0m6jl1" path="res://src/actors/enemies/enemy_base.tscn" id="4_enemy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
-size = Vector2(2926, 64)
+size = Vector2(11047, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j0a6s"]
 size = Vector2(98, 1573)
@@ -22,17 +22,18 @@ size = Vector2(98, 1573)
 z_index = -100
 
 [node name="Sprite2D" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer" unique_id=542068778]
-position = Vector2(0, -750)
+position = Vector2(8148, -748)
 scale = Vector2(2.8, 2.8)
 texture = ExtResource("1_yqen0")
 
 [node name="Player" parent="." unique_id=1772990036 instance=ExtResource("1_player")]
 position = Vector2(-1538, 110)
 
-[node name="Camera2D" parent="Player" index="4" unique_id=1901156142]
+[node name="Camera2D" parent="Player" index="5" unique_id=1901156142]
+offset = Vector2(0, -125)
 limit_left = -2866
-limit_top = -400
-limit_right = 2854
+limit_top = -453
+limit_right = 19040
 limit_bottom = 749
 
 [node name="Environment" type="Node2D" parent="." unique_id=1068240947]
@@ -43,12 +44,12 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2DHaut" type="CollisionShape2D" parent="Environment/Ground" unique_id=1789729900]
-position = Vector2(-22, -885.00006)
+position = Vector2(8000, -1150)
 scale = Vector2(2, -3)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Ground" unique_id=295017074]
-position = Vector2(0, 250)
+position = Vector2(8000, 250)
 scale = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_ground")
 
@@ -67,7 +68,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/WallRight" unique_id=1945954310]
-position = Vector2(1750, -300)
+position = Vector2(18000, -300)
 shape = SubResource("RectangleShape2D_wall")
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=327576703]
