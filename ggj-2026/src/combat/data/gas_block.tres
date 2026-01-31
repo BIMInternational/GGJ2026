@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://cdrgg5vknq2qb"]
 
 [ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_gas_block"]
+[ext_resource type="PackedScene" uid="uid://brr8uoxrdtc8m" path="res://src/combat/effects/frozengas_effect.tscn" id="2_7s6kc"]
 
 [resource]
 script = ExtResource("1_gas_block")
@@ -10,3 +11,4 @@ range_distance = 80.0
 dissipation_time = 45.0
 cooldown = 0.0
 collision_radius = 30.0
+visual_effect = ExtResource("2_7s6kc")

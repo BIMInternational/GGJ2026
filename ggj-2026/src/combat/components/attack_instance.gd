@@ -49,7 +49,7 @@ func initialize(data: AttackData, spawn_position: Vector2, move_direction: Vecto
 	if attack_data.expand_over_time:
 		initial_radius = attack_data.collision_radius * 0.1  # Commence à 10% de la taille
 		target_radius = attack_data.collision_radius
-		scale = Vector2(0.1, 0.1)  # Commence petit
+		scale = Vector2(0.4, 0.4)  # Commence petit
 	else:
 		initial_radius = attack_data.collision_radius
 		target_radius = attack_data.collision_radius
