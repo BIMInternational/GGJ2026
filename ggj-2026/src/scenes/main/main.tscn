@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://ddftavpnj0tio" path="res://src/scenes/main/main.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://hud" path="res://src/ui/hud.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://src/ui/pause_menu.tscn" id="3"]
-[ext_resource type="PackedScene" path="res://src/ui/game_over.tscn" id="4"]
+[ext_resource type="PackedScene" uid="uid://ujumiwhixupf" path="res://src/ui/pause_menu.tscn" id="3"]
+[ext_resource type="PackedScene" uid="uid://daskr88tiwk71" path="res://src/ui/game_over.tscn" id="4"]
 [ext_resource type="PackedScene" uid="uid://c8vq3m2n4p5r6" path="res://src/scenes/levels/level_01.tscn" id="5"]
 
 [node name="Main" type="Node2D" unique_id=103620999]

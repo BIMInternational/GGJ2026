@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://dpxayxbc1hf1y"]
+
+[ext_resource type="Script" uid="uid://uunjfi20yt44" path="res://src/ui/reward_placeholder.gd" id="1_fdkbg"]
+
+[node name="RewardPlaceholder" type="CanvasLayer" unique_id=225742881]
+process_mode = 3
+layer = 100
+script = ExtResource("1_fdkbg")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=731082839]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5254902)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=876615997]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1773467588]
+layout_mode = 2
+text = "REWARD!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ContinueButton" type="Button" parent="VBoxContainer" unique_id=1167965566]
+layout_mode = 2
+text = "Continue"
+
+[connection signal="pressed" from="VBoxContainer/ContinueButton" to="." method="_on_continue_pressed"]

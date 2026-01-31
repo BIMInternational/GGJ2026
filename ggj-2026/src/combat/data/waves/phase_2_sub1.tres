@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="SubwaveData" format=3 uid="uid://bh0g1o4rtxg75"]
+
+[ext_resource type="PackedScene" uid="uid://cenw7gy0m6jl1" path="res://src/actors/enemies/enemy_base.tscn" id="1_btsfi"]
+[ext_resource type="Script" uid="uid://ddh4kkedu1upw" path="res://src/combat/data/subwave_data.gd" id="2_6bheu"]
+
+[resource]
+script = ExtResource("2_6bheu")
+enemy_scene = ExtResource("1_btsfi")
+enemy_count = 6
+spawn_delay = 1.0
+metadata/_custom_type_script = "uid://ddh4kkedu1upw"
