@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://brr8uoxrdtc8m"]
+
+[ext_resource type="Shader" uid="uid://dskhmgncjhpgw" path="res://src/combat/effects/frozengas_shader.gdshader" id="1_0v2ti"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gas"]
+shader = ExtResource("1_0v2ti")
+shader_parameter/gas_speed = 0.26000000909012
+shader_parameter/gas_density = 1.9430000685425
+shader_parameter/noise_scale = 7.31200029982
+shader_parameter/swirl_strength = 0.2050000097375
+shader_parameter/color_core = Color(0.40018785, 0.89979166, 0.96719956, 0.82000005)
+shader_parameter/color_mid = Color(0.29951698, 0.70000815, 0.94385463, 0.5)
+shader_parameter/color_outer = Color(0.19966345, 0.5021107, 0.96166515, 0.30200002)
+shader_parameter/color_edge = Color(0.1, 0.3, 0.1, 0)
+
+[sub_resource type="Gradient" id="Gradient_white"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1"]
+gradient = SubResource("Gradient_white")
+fill = 1
+
+[node name="FrozenGasEffect" type="Sprite2D" unique_id=236747100]
+material = SubResource("ShaderMaterial_gas")
+scale = Vector2(8, 8)
+texture = SubResource("GradientTexture2D_1")
