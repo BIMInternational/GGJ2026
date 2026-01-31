@@ -47,5 +47,11 @@ enum ElementType {
 ## Distance entre chaque spawn de trainée (en pixels)
 @export var trail_spawn_distance: float = 30.0
 
+## Utiliser un système de particules GPU pour la trainée (plus performant)
+@export var use_particle_trail: bool = false
+
+## Effet de particules pour la trainée (GPUParticles2D)
+@export var trail_particle_effect: PackedScene = null
+
 ## Effet visuel (particules/sprites)
 @export var visual_effect: PackedScene = null

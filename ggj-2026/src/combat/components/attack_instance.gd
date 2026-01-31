@@ -25,6 +25,7 @@ var _damaged_bodies: Array[Node2D] = []
 ## Trail system
 var _last_trail_position: Vector2 = Vector2.ZERO
 var _trail_distance_traveled: float = 0.0
+var _trail_emitter: Node2D = null
 
 func _ready() -> void:
 	# Connecter le signal de détection d'aire
@@ -73,6 +74,13 @@ func initialize(data: AttackData, spawn_position: Vector2, move_direction: Vecto
 		# Sprite par défaut pour visualiser l'attaque
 		_create_default_visual()
 
+	# Setup particle trail emitter if enabled
+	if attack_data.use_particle_trail and attack_data.trail_particle_effect != null:
+		_trail_emitter = attack_data.trail_particle_effect.instantiate()
+		add_child(_trail_emitter)
+		if _trail_emitter.has_method("initialize"):
+			_trail_emitter.initialize(attack_data, owner_node)
+
 func _create_default_visual() -> void:
 	var sprite = Sprite2D.new()
 	var size = int(attack_data.collision_radius * 2)
@@ -119,11 +127,11 @@ func _process(delta: float) -> void:
 		var old_position = global_position
 		global_position += direction * attack_data.speed * delta
 		
-		# Spawn trail si configuré
-		if attack_data.trail_attack_data != null:
+		# Spawn trail si configuré (legacy mode - skip if using particle trail)
+		if attack_data.trail_attack_data != null and not attack_data.use_particle_trail:
 			var distance_moved = old_position.distance_to(global_position)
 			_trail_distance_traveled += distance_moved
-			
+
 			if _trail_distance_traveled >= attack_data.trail_spawn_distance:
 				_spawn_trail_attack()
 				_trail_distance_traveled = 0.0
