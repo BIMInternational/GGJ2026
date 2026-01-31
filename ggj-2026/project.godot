@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="GGJ2026"
-run/main_scene="res://src/scenes/levels/level_01.tscn"
+run/main_scene="uid://c8vq3m2n4p5r6"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -26,6 +26,7 @@ InputRemapManager="*res://src/autoload/input_remap_manager.gd"
 LocalizationManager="*res://src/autoload/localization_manager.gd"
 GameConstants="*res://src/autoload/game_constants.gd"
 ChemistryManager="*res://src/autoload/chemistry_manager.gd"
+WaveManager="*uid://dchgjlo6xhiw6"
 
 [display]
 

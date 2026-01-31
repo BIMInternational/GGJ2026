@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://xk45b2t12cna"]
+
+[ext_resource type="Script" uid="uid://m4g0mh81qosv" path="res://src/ui/arrow_indicator.gd" id="1_j6g8a"]
+
+[node name="ArrowIndicator" type="Control" unique_id=1511839058]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_top = 100.0
+offset_right = -150.0
+offset_bottom = 100.0
+grow_horizontal = 0
+script = ExtResource("1_j6g8a")
+
+[node name="Label" type="Label" parent="." unique_id=2004430871]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "GO! →"
+horizontal_alignment = 2
+vertical_alignment = 1
+uppercase = true

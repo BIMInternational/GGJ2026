@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="WaveData" format=3 uid="uid://btj45s658rvua"]
+
+[ext_resource type="PackedScene" uid="uid://nulh7rl1i48x" path="res://src/actors/enemies/Boss.tscn" id="1_jchdp"]
+[ext_resource type="Script" uid="uid://k55qcpowocic" path="res://src/combat/data/wave_data.gd" id="1_tfrve"]
+[ext_resource type="Script" uid="uid://ddh4kkedu1upw" path="res://src/combat/data/subwave_data.gd" id="2_t53wa"]
+[ext_resource type="Resource" uid="uid://bhfxrn2qt1wss" path="res://src/combat/data/waves/phase_1_sub1.tres" id="4_w5cd5"]
+[ext_resource type="Resource" uid="uid://d27lqybph3e14" path="res://src/combat/data/waves/phase_1_sub2.tres" id="5_xhtm2"]
+
+[resource]
+script = ExtResource("1_tfrve")
+subwaves = Array[ExtResource("2_t53wa")]([ExtResource("4_w5cd5"), ExtResource("5_xhtm2")])
+boss_scene = ExtResource("1_jchdp")
+gate_x_position = 800.0
+metadata/_custom_type_script = "uid://k55qcpowocic"
