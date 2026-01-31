@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://b37oylhjvuvsb"]
+
+[ext_resource type="Shader" uid="uid://bxpgj3ytawyo8" path="res://src/combat/effects/fire_shader.gdshader" id="1_explosion"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_explosion"]
+shader = ExtResource("1_explosion")
+shader_parameter/fire_speed = 1.16400003154
+shader_parameter/fire_intensity = 1.2120000338199999
+shader_parameter/noise_scale = 5.5810002175975
+shader_parameter/pulse_strength = 0.3010000142975
+shader_parameter/color_core = Color(1, 0.9, 0.4, 1)
+shader_parameter/color_mid = Color(1, 0.7, 0.2, 1)
+shader_parameter/color_outer = Color(1, 0.3, 0, 1)
+shader_parameter/color_edge = Color(0.6, 0.1, 0, 0)
+
+[sub_resource type="Gradient" id="Gradient_white"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1"]
+gradient = SubResource("Gradient_white")
+fill = 1
+
+[node name="ExplosionEffect" type="Sprite2D" unique_id=551576766]
+material = SubResource("ShaderMaterial_explosion")
+scale = Vector2(5, 5)
+texture = SubResource("GradientTexture2D_1")
