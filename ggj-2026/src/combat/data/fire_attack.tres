@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://dvrhvh41yfs5c"]
 
 [ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_fire"]
+[ext_resource type="PackedScene" uid="uid://c3v8m1fire0fx" path="res://src/combat/effects/fire_effect.tscn" id="2_effect"]
 
 [resource]
 script = ExtResource("1_fire")
@@ -9,3 +10,4 @@ damage = 15.0
 range_distance = 60.0
 cooldown = 1.5
 speed = 400.0
+visual_effect = ExtResource("2_effect")
