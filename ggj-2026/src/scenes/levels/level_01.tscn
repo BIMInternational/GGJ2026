@@ -8,6 +8,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(2926, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j0a6s"]
+size = Vector2(98, 1573)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
 size = Vector2(98, 1573)
 
@@ -40,7 +43,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2DHaut" type="CollisionShape2D" parent="Environment/Ground" unique_id=1789729900]
-position = Vector2(0, -1100)
+position = Vector2(-22, -885.00006)
 scale = Vector2(2, -3)
 shape = SubResource("RectangleShape2D_ground")
 
@@ -50,13 +53,13 @@ scale = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="WallLeft" type="StaticBody2D" parent="Environment" unique_id=1597097024]
-position = Vector2(-1123, 72)
+position = Vector2(-1437, 80)
 collision_layer = 4
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/WallLeft" unique_id=512569446]
-position = Vector2(-1750, -100)
-shape = SubResource("RectangleShape2D_wall")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/WallLeft" unique_id=150820180]
+position = Vector2(-1467, -49)
+shape = SubResource("RectangleShape2D_j0a6s")
 
 [node name="WallRight" type="StaticBody2D" parent="Environment" unique_id=871996782]
 position = Vector2(1100, 300)
