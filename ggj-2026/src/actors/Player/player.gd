@@ -70,7 +70,9 @@ var _is_changing_mask: bool = false
 
 # References
 @onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite_mask: Sprite2D = $Sprite2DMasque if has_node("Sprite2DMasque") else null
 @onready var animation_player: AnimationPlayer = $AnimationPlayer if has_node("AnimationPlayer") else null
+@onready var animation_mask: AnimationPlayer = $AnimationMask if has_node("AnimationMask") else null
 @onready var health_component: HealthComponent = $HealthComponent
 
 
@@ -82,8 +84,7 @@ func _ready() -> void:
 	y_sort_enabled = true
 
 	# Démarrer avec l'animation Idle
-	if animation_player and animation_player.has_animation("Idle"):
-		animation_player.play("Idle")
+	_update_animations()
 
 
 func _physics_process(delta: float) -> void:
@@ -108,6 +109,7 @@ func _physics_process(delta: float) -> void:
 	# Ne flip que si c'est un mouvement volontaire (pas du knockback)
 	if direction.x != 0:
 		sprite.flip_h = direction.x < 0
+		sprite_mask.flip_h = direction.x < 0
 	
 	set_velocity(_velocity)
 	move_and_slide()
@@ -134,15 +136,21 @@ func _update_animations() -> void:
 	if is_moving:
 		if animation_player.has_animation("Move"):
 			if animation_player.current_animation != "Move":
-				animation_player.play("Move")
+				_play_animation("Move", "Move")
 		else:
 			print("Animation 'Move' introuvable. Animations disponibles: ", animation_player.get_animation_list())
 	else:
-		if animation_player.has_animation("Idle"):
-			if animation_player.current_animation != "Idle":
-				animation_player.play("Idle")
-		else:
-			print("Animation 'Idle' introuvable. Animations disponibles: ", animation_player.get_animation_list())
+		# Essayer l'animation Idle spécifique au masque, sinon fallback sur "Idle"
+		var idle_anim_name = _get_idle_animation_name()
+		var anim_to_play = "Idle"  # Par défaut
+		
+		if animation_player.has_animation(idle_anim_name):
+			anim_to_play = idle_anim_name
+		elif animation_player.has_animation("Idle"):
+			anim_to_play = "Idle"
+		
+		if animation_player.current_animation != anim_to_play:
+			_play_animation(anim_to_play, "Idle")
 
 
 func _update_timers(delta: float) -> void:
@@ -179,6 +187,8 @@ func _update_timers(delta: float) -> void:
 		_mask_change_timer -= delta
 		if _mask_change_timer <= 0:
 			_is_changing_mask = false
+			# Forcer la mise à jour de l'animation Idle après le changement de masque
+			_update_animations()
 
 
 func _handle_input() -> void:
@@ -207,9 +217,7 @@ func _apply_movement(_delta: float) -> void:
 		_velocity = _velocity
 	elif _is_hurt:
 		# En état hurt, appliquer une friction très légère pour laisser le knockback agir
-		var old_velocity = _velocity
 		_velocity *= 0.95
-		print("[Player] Hurt movement - velocity avant=", old_velocity, " après=", _velocity)
 	elif _is_changing_mask:
 		# En état mask change, ralentir progressivement
 		_velocity = lerp(_velocity, Vector2.ZERO, 0.2)
@@ -243,8 +251,7 @@ func _start_attack() -> void:
 	attack_started.emit()
 	
 	# Lancer l'animation Attack
-	if animation_player and animation_player.has_animation("Attack"):
-		animation_player.play("Attack")
+	_play_animation("Attack", "Attack")
 
 
 func _end_attack() -> void:
@@ -291,8 +298,7 @@ func take_damage(damage: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
 		print("[Player] État hurt activé")
 		
 		# Lancer l'animation Domage
-		if animation_player and animation_player.has_animation("Domage"):
-			animation_player.play("Domage")
+		_play_animation("Domage", "Domage")
 		
 		# Appliquer le knockback
 		if knockback_dir != Vector2.ZERO:
@@ -316,21 +322,15 @@ func _switch_mask() -> void:
 	_is_changing_mask = true
 	_mask_change_timer = 0.3
 	
-	# Lancer l'animation Mask_Change
-	if animation_player and animation_player.has_animation("Mask_Change"):
-		animation_player.play("Mask_Change")
-		print("[Player] Animation Mask_Change lancée")
-	elif animation_player:
-		print("[Player] Animation Mask_Change introuvable! Animations dispo: ", animation_player.get_animation_list())
-	else:
-		print("[Player] Pas d'AnimationPlayer!")
-	
 	# Cycle vers le masque suivant
 	current_mask_index = (current_mask_index + 1) % available_masks.size()
 	var new_mask = available_masks[current_mask_index]
 	
 	mask_changed.emit(new_mask)
 	print("Masque changé: ", _get_mask_name(new_mask))
+
+	# Lancer l'animation Mask_Change
+	_play_animation("Mask_Change", "Mask_Change")
 
 
 ## Retourne l'AttackData correspondant au masque équipé
@@ -371,6 +371,41 @@ func _get_mask_name(mask: MaskType) -> String:
 			return "LIGHTNING"
 		_:
 			return "UNKNOWN"
+
+
+## Retourne le nom de l'animation Idle correspondant au masque équipé
+func _get_idle_animation_name() -> String:
+	if available_masks.is_empty():
+		return "Idle_FIRE"  # Par défaut
+	
+	var current_mask = available_masks[current_mask_index]
+	match current_mask:
+		MaskType.FIRE:
+			return "Idle_FIRE"
+		MaskType.GAS:
+			return "Idle_GAS"
+		MaskType.WATER:
+			return "Idle_WATER"
+		MaskType.ICE:
+			return "Idle_ICE"
+		MaskType.LIGHTNING:
+			return "Idle_LIGHTNING"
+		_:
+			return "Idle_FIRE"  # Fallback
+
+
+## Joue une animation sur le personnage ET le masque
+func _play_animation(base_anim: String, mask_suffix: String = "") -> void:
+	# Jouer l'animation de base sur le personnage
+	if animation_player and animation_player.has_animation(base_anim):
+		animation_player.play(base_anim)
+	
+	# Jouer l'animation du masque si disponible
+	if animation_mask and mask_suffix != "":
+		var mask_anim = mask_suffix + "_" + _get_mask_name(available_masks[current_mask_index])
+		if animation_mask.has_animation(mask_anim):
+			animation_mask.play(mask_anim)
+			print("[Player] Animation Mask lancée: ", mask_anim)
 
 
 ## Spawn une attaque à partir d'AttackData
