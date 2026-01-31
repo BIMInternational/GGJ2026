@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cei0nk25e4al2" path="res://assets/fonts/Street.png" id="1_yqen0"]
 [ext_resource type="Script" uid="uid://cultll0o0bju3" path="res://src/scripts/enemy_spawner.gd" id="3_spawner"]
 [ext_resource type="PackedScene" uid="uid://cenw7gy0m6jl1" path="res://src/actors/enemies/enemy_base.tscn" id="4_enemy"]
+[ext_resource type="PackedScene" uid="uid://nulh7rl1i48x" path="res://src/actors/enemies/Boss.tscn" id="5_yfpvf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(11047, 64)
@@ -29,7 +30,7 @@ texture = ExtResource("1_yqen0")
 [node name="Player" parent="." unique_id=1772990036 instance=ExtResource("1_player")]
 position = Vector2(-1538, 110)
 
-[node name="Camera2D" parent="Player" index="5" unique_id=1901156142]
+[node name="Camera2D" parent="Player" index="7" unique_id=1901156142]
 offset = Vector2(0, -125)
 limit_left = -2866
 limit_top = -453
@@ -74,5 +75,9 @@ shape = SubResource("RectangleShape2D_wall")
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=327576703]
 script = ExtResource("3_spawner")
 enemy_scene = ExtResource("4_enemy")
+
+[node name="Boss" parent="." unique_id=549871255 instance=ExtResource("5_yfpvf")]
+position = Vector2(1684, 12)
+scale = Vector2(0.65, 0.65)
 
 [editable path="Player"]

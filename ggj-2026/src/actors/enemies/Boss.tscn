@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://nulh7rl1i48x"]
+
+[ext_resource type="Texture2D" uid="uid://b60j6qoaabat7" path="res://assets/sprites/Boss/boss_spe01.png" id="1_4wn1r"]
+[ext_resource type="Script" uid="uid://ctl3502gqbpps" path="res://src/actors/enemies/boss.gd" id="1_7gg8e"]
+[ext_resource type="Texture2D" uid="uid://b85u0pkwxvto3" path="res://assets/sprites/Boss/boss_spe02.png" id="2_nh2h2"]
+[ext_resource type="Texture2D" uid="uid://bcafq6n3qqe5n" path="res://assets/sprites/Boss/boss_spe03.png" id="3_y1sus"]
+[ext_resource type="Texture2D" uid="uid://b73ylwdegbhss" path="res://assets/sprites/Boss/boss_walk01.png" id="4_dkht7"]
+[ext_resource type="Texture2D" uid="uid://dvqjigvrbuoa2" path="res://assets/sprites/Boss/boss_walk02.png" id="5_o2uq7"]
+[ext_resource type="Texture2D" uid="uid://2j4xpd6bq152" path="res://assets/sprites/Boss/boss_walk03.png" id="6_0dpou"]
+[ext_resource type="Texture2D" uid="uid://8ax7bsxs11v4" path="res://assets/sprites/Boss/boss_walk04.png" id="7_x34rp"]
+[ext_resource type="Script" uid="uid://cc45vge2xbv2a" path="res://src/scripts/health_component.gd" id="8_7gg8e"]
+[ext_resource type="Script" uid="uid://bs6471secjsn" path="res://src/scripts/state_machine.gd" id="10_a8hm0"]
+[ext_resource type="Script" uid="uid://dj63b1mquoys3" path="res://src/actors/enemies/states/enemy_idle.gd" id="11_icfpw"]
+[ext_resource type="Script" uid="uid://cywm0e4wtknag" path="res://src/actors/enemies/states/enemy_chase.gd" id="12_owhll"]
+[ext_resource type="Script" uid="uid://difiev7vnjjug" path="res://src/actors/enemies/states/enemy_attack.gd" id="13_48mcc"]
+[ext_resource type="Script" uid="uid://bpej04ywkfsmn" path="res://src/actors/enemies/states/enemy_hurt.gd" id="14_618vn"]
+[ext_resource type="Script" uid="uid://b1dkbs86jnsl1" path="res://src/actors/enemies/components/attack_hitbox.gd" id="15_dhdu4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a8hm0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4wn1r")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_4wn1r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_nh2h2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_y1sus")
+}],
+"loop": false,
+"name": &"special",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_dkht7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_o2uq7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_0dpou")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_x34rp")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 4.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_icfpw"]
+radius = 244.0
+height = 684.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm8e6"]
+size = Vector2(205, 98)
+
+[node name="Boss" type="CharacterBody2D" unique_id=549871255]
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_7gg8e")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1974620946]
+sprite_frames = SubResource("SpriteFrames_a8hm0")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=655944404]
+position = Vector2(30, 0)
+shape = SubResource("CapsuleShape2D_icfpw")
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1828787666]
+script = ExtResource("8_7gg8e")
+max_health = 1000
+metadata/_custom_type_script = "uid://cc45vge2xbv2a"
+
+[node name="StateMachine" type="Node" parent="." unique_id=789675315 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("10_a8hm0")
+initial_state = NodePath("Idle")
+metadata/_custom_type_script = "uid://bs6471secjsn"
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=501821420]
+script = ExtResource("11_icfpw")
+metadata/_custom_type_script = "uid://dj63b1mquoys3"
+
+[node name="Chase" type="Node" parent="StateMachine" unique_id=333700637]
+script = ExtResource("12_owhll")
+metadata/_custom_type_script = "uid://cywm0e4wtknag"
+
+[node name="Hurt" type="Node" parent="StateMachine" unique_id=1746474694]
+script = ExtResource("14_618vn")
+metadata/_custom_type_script = "uid://bpej04ywkfsmn"
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1831049524]
+script = ExtResource("13_48mcc")
+metadata/_custom_type_script = "uid://difiev7vnjjug"
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=1491581439]
+collision_layer = 2
+collision_mask = 4
+monitoring = false
+script = ExtResource("15_dhdu4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1145263596]
+position = Vector2(263.5, -129)
+shape = SubResource("RectangleShape2D_nm8e6")
+
+[connection signal="hit_landed" from="AttackHitbox" to="." method="_on_attack_hit_landed"]

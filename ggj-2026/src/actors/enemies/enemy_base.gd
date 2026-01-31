@@ -18,7 +18,7 @@ signal died(enemy: EnemyBase)
 # === REFERENCES ===
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var state_machine: StateMachine = $StateMachine
-@onready var sprite: Sprite2D = $Sprite2D
+@onready var sprite: Sprite2D = get_node_or_null("Sprite2D")
 @onready var attack_hitbox: Area2D = $AttackHitbox
 
 # === STATE ===
@@ -69,8 +69,11 @@ func _update_hitbox_position() -> void:
 	if not attack_hitbox:
 		return
 	
+	if not sprite:
+		return
+	
 	# Flip the hitbox to match sprite direction
-	attack_hitbox.scale.x = -1.0 if sprite.flip_h else 1.0
+	attack_hitbox.scale.x = -1.0 if sprite.flip_h else 1.00
 
 func enable_attack_hitbox(enabled: bool) -> void:
 	if attack_hitbox:
