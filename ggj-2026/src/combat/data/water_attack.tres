@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://btv8nlrkbspwk" path="res://src/combat/attack_data.gd" id="1_water"]
 [ext_resource type="Resource" uid="uid://b8h3j2lam5n7p" path="res://src/combat/data/water_static.tres" id="2_water_static"]
+[ext_resource type="PackedScene" uid="uid://df7n3yd1j1ttm" path="res://src/combat/effects/water_effect.tscn" id="3_effect"]
+[ext_resource type="PackedScene" path="res://src/combat/effects/water_trail_emitter.tscn" id="4_trail"]
 
 [resource]
 script = ExtResource("1_water")
@@ -13,3 +15,6 @@ cooldown = 1.5
 speed = 400.0
 trail_attack_data = ExtResource("2_water_static")
 trail_spawn_distance = 25.0
+use_particle_trail = true
+trail_particle_effect = ExtResource("4_trail")
+visual_effect = ExtResource("3_effect")

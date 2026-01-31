@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://df7n3yd1j1ttm"]
+
+[ext_resource type="Shader" uid="uid://j7mdjl1dnm3j" path="res://src/combat/effects/water_shader.gdshader" id="1_water"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_water"]
+shader = ExtResource("1_water")
+shader_parameter/water_speed = 2.4290000916275
+shader_parameter/wave_intensity = 0.69200003287
+shader_parameter/ripple_scale = 4.4890001657275
+shader_parameter/shine_intensity = 0.1600000076
+shader_parameter/color_core = Color(0.7, 0.9, 1, 0.9)
+shader_parameter/color_mid = Color(0.3, 0.6, 1, 0.8)
+shader_parameter/color_outer = Color(0.15, 0.4, 0.8, 0.6)
+shader_parameter/color_edge = Color(0.1, 0.25, 0.5, 0)
+
+[sub_resource type="Gradient" id="Gradient_white"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1"]
+gradient = SubResource("Gradient_white")
+fill = 1
+
+[node name="WaterEffect" type="Sprite2D" unique_id=1514503684]
+material = SubResource("ShaderMaterial_water")
+scale = Vector2(3, 3)
+texture = SubResource("GradientTexture2D_1")
