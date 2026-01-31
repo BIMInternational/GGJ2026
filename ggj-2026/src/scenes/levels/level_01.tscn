@@ -14,6 +14,8 @@ size = Vector2(98, 1573)
 [node name="Level01" type="Node2D" unique_id=1054281201]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=542068778]
+position = Vector2(0, -750)
+scale = Vector2(2.8, 2.8)
 texture = ExtResource("1_yqen0")
 
 [node name="Player" parent="." unique_id=1772990036 instance=ExtResource("1_player")]
@@ -32,11 +34,13 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2DHaut" type="CollisionShape2D" parent="Environment/Ground" unique_id=1789729900]
-position = Vector2(24, -792)
+position = Vector2(0, -1100)
+scale = Vector2(2, -3)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Ground" unique_id=295017074]
-position = Vector2(-35, 160)
+position = Vector2(0, 250)
+scale = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="WallLeft" type="StaticBody2D" parent="Environment" unique_id=1597097024]
@@ -45,7 +49,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/WallLeft" unique_id=512569446]
-position = Vector2(-1351, -299)
+position = Vector2(-1750, -100)
 shape = SubResource("RectangleShape2D_wall")
 
 [node name="WallRight" type="StaticBody2D" parent="Environment" unique_id=871996782]
@@ -54,7 +58,7 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/WallRight" unique_id=1945954310]
-position = Vector2(368, -289.5)
+position = Vector2(1750, -300)
 shape = SubResource("RectangleShape2D_wall")
 
 [node name="EnemySpawner" type="Node2D" parent="." unique_id=327576703]
