@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://xk45b2t12cna" path="res://src/scenes/ArrowIndicator.tscn" id="5_3ihjg"]
 [ext_resource type="PackedScene" uid="uid://hud" path="res://src/ui/hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" uid="uid://dpxayxbc1hf1y" path="res://src/ui/reward_placeholder.tscn" id="6_naqav"]
+[ext_resource type="Shader" uid="uid://dwmmmejddurk7" path="res://src/scenes/levels/sandstorm_shader.gdshader" id="8_sandstorm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(11047, 64)
@@ -16,6 +17,16 @@ size = Vector2(98, 1573)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wall"]
 size = Vector2(98, 1573)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sandstorm"]
+shader = ExtResource("8_sandstorm")
+shader_parameter/wind_speed = 0.75100003241262
+shader_parameter/wind_direction = 0.28000006079999995
+shader_parameter/haze_intensity = 0.4250000201875
+shader_parameter/dust_density = 0.2230000105925
+shader_parameter/dust_size = 20.0
+shader_parameter/haze_color = Color(0.85, 0.75, 0.55, 1)
+shader_parameter/dust_color = Color(0.9, 0.8, 0.6, 1)
 
 [node name="Level01" type="Node2D" unique_id=1054281201]
 script = ExtResource("1_naqav")
@@ -89,5 +100,21 @@ position = Vector2(19000, 0)
 [node name="ArrowIndicator" parent="." unique_id=1511839058 instance=ExtResource("5_3ihjg")]
 
 [node name="RewardPlaceholder" parent="." unique_id=225742881 instance=ExtResource("6_naqav")]
+
+[node name="SandstormOverlay" type="CanvasLayer" parent="." unique_id=2086323392]
+layer = 10
+
+[node name="ColorRect" type="ColorRect" parent="SandstormOverlay" unique_id=423105716]
+material = SubResource("ShaderMaterial_sandstorm")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
 [editable path="Player"]

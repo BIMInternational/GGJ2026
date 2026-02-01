@@ -10,8 +10,8 @@
 [ext_resource type="Script" uid="uid://cc45vge2xbv2a" path="res://src/scripts/health_component.gd" id="7_health"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6jq1w"]
-radius = 127.0
-height = 298.0
+radius = 114.0
+height = 244.0
 
 [sub_resource type="Animation" id="Animation_6jq1w"]
 resource_name = "Attack"
@@ -704,7 +704,7 @@ vframes = 12
 frame = 24
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=55163954]
-position = Vector2(3, -7)
+position = Vector2(-9, -46)
 shape = SubResource("CapsuleShape2D_6jq1w")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=17162992]
@@ -729,3 +729,7 @@ editor_draw_drag_margin = true
 
 [node name="PlayerSounds" type="Node" parent="." unique_id=1457896083]
 script = ExtResource("3_xj70e")
+
+[node name="Tumbleweed" type="Node" parent="." unique_id=552438982]
+
+[node name="TimerTumbleweed" type="Timer" parent="Tumbleweed" unique_id=857617178]
