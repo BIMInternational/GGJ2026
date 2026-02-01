@@ -93,10 +93,9 @@ collision_mask = 4
 script = ExtResource("1_7gg8e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1974620946]
-position = Vector2(-200.00002, -320.00003)
+position = Vector2(-200, -320)
 sprite_frames = SubResource("SpriteFrames_a8hm0")
-animation = &"walk"
-frame_progress = 0.616301
+animation = &"laser"
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=655944404]
