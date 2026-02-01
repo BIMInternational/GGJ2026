@@ -10,6 +10,7 @@
 z_index = 1
 
 [node name="Red" type="Sprite2D" parent="." unique_id=1838284174]
+visible = false
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("1_rh1yg")
 

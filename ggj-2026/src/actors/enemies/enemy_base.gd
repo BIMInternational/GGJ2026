@@ -19,7 +19,8 @@ signal died(enemy: EnemyBase)
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = get_node_or_null("Sprite2D")
-@onready var hair: Sprite2D = get_node_or_null("PunkHairs/Red")
+@onready var punk_hairs: Node2D = get_node_or_null("PunkHairs")
+var hair: Sprite2D = null
 @onready var attack_hitbox: Area2D = $AttackHitbox
 
 # === STATE ===
@@ -32,6 +33,9 @@ func _ready() -> void:
 	add_to_group("enemies")
 	y_sort_enabled = true
 	health_component.died.connect(_on_died)
+
+	# Randomize hair color
+	_randomize_hair_color()
 
 	# Connecter la hitbox d'attaque au state machine
 	if attack_hitbox:
@@ -131,3 +135,21 @@ func get_hair_offset() -> Vector2:
 			return Vector2(23, 0)
 		else:
 			return Vector2(0, 0)
+
+
+func _randomize_hair_color() -> void:
+	if not punk_hairs:
+		return
+
+	var hair_options = punk_hairs.get_children()
+	if hair_options.is_empty():
+		return
+
+	# Hide all hair options
+	for h in hair_options:
+		h.visible = false
+
+	# Pick a random one and make it visible
+	var random_index = randi() % hair_options.size()
+	hair = hair_options[random_index]
+	hair.visible = true
