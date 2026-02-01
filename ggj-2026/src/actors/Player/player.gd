@@ -208,6 +208,12 @@ func _handle_input() -> void:
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	).normalized()
 	
+	if(direction.length() > 0):
+		if(get_node('/root').find_child("ScooterSoundEffect", true, false).playing == false):
+			get_node('/root').find_child("ScooterSoundEffect", true, false).play()
+	else:
+		get_node('/root').find_child("ScooterSoundEffect", true, false).stop()
+	
 	# Mettre à jour la dernière direction si le joueur bouge
 	if direction.length() > 0.1:
 		_last_move_direction = direction
@@ -473,6 +479,9 @@ func _spawn_attack(attack_data: AttackData) -> void:
 	# Position de spawn dans la direction de l'attaque
 	var spawn_position = global_position + attack_direction * attack_offset
 
+	#if(attack_data.ElementType == AttackData.ElementType.FIRE):
+	get_node('/root').find_child("FireballSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
+	get_node('/root').find_child("FireballSoundEffect", true, false).play()
 	# Utiliser le ChemistryManager pour spawn (disponible pour tous les acteurs)
 	ChemistryManager.spawn_attack(attack_data, spawn_position, attack_direction, self)
 

@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://b44f7medffo2m" path="res://assets/sprites/DonaRosa.png" id="6_6jq1w"]
 [ext_resource type="Script" uid="uid://bnef08cjc2l1j" path="res://src/scripts/particle_manager.gd" id="6_dmu6e"]
 [ext_resource type="Script" uid="uid://cc45vge2xbv2a" path="res://src/scripts/health_component.gd" id="7_health"]
+[ext_resource type="AudioStream" uid="uid://d1uembhw7m4wg" path="res://assets/sounds/scooter.ogg" id="9_ksoi8"]
+[ext_resource type="AudioStream" uid="uid://23tiifik4ujn" path="res://assets/sounds/fireball launch.wav" id="10_7wa16"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6jq1w"]
 radius = 127.0
@@ -729,3 +731,11 @@ editor_draw_drag_margin = true
 
 [node name="PlayerSounds" type="Node" parent="." unique_id=1457896083]
 script = ExtResource("3_xj70e")
+
+[node name="ScooterSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=643648925]
+stream = ExtResource("9_ksoi8")
+volume_db = -6.386
+
+[node name="FireballSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=1271636696]
+stream = ExtResource("10_7wa16")
+volume_db = -9.123
