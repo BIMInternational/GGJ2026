@@ -5,14 +5,18 @@ class_name Boss
 
 @export var special_attack_cooldown: float = 5.0
 @export var special_attack_range: float = 300.0
-@export var entrance_duration: float = 3.0
 
 var _special_cooldown_timer: float = 0.0
-var _is_entering: bool = false
-var _entrance_timer: float = 0.0
+var _has_entered: bool = false
+
+var _is_laser_attacking: bool = false
 
 # Override sprite reference to use AnimatedSprite2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+
+@onready var laser_hitbox: Area2D = $LaserHitbox
+@onready var laser_animation_player: AnimationPlayer = $LaserAnimationPlayer
+# Offset for laser animation (laser images are larger than normal 420px images)
 
 
 func _ready() -> void:
@@ -32,16 +36,22 @@ func _ready() -> void:
 	
 	# Start with idle
 	animated_sprite.play("idle")
+	_has_entered = false
 
 
 func _physics_process(delta: float) -> void:
 	# Handle entrance animation
-	if _is_entering:
-		_entrance_timer -= delta
-		if _entrance_timer <= 0:
-			_end_entrance()
-		return  # Don't process anything else during entrance
-	
+	if not _has_entered:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+		
+	if _is_laser_attacking:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		_update_hitbox_position_boss()
+		return
+		
 	_update_timers_boss(delta)
 	
 	# Skip parent's _physics_process to avoid sprite.flip_h error
@@ -85,11 +95,18 @@ func _update_hitbox_position_boss() -> void:
 	
 	# Flip the hitbox to match animated sprite direction
 	attack_hitbox.scale.x = -1.0 if animated_sprite.flip_h else 1.0
+	
+	if laser_hitbox:
+		laser_hitbox.scale.x = -1.0 if animated_sprite.flip_h else 1.0
 
+func is_entering() -> bool:
+	return not _has_entered
 
 func _update_boss_animations() -> void:
 	# Don't change animation during entrance or special attack
-	if _is_entering:
+	if not _has_entered:
+		return
+	if _is_laser_attacking: 
 		return
 	if animated_sprite.animation == "special" and animated_sprite.is_playing():
 		return
@@ -103,42 +120,14 @@ func _update_boss_animations() -> void:
 
 
 ## Start the boss entrance animation
-func start_entrance(duration: float = -1.0) -> void:
-	if duration < 0:
-		duration = entrance_duration
-	
-	print("[Boss] Starting entrance animation for ", duration, " seconds")
-	_is_entering = true
-	_entrance_timer = duration
-	
-	# Stop all movement
+func start_entrance(_duration: float = -1.0) -> void:
 	velocity = Vector2.ZERO
-	
-	# Face the player (usually left)
 	animated_sprite.flip_h = true
-	
-	# Play the special/entrance animation
 	animated_sprite.play("special")
 
 
-## End the entrance and start normal behavior
-func _end_entrance() -> void:
-	print("[Boss] Entrance finished, starting normal behavior")
-	_is_entering = false
-	
-	# Return to idle animation
-	animated_sprite.play("idle")
-	
-	# State machine will take over from here
-
-
-## Check if boss is currently in entrance animation
-func is_entering() -> bool:
-	return _is_entering
-
-
 func can_special_attack() -> bool:
-	return _special_cooldown_timer <= 0 and not _is_entering
+	return _has_entered and _special_cooldown_timer <= 0 and not _is_laser_attacking
 
 
 func perform_special_attack() -> void:
@@ -146,25 +135,38 @@ func perform_special_attack() -> void:
 		return
 	
 	_special_cooldown_timer = special_attack_cooldown
-	velocity = Vector2.ZERO  # Stop moving during attack
-	animated_sprite.play("special")
+	_is_laser_attacking = true
+	velocity = Vector2.ZERO
+	
+	if target:
+		animated_sprite.flip_h = target.global_position.x < global_position.x
+	
+	animated_sprite.play("laser")
+	
+	if laser_hitbox and laser_hitbox.has_method("reset_attack"):
+		laser_hitbox.reset_attack()
+	# Play the hitbox timing animation
+	laser_animation_player.play("laser_hitbox")
 	
 	# Spawn gas attack (matching the smoke in your sprite)
-	var attack_data = load("res://src/combat/data/gas_attack.tres")
-	var attack_dir = get_facing_direction()
-	ChemistryManager.spawn_attack(attack_data, global_position + attack_dir * 80, attack_dir, self)
+	#var attack_data = load("res://src/combat/data/gas_attack.tres")
+	#var attack_dir = get_facing_direction()
+	#ChemistryManager.spawn_attack(attack_data, global_position + attack_dir * 80, attack_dir, self)
 
 
 func _on_animation_finished() -> void:
-	# Don't auto-return to idle if we're in entrance mode (timer handles that)
-	if _is_entering:
-		# Loop the special animation during entrance
-		animated_sprite.play("special")
+	# Entrance finished
+	if animated_sprite.animation == "special" and not _has_entered:
+		_has_entered = true
+		animated_sprite.play("idle")
 		return
 	
-	# Return to idle after special attack finishes
-	if animated_sprite.animation == "special":
+	# Laser attack finished
+	if animated_sprite.animation == "laser":
+		_is_laser_attacking = false
 		animated_sprite.play("idle")
+		return
+
 
 
 ## Override to use AnimatedSprite2D for facing direction
@@ -175,8 +177,7 @@ func get_facing_direction() -> Vector2:
 ## Override take_damage to ignore damage during entrance
 func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, _element: AttackData.ElementType = AttackData.ElementType.NONE, _play_sound: bool = true) -> void:
 	# Optionally make boss invulnerable during entrance
-	if _is_entering:
-		print("[Boss] Immune during entrance!")
+	if not _has_entered:
 		return
 
 	# Boss has no element immunity, so just call parent logic directly
@@ -187,3 +188,8 @@ func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, _element: A
 
 	if state_machine and state_machine.states.has("Hurt"):
 		state_machine._on_transition_requested(state_machine.current_state, "Hurt")
+
+func _on_laser_hit_landed(body: Node2D) -> void:
+	if body.has_method("take_damage"):
+		var knockback_dir = get_facing_direction()
+		body.take_damage(attack_damage * 2, knockback_dir)  # Maybe extra damage for laser?

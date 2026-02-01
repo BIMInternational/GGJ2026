@@ -18,7 +18,13 @@ func physics_update(_delta: float) -> void:
 	if distance > _enemy.detection_range:
 		transition_requested.emit(self, "Idle")
 		return
-	
+
+	if _enemy is Boss:
+		var boss := _enemy as Boss
+		if boss.can_special_attack():
+			boss.perform_special_attack()
+			return
+
 	# Check if player is in attack range
 	var player_in_range = _enemy.attack_hitbox.is_player_in_range()
 	
