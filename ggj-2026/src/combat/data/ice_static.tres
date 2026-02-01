@@ -11,4 +11,5 @@ range_distance = 80.0
 dissipation_time = 12.0
 cooldown = 0.0
 collision_radius = 30.0
+play_sound = false
 visual_effect = ExtResource("2_v2ru2")
