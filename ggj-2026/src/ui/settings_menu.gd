@@ -183,6 +183,6 @@ func _input(event: InputEvent) -> void:
 		return
 	
 	# Gestion du retour avec la manette
-	if event.is_action_pressed("ui_cancel"):
+	if event.is_action_pressed("cancel"):
 		_on_back_pressed()
 		accept_event()

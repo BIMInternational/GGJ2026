@@ -21,11 +21,8 @@ func _ready() -> void:
 	_update_texts()
 	_setup_focus()
 	
-	# Si on arrive directement sur cette scène (après un changement de scène), afficher l'écran
-	if not GameManager.is_game_running:
-		# Attendre un frame pour que tous les noeuds soient prêts
-		await get_tree().process_frame
-		_show_game_over()
+	# Cacher l'écran par défaut
+	control.hide()
 
 
 func _process(delta: float) -> void:

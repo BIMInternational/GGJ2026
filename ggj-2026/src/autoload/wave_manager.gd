@@ -39,6 +39,7 @@ var _gates: Array[Node2D] = []
 var _arrow_indicator: Control = null
 var _reward_screen: CanvasLayer = null
 var _player: Node2D = null
+var _level_node: Node2D = null
 
 
 func _ready() -> void:
@@ -54,11 +55,12 @@ func _process(_delta: float) -> void:
 
 
 ## Call this from level script to start the wave system
-func start_waves(camera: Camera2D, gates: Array, arrow: Control, reward: CanvasLayer) -> void:
+func start_waves(camera: Camera2D, gates: Array, arrow: Control, reward: CanvasLayer, level: Node2D = null) -> void:
 	_camera = camera
 	_gates = gates
 	_arrow_indicator = arrow
 	_reward_screen = reward
+	_level_node = level if level != null else get_tree().current_scene
 	
 	# Find player reference
 	await get_tree().process_frame
@@ -171,7 +173,12 @@ func _spawn_enemy(enemy_scene: PackedScene) -> void:
 	if enemy.has_signal("died"):
 		enemy.died.connect(_on_enemy_died)
 	
-	get_tree().current_scene.add_child(enemy)
+	if _level_node:
+		_level_node.add_child(enemy)
+	else:
+		print("[WaveManager] Error: No level node to spawn enemy!")
+		return
+	
 	enemies_alive.append(enemy)
 	
 	print("[WaveManager] Spawned enemy at ", enemy.global_position)
@@ -293,7 +300,11 @@ func _spawn_boss(phase: WaveData) -> void:
 	var target_scale = boss.scale
 	boss.scale = Vector2.ZERO
 	
-	get_tree().current_scene.add_child(boss)
+	if _level_node:
+		_level_node.add_child(boss)
+	else:
+		print("[WaveManager] Error: No level node to spawn boss!")
+		return
 	
 	# Scale-in tween
 	var tween = create_tween()
