@@ -15,6 +15,8 @@
 [ext_resource type="AudioStream" uid="uid://34w4pq7gg121" path="res://assets/sounds/ice ball.wav" id="13_ngjhu"]
 [ext_resource type="AudioStream" uid="uid://k8aotyn3cp6h" path="res://assets/sounds/electricity.wav" id="14_dq8jy"]
 [ext_resource type="AudioStream" uid="uid://cqqfk1hqstyyl" path="res://assets/sounds/dash.wav" id="15_k06so"]
+[ext_resource type="AudioStream" uid="uid://1gflbw72jh7h" path="res://assets/sounds/abuelita hurt.wav" id="16_ku5n2"]
+[ext_resource type="AudioStream" uid="uid://jv0jvj4gnuo0" path="res://assets/music/abuelita dead.ogg" id="17_c065h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6jq1w"]
 radius = 114.0
@@ -765,6 +767,14 @@ volume_db = -4.562
 [node name="DashSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=1568316794]
 stream = ExtResource("15_k06so")
 volume_db = -10.0
+
+[node name="AbuelitaHurtSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=1173132192]
+stream = ExtResource("16_ku5n2")
+volume_db = -10.0
+
+[node name="AbuelitaDeadSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=1170142923]
+stream = ExtResource("17_c065h")
+volume_db = -3.649
 
 [node name="Tumbleweed" type="Node" parent="." unique_id=552438982]
 
