@@ -145,7 +145,7 @@ shape = SubResource("CapsuleShape2D_icfpw")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1828787666]
 script = ExtResource("8_7gg8e")
-max_health = 400
+max_health = 1000
 metadata/_custom_type_script = "uid://cc45vge2xbv2a"
 
 [node name="StateMachine" type="Node" parent="." unique_id=789675315 node_paths=PackedStringArray("initial_state")]
