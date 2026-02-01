@@ -1,12 +1,15 @@
 extends EnemyBase
 class_name Boss
 
-## Boss enemy with special attack
+## Boss enemy with special attack and entrance animation
 
 @export var special_attack_cooldown: float = 5.0
 @export var special_attack_range: float = 300.0
+@export var entrance_duration: float = 3.0
 
 var _special_cooldown_timer: float = 0.0
+var _is_entering: bool = false
+var _entrance_timer: float = 0.0
 
 # Override sprite reference to use AnimatedSprite2D
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
@@ -32,6 +35,13 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# Handle entrance animation
+	if _is_entering:
+		_entrance_timer -= delta
+		if _entrance_timer <= 0:
+			_end_entrance()
+		return  # Don't process anything else during entrance
+	
 	_update_timers_boss(delta)
 	
 	# Skip parent's _physics_process to avoid sprite.flip_h error
@@ -77,8 +87,10 @@ func _update_hitbox_position_boss() -> void:
 
 
 func _update_boss_animations() -> void:
-	# Don't interrupt special attack animation
-	if animated_sprite.animation == "special_attack" and animated_sprite.is_playing():
+	# Don't change animation during entrance or special attack
+	if _is_entering:
+		return
+	if animated_sprite.animation == "special" and animated_sprite.is_playing():
 		return
 	
 	if velocity.length() > 10:
@@ -89,8 +101,43 @@ func _update_boss_animations() -> void:
 			animated_sprite.play("idle")
 
 
+## Start the boss entrance animation
+func start_entrance(duration: float = -1.0) -> void:
+	if duration < 0:
+		duration = entrance_duration
+	
+	print("[Boss] Starting entrance animation for ", duration, " seconds")
+	_is_entering = true
+	_entrance_timer = duration
+	
+	# Stop all movement
+	velocity = Vector2.ZERO
+	
+	# Face the player (usually left)
+	animated_sprite.flip_h = true
+	
+	# Play the special/entrance animation
+	animated_sprite.play("special")
+
+
+## End the entrance and start normal behavior
+func _end_entrance() -> void:
+	print("[Boss] Entrance finished, starting normal behavior")
+	_is_entering = false
+	
+	# Return to idle animation
+	animated_sprite.play("idle")
+	
+	# State machine will take over from here
+
+
+## Check if boss is currently in entrance animation
+func is_entering() -> bool:
+	return _is_entering
+
+
 func can_special_attack() -> bool:
-	return _special_cooldown_timer <= 0
+	return _special_cooldown_timer <= 0 and not _is_entering
 
 
 func perform_special_attack() -> void:
@@ -99,7 +146,7 @@ func perform_special_attack() -> void:
 	
 	_special_cooldown_timer = special_attack_cooldown
 	velocity = Vector2.ZERO  # Stop moving during attack
-	animated_sprite.play("special_attack")
+	animated_sprite.play("special")
 	
 	# Spawn gas attack (matching the smoke in your sprite)
 	var attack_data = load("res://src/combat/data/gas_attack.tres")
@@ -108,8 +155,14 @@ func perform_special_attack() -> void:
 
 
 func _on_animation_finished() -> void:
+	# Don't auto-return to idle if we're in entrance mode (timer handles that)
+	if _is_entering:
+		# Loop the special animation during entrance
+		animated_sprite.play("special")
+		return
+	
 	# Return to idle after special attack finishes
-	if animated_sprite.animation == "special_attack":
+	if animated_sprite.animation == "special":
 		animated_sprite.play("idle")
 
 
@@ -118,8 +171,13 @@ func get_facing_direction() -> Vector2:
 	return Vector2(-1, 0) if animated_sprite.flip_h else Vector2(1, 0)
 
 
-## Override take_damage to use animated_sprite for flash effect if needed
+## Override take_damage to ignore damage during entrance
 func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
+	# Optionally make boss invulnerable during entrance
+	if _is_entering:
+		print("[Boss] Immune during entrance!")
+		return
+	
 	health_component.take_damage(amount)
 	
 	if knockback_dir != Vector2.ZERO:
