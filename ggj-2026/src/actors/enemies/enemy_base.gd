@@ -8,7 +8,7 @@ signal died(enemy: EnemyBase)
 # === EXPORTS ===
 @export var speed: float = 80.0
 @export var attack_range: float = 50.0
-@export var detection_range: float = 2000.0
+@export var detection_range: float = 200000.0
 @export var score_value: int = 100
 @export var knockback_friction: float = 0.05
 @export var knockback_force: float = 800.0
