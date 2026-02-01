@@ -729,3 +729,7 @@ editor_draw_drag_margin = true
 
 [node name="PlayerSounds" type="Node" parent="." unique_id=1457896083]
 script = ExtResource("3_xj70e")
+
+[node name="Tumbleweed" type="Node" parent="." unique_id=552438982]
+
+[node name="TimerTumbleweed" type="Timer" parent="Tumbleweed" unique_id=857617178]
