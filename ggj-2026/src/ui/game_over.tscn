@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://daskr88tiwk71"]
 
 [ext_resource type="Script" uid="uid://dkiiblr08a488" path="res://src/ui/game_over.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://x0ewq378heow" path="res://assets/fonts/American Captain.ttf" id="2_ioouv"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
 bg_color = Color(0.3, 0.3, 0.3, 1)
@@ -87,11 +88,15 @@ vertical_alignment = 1
 
 [node name="ScoreLabel" type="Label" parent="Control/VBoxContainer" unique_id=1013343011]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ioouv")
+theme_override_font_sizes/font_size = 40
 text = "Score: 0"
 horizontal_alignment = 1
 
 [node name="BestScoreLabel" type="Label" parent="Control/VBoxContainer" unique_id=779272360]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ioouv")
+theme_override_font_sizes/font_size = 35
 text = "Meilleur score: 0"
 horizontal_alignment = 1
 
@@ -102,20 +107,20 @@ theme_override_constants/separation = 10
 
 [node name="RestartButton" type="Button" parent="Control/VBoxContainer/ButtonsContainer" unique_id=1962488999]
 layout_mode = 2
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 
 [node name="MainMenuButton" type="Button" parent="Control/VBoxContainer/ButtonsContainer" unique_id=577441276]
 layout_mode = 2
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 
 [node name="QuitButton" type="Button" parent="Control/VBoxContainer/ButtonsContainer" unique_id=1371252110]
 layout_mode = 2
-theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
 
 [connection signal="pressed" from="Control/VBoxContainer/ButtonsContainer/RestartButton" to="." method="_on_restart_pressed"]
