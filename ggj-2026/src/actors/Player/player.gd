@@ -245,6 +245,7 @@ func _apply_movement(_delta: float) -> void:
 	elif _is_hurt:
 		# En état hurt, appliquer une friction très légère pour laisser le knockback agir
 		_velocity *= 0.95
+		
 	elif _is_changing_mask:
 		# En état mask change, ralentir progressivement
 		_velocity = lerp(_velocity, Vector2.ZERO, 0.2)
@@ -323,6 +324,8 @@ func take_damage(damage: int, knockback_dir: Vector2 = Vector2.ZERO, _element: A
 		_is_hurt = true
 		_hurt_timer = 0.5 # Ne peut rien faire pendant 0.5s
 		_invulnerability_timer = 0.6 # Invulnérable pendant 0.6s
+		get_node('/root').find_child("AbuelitaHurtSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
+		get_node('/root').find_child("AbuelitaHurtSoundEffect", true, false).play()
 		print("[Player] État hurt activé")
 		
 		if (health_component.current_health <= 0):
@@ -343,6 +346,7 @@ func take_damage(damage: int, knockback_dir: Vector2 = Vector2.ZERO, _element: A
 ## Appelé quand les points de vie atteignent 0
 func _on_health_depleted() -> void:
 	print("[Player] Points de vie épuisés!")
+	get_node('/root').find_child("AbuelitaDeadSoundEffect", true, false).play()
 	die()
 
 

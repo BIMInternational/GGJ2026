@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dpxayxbc1hf1y" path="res://src/ui/reward_placeholder.tscn" id="6_naqav"]
 [ext_resource type="Shader" path="res://src/scenes/levels/sandstorm_shader.gdshader" id="8_sandstorm"]
 [ext_resource type="AudioStream" uid="uid://nm0gopvfmpfa" path="res://assets/music/Aquí a patear culos y a preparar poblanos. Y ya están servidos los poblanos.ogg" id="9_lbvuf"]
+[ext_resource type="AudioStream" uid="uid://d2k7j2nci3msx" path="res://assets/music/Ven a comer tu torta de puños.ogg" id="10_8bfcq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(11047, 64)
@@ -123,5 +124,8 @@ mouse_filter = 2
 [node name="InGameMusic" type="AudioStreamPlayer" parent="Node" unique_id=700980479]
 stream = ExtResource("9_lbvuf")
 autoplay = true
+
+[node name="BossMusic" type="AudioStreamPlayer" parent="Node" unique_id=1274417904]
+stream = ExtResource("10_8bfcq")
 
 [editable path="Player"]

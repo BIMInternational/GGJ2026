@@ -321,11 +321,15 @@ func _spawn_boss(phase: WaveData) -> void:
 	
 	current_boss = boss
 	boss_spawned.emit(boss)
+	get_node('/root').find_child("InGameMusic", true, false).stop()
+	get_node('/root').find_child("BossMusic", true, false).play()
 
 func _on_boss_died(_boss: Node2D) -> void:
 	print("[WaveManager] Boss defeated!")
 	current_boss = null
 	boss_defeated.emit()
+	get_node('/root').find_child("BossMusic", true, false).stop()
+	get_node('/root').find_child("InGameMusic", true, false).play()
 	
 	# Open the gate
 	if current_phase_index < _gates.size():
