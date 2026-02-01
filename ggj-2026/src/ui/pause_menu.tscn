@@ -2,6 +2,48 @@
 
 [ext_resource type="Script" uid="uid://cx3qcnynypf12" path="res://src/ui/pause_menu.gd" id="1"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
+bg_color = Color(0.3, 0.3, 0.3, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_normal"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pressed"]
+bg_color = Color(0.25, 0.25, 0.25, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.7, 0.7, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id="Theme_1"]
+Button/styles/focus = SubResource("StyleBoxFlat_hover")
+Button/styles/hover = SubResource("StyleBoxFlat_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_pressed")
+
 [node name="PauseMenu" type="CanvasLayer" unique_id=2036477546]
 process_mode = 3
 script = ExtResource("1")
@@ -26,6 +68,7 @@ offset_right = 100.0
 offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_1")
 
 [node name="Title" type="Label" parent="VBoxContainer" unique_id=1945941596]
 layout_mode = 2
@@ -34,14 +77,23 @@ horizontal_alignment = 1
 
 [node name="ResumeButton" type="Button" parent="VBoxContainer" unique_id=1188477445]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 18
 text = "Reprendre"
 
 [node name="RestartButton" type="Button" parent="VBoxContainer" unique_id=2097527304]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 18
 text = "Recommencer"
 
 [node name="MainMenuButton" type="Button" parent="VBoxContainer" unique_id=1769398181]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 18
 text = "Menu Principal"
 
 [connection signal="pressed" from="VBoxContainer/ResumeButton" to="." method="_on_resume_pressed"]

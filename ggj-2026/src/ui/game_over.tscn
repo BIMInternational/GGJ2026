@@ -2,6 +2,48 @@
 
 [ext_resource type="Script" uid="uid://dkiiblr08a488" path="res://src/ui/game_over.gd" id="1"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
+bg_color = Color(0.3, 0.3, 0.3, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_normal"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pressed"]
+bg_color = Color(0.25, 0.25, 0.25, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.7, 0.7, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id="Theme_1"]
+Button/styles/focus = SubResource("StyleBoxFlat_hover")
+Button/styles/hover = SubResource("StyleBoxFlat_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_pressed")
+
 [node name="GameOver" type="CanvasLayer" unique_id=2064297038]
 process_mode = 3
 layer = 10
@@ -55,16 +97,26 @@ horizontal_alignment = 1
 
 [node name="ButtonsContainer" type="VBoxContainer" parent="Control/VBoxContainer" unique_id=734521480]
 layout_mode = 2
+theme = SubResource("Theme_1")
 theme_override_constants/separation = 10
 
 [node name="RestartButton" type="Button" parent="Control/VBoxContainer/ButtonsContainer" unique_id=1962488999]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 18
 
 [node name="MainMenuButton" type="Button" parent="Control/VBoxContainer/ButtonsContainer" unique_id=577441276]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 18
 
 [node name="QuitButton" type="Button" parent="Control/VBoxContainer/ButtonsContainer" unique_id=1371252110]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 18
 
 [connection signal="pressed" from="Control/VBoxContainer/ButtonsContainer/RestartButton" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/ButtonsContainer/MainMenuButton" to="." method="_on_main_menu_pressed"]

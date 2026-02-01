@@ -2,6 +2,48 @@
 
 [ext_resource type="Script" uid="uid://c7sbgweecy5rx" path="res://src/ui/settings_menu.gd" id="1"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
+bg_color = Color(0.3, 0.3, 0.3, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_normal"]
+bg_color = Color(0.15, 0.15, 0.15, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.5, 0.5, 0.5, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pressed"]
+bg_color = Color(0.25, 0.25, 0.25, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.7, 0.7, 0.7, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id="Theme_1"]
+Button/styles/focus = SubResource("StyleBoxFlat_hover")
+Button/styles/hover = SubResource("StyleBoxFlat_hover")
+Button/styles/normal = SubResource("StyleBoxFlat_normal")
+Button/styles/pressed = SubResource("StyleBoxFlat_pressed")
+
 [node name="SettingsMenu" type="Control" unique_id=1103009533]
 layout_mode = 3
 anchors_preset = 15
@@ -33,6 +75,7 @@ theme_override_constants/margin_bottom = 40
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=946178562]
 layout_mode = 2
+theme = SubResource("Theme_1")
 theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="MarginContainer/VBoxContainer" unique_id=254109163]
@@ -41,6 +84,9 @@ horizontal_alignment = 1
 
 [node name="ControlsButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1468004354]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 18
 
 [node name="LanguageSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1928588713]
 layout_mode = 2
@@ -102,9 +148,15 @@ horizontal_alignment = 1
 
 [node name="ResetButton" type="Button" parent="MarginContainer/VBoxContainer/ResetSection" unique_id=1952887363]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 18
 
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=2042020835]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 18
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/ControlsButton" to="." method="_on_controls_button_pressed"]
 [connection signal="item_selected" from="MarginContainer/VBoxContainer/LanguageSection/LanguageOption" to="." method="_on_language_selected"]
