@@ -6,6 +6,8 @@ class_name HUD
 #@onready var timer_label: Label = $MarginContainer/HBoxContainerScore/VBoxContainerScore/TimerLabel
 @onready var health_bar: ProgressBar = $MarginContainer/HBoxContainerP1/VBoxContainerP1/HealthBarP1
 @onready var name_label_p1: Label = $MarginContainer/HBoxContainerP1/VBoxContainerP1/NameLabelP1
+@onready var go_label: Label = $MarginContainer/HBoxContainerP2/VBoxContainerP2/LivesLabelP2Coin
+var _go_tween: Tween = null
 
 var _last_time_displayed: int = -1
 var _player: PlayerController = null
@@ -112,3 +114,25 @@ func _on_timer_finished() -> void:
 func update_timer(time: float) -> void:
 	_current_time = time
 	_update_timer_display()
+	
+func show_go_indicator() -> void:
+	print("[HUD] show_go_indicator called")
+	if go_label:
+		go_label.text = "GO! →"
+		_start_go_animation()
+	else:
+		print("[HUD] ERROR: go_label is null!")
+
+func hide_go_indicator() -> void:
+	go_label.text = "INSERT COIN"
+	if _go_tween:
+		_go_tween.kill()
+		_go_tween = null
+
+func _start_go_animation() -> void:
+	if _go_tween:
+		_go_tween.kill()
+	var initial_x = go_label.position.x
+	_go_tween = create_tween().set_loops()
+	_go_tween.tween_property(go_label, "position:x", initial_x + 10, 0.5).set_ease(Tween.EASE_IN_OUT)
+	_go_tween.tween_property(go_label, "position:x", initial_x, 0.5).set_ease(Tween.EASE_IN_OUT)

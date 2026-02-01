@@ -36,7 +36,7 @@ var _waiting_for_boss_area_visible: bool = false
 # === REFERENCES ===
 var _camera: Camera2D = null
 var _gates: Array[Node2D] = []
-var _arrow_indicator: Control = null
+var _arrow_indicator: Node = null
 var _reward_screen: CanvasLayer = null
 var _player: Node2D = null
 var _level_node: Node2D = null
@@ -55,7 +55,7 @@ func _process(_delta: float) -> void:
 
 
 ## Call this from level script to start the wave system
-func start_waves(camera: Camera2D, gates: Array, arrow: Control, reward: CanvasLayer, level: Node2D = null) -> void:
+func start_waves(camera: Camera2D, gates: Array, arrow: Node, reward: CanvasLayer, level: Node2D = null) -> void:
 	_camera = camera
 	_gates = gates
 	_arrow_indicator = arrow
@@ -256,23 +256,12 @@ func _on_boss_area_visible() -> void:
 	_spawn_boss(phase)
 
 
-## Show arrow without auto-hide timer
-func _show_arrow_indefinitely() -> void:
-	if _arrow_indicator:
-		_arrow_indicator.visible = true
-		# Start bobbing animation if available
-		if _arrow_indicator.has_method("_start_bob_animation"):
-			_arrow_indicator._start_bob_animation()
-		# Stop any existing timer
-		if _arrow_indicator.has_node("_display_timer"):
-			var timer = _arrow_indicator.get_node("_display_timer")
-			if timer:
-				timer.stop()
-	print("[WaveManager] Arrow shown - advance to boss area!")
-
-
 func _show_arrow(duration: float = 3.0) -> void:
-	if _arrow_indicator:
+	var hud = _level_node.get_node_or_null("HUD") if _level_node else null
+	
+	if hud and hud.has_method("show_go_indicator"):
+		hud.show_go_indicator()
+	elif _arrow_indicator:
 		if _arrow_indicator.has_method("display"):
 			_arrow_indicator.display(duration)
 		else:
@@ -281,11 +270,28 @@ func _show_arrow(duration: float = 3.0) -> void:
 
 
 func _hide_arrow() -> void:
-	if _arrow_indicator:
+	var hud = _level_node.get_node_or_null("HUD") if _level_node else null
+	
+	if hud and hud.has_method("hide_go_indicator"):
+		hud.hide_go_indicator()
+	elif _arrow_indicator:
 		if _arrow_indicator.has_method("hide_arrow"):
 			_arrow_indicator.hide_arrow()
 		else:
 			_arrow_indicator.hide()
+
+func _show_arrow_indefinitely() -> void:
+	# Get HUD directly from level_node to ensure we use the correct one
+	var hud = _level_node.get_node_or_null("HUD") if _level_node else null
+	
+	if hud and hud.has_method("show_go_indicator"):
+		hud.show_go_indicator()
+	elif _arrow_indicator:
+		if _arrow_indicator.has_method("show_indefinitely"):
+			_arrow_indicator.show_indefinitely()
+		else:
+			_arrow_indicator.visible = true
+	print("[WaveManager] GO! shown - advance to boss area!")
 
 
 func _spawn_boss(phase: WaveData) -> void:

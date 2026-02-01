@@ -21,7 +21,8 @@ func _setup_wave_system() -> void:
 	var g3 = $Environment/Gate3
 	var gates: Array[Node2D] = [g1, g2, g3]
 	
-	var arrow = $ArrowIndicator
+	var hud = get_node_or_null("HUD")
+	
 	var reward = $RewardPlaceholder
 	
 	WaveManager.phases = [
@@ -33,7 +34,7 @@ func _setup_wave_system() -> void:
 	WaveManager.all_phases_completed.connect(_on_victory)
 	
 	print("Starting WaveManager...")
-	WaveManager.start_waves(camera, gates, arrow, reward, self)
+	WaveManager.start_waves(camera, gates, hud, reward, self)
 
 func _on_player_died() -> void:
 	player_died.emit()
