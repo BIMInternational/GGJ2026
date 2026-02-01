@@ -28,6 +28,7 @@ var target: Node2D = null
 var _knockback_velocity: Vector2 = Vector2.ZERO
 var _attack_cooldown_timer: float = 0.0
 var _is_attacking: bool = false
+var immune_element: AttackData.ElementType = AttackData.ElementType.NONE
 
 func _ready() -> void:
 	add_to_group("enemies")
@@ -104,7 +105,11 @@ func apply_knockback(direction: Vector2, force: float = knockback_force) -> void
 	_knockback_velocity = direction.normalized() * force
 
 
-func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
+func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, element: AttackData.ElementType = AttackData.ElementType.NONE) -> void:
+	# Check immunity based on hair color
+	if element != AttackData.ElementType.NONE and element == immune_element:
+		return  # Immune to this element
+
 	health_component.take_damage(amount)
 
 	if knockback_dir != Vector2.ZERO:
@@ -153,3 +158,18 @@ func _randomize_hair_color() -> void:
 	var random_index = randi() % hair_options.size()
 	hair = hair_options[random_index]
 	hair.visible = true
+
+	# Set immunity based on hair color
+	match hair.name:
+		"Red":
+			immune_element = AttackData.ElementType.FIRE
+		"Blue":
+			immune_element = AttackData.ElementType.WATER
+		"Green":
+			immune_element = AttackData.ElementType.GAS
+		"White":
+			immune_element = AttackData.ElementType.ICE
+		"Yellow":
+			immune_element = AttackData.ElementType.ELECTRIC
+		_:
+			immune_element = AttackData.ElementType.NONE
