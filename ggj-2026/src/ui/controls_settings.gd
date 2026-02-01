@@ -5,7 +5,7 @@ class_name ControlsSettings
 @onready var inputs_container: VBoxContainer = $MarginContainer/VBoxContainer/ScrollContainer/InputsContainer
 @onready var scroll_container: ScrollContainer = $MarginContainer/VBoxContainer/ScrollContainer
 
-var _actions: Array[String] = ["move_left", "move_right", "move_up", "move_down", "action", "attack", "switch_mask", "defense", "validate", "cancel", "pause"]
+var _actions: Array[String] = ["move_left", "move_right", "move_up", "move_down", "dash", "attack", "switch_mask", "validate", "cancel", "pause"]
 var _actions_cache: Dictionary = {}
 var _waiting_for_input: Button = null
 

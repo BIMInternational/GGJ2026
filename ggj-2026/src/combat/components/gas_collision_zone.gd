@@ -45,7 +45,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 
 	# Avoid self-damage
-	if body == owner_node:
+	if is_instance_valid(owner_node) and body == owner_node:
 		return
 
 	# Damage enemies

@@ -52,7 +52,10 @@ func _spawn_collision_zone() -> void:
 
 	var zone = WATER_COLLISION_ZONE.instantiate()
 	get_tree().root.add_child(zone)
-	zone.initialize(attack_data.trail_attack_data, global_position, _zone_lifetime, owner_node)
+	
+	# Check if owner_node is still valid before passing it
+	var valid_owner = owner_node if is_instance_valid(owner_node) else null
+	zone.initialize(attack_data.trail_attack_data, global_position, _zone_lifetime, valid_owner)
 
 func stop_emitting() -> void:
 	_is_emitting = false

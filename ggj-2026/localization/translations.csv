@@ -26,7 +26,7 @@ ACTION_MOVE_RIGHT,Déplacement Droite,Move Right
 ACTION_MOVE_UP,Déplacement Haut,Move Up
 ACTION_MOVE_DOWN,Déplacement Bas,Move Down
 ACTION_JUMP,Sauter,Jump
-ACTION_ACTION,Action/Interagir,Action/Interact
+ACTION_DASH,Dash,Dash
 ACTION_ATTACK,Attaquer,Attack
 ACTION_SWITCH_MASK,Changer de Masque,Switch Mask
 ACTION_DEFENSE,Défendre/Bloquer,Defend/Block
