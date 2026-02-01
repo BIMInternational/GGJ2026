@@ -151,8 +151,7 @@ layout_mode = 2
 layout_mode = 2
 text = "REMERCIEMENTS SPÉCIAUX
 
-[Personnes à remercier]
-[Sponsors/Organisateurs]"
+Toulouse Game Dev X 7Fault"
 horizontal_alignment = 1
 
 [node name="Separator6" type="HSeparator" parent="ScrollContainer/MarginContainer/VBoxContainer" unique_id=357526418]
