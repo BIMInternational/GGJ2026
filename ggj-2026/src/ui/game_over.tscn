@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dkiiblr08a488" path="res://src/ui/game_over.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://x0ewq378heow" path="res://assets/fonts/American Captain.ttf" id="2_ioouv"]
+[ext_resource type="AudioStream" uid="uid://b8shm6t03ore5" path="res://assets/music/Adolorido del Culazón.ogg" id="3_34wjx"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hover"]
 bg_color = Color(0.3, 0.3, 0.3, 1)
@@ -122,6 +123,11 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 18
+
+[node name="Audio" type="Node" parent="." unique_id=2135545904]
+
+[node name="GameOverMusic" type="AudioStreamPlayer" parent="Audio" unique_id=2015093668]
+stream = ExtResource("3_34wjx")
 
 [connection signal="pressed" from="Control/VBoxContainer/ButtonsContainer/RestartButton" to="." method="_on_restart_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/ButtonsContainer/MainMenuButton" to="." method="_on_main_menu_pressed"]
