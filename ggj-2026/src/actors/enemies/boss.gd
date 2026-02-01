@@ -173,16 +173,17 @@ func get_facing_direction() -> Vector2:
 
 
 ## Override take_damage to ignore damage during entrance
-func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
+func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, _element: AttackData.ElementType = AttackData.ElementType.NONE) -> void:
 	# Optionally make boss invulnerable during entrance
 	if _is_entering:
 		print("[Boss] Immune during entrance!")
 		return
-	
+
+	# Boss has no element immunity, so just call parent logic directly
 	health_component.take_damage(amount)
-	
+
 	if knockback_dir != Vector2.ZERO:
 		apply_knockback(knockback_dir)
-	
+
 	if state_machine and state_machine.states.has("Hurt"):
 		state_machine._on_transition_requested(state_machine.current_state, "Hurt")

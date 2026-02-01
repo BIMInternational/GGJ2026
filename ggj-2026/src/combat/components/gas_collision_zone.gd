@@ -52,4 +52,4 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemies") and body.has_method("take_damage"):
 		_damaged_bodies.append(body)
 		var knockback_dir = (body.global_position - global_position).normalized()
-		body.take_damage(int(attack_data.damage), knockback_dir)
+		body.take_damage(int(attack_data.damage), knockback_dir, attack_data.element_type)
