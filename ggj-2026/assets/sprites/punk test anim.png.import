@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6vstoydke7kc"
-path="res://.godot/imported/punk.png-b8639047d2fb52217e9652caa2d7d4a5.ctex"
+uid="uid://bmwfu8u54rwxg"
+path="res://.godot/imported/punk test anim.png-61061ce009f6971c13fe526b9c971af4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://src/actors/enemies/punk.png"
-dest_files=["res://.godot/imported/punk.png-b8639047d2fb52217e9652caa2d7d4a5.ctex"]
+source_file="res://assets/sprites/punk test anim.png"
+dest_files=["res://.godot/imported/punk test anim.png-61061ce009f6971c13fe526b9c971af4.ctex"]
 
 [params]
 

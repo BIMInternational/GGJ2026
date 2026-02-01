@@ -12,7 +12,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
 radius = 84.0
-height = 246.0
+height = 316.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_frm3g"]
 size = Vector2(21.352478, 78.17346)
@@ -34,7 +34,7 @@ hframes = 2
 region_rect = Rect2(24.626266, 126.51555, 276.42212, 530.48444)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=397215438]
-position = Vector2(3, 2)
+position = Vector2(-17, 9)
 shape = SubResource("CapsuleShape2D_1")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1332650829]
