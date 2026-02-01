@@ -19,13 +19,14 @@ signal died(enemy: EnemyBase)
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var state_machine: StateMachine = $StateMachine
 @onready var sprite: Sprite2D = get_node_or_null("Sprite2D")
+@onready var hair: Sprite2D = get_node_or_null("PunkHairs/Red")
 @onready var attack_hitbox: Area2D = $AttackHitbox
 
 # === STATE ===
 var target: Node2D = null
 var _knockback_velocity: Vector2 = Vector2.ZERO
 var _attack_cooldown_timer: float = 0.0
-
+var _is_attacking: bool = false
 
 func _ready() -> void:
 	add_to_group("enemies")
@@ -62,7 +63,9 @@ func _physics_process(delta: float) -> void:
 	# Orienter le sprite selon la direction (seulement si mouvement volontaire, pas knockback)
 	if movement_direction != 0:
 		sprite.flip_h = movement_direction < 0
-		
+		hair.flip_h = movement_direction < 0
+		hair.offset = get_hair_offset()
+
 	_update_hitbox_position()
 
 func _update_hitbox_position() -> void:
@@ -109,9 +112,22 @@ func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
 
 func _on_died() -> void:
 	GameManager.score += score_value
-	died.emit(self)
+	died.emit(self )
 	queue_free()
 
 
 func get_facing_direction() -> Vector2:
 	return Vector2(-1, 0) if sprite.flip_h else Vector2(1, 0)
+
+
+func get_hair_offset() -> Vector2:
+	if _is_attacking:
+		if sprite.flip_h:
+			return Vector2(40, 0)
+		else:
+			return Vector2(-20, 0)
+	else:
+		if sprite.flip_h:
+			return Vector2(23, 0)
+		else:
+			return Vector2(0, 0)
