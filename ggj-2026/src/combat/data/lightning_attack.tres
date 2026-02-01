@@ -6,10 +6,10 @@
 [resource]
 script = ExtResource("1_lightning")
 element_type = 5
-damage = 18.0
+damage = 25.0
 range_distance = 0.0
 dissipation_time = 30.0
-cooldown = 3.5
+cooldown = 2.5
 collision_radius = 250.0
 expand_over_time = true
 ignore_y_axis = true
