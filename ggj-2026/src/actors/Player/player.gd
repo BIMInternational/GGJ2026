@@ -19,12 +19,12 @@ signal mask_changed(new_mask: int)
 # WATER = Trainée en avant
 # ICE = Boule de glace gèle au contact
 # LIGHTNING = Zone autour de toi
-enum MaskType { FIRE, GAS, WATER, ICE, LIGHTNING }
+enum MaskType {FIRE, GAS, WATER, ICE, LIGHTNING}
 
 # === MOVEMENT CONSTANTS ===
 @export var speed: float = 400.0
-@export var speed_boost: float = 1.5  # Multiplicateur de vitesse
-@export var inertia: float = 0.15  # 0.0 = lourd, 1.0 = aérien
+@export var speed_boost: float = 1.5 # Multiplicateur de vitesse
+@export var inertia: float = 0.15 # 0.0 = lourd, 1.0 = aérien
 
 # Dash
 @export var dash_speed: float = 800.0
@@ -33,14 +33,19 @@ enum MaskType { FIRE, GAS, WATER, ICE, LIGHTNING }
 
 # Attack
 @export var attack_duration: float = 0.3
-@export var attack_offset: float = 30.0  # Distance de spawn de l'attaque
+@export var attack_offset: float = 30.0 # Distance de spawn de l'attaque
 
 # Attack Data pour tests
 var fire_attack_data: AttackData = preload("res://src/combat/data/fire_attack.tres")
 var gas_static_data: AttackData = preload("res://src/combat/data/gas_attack.tres")
-var water_attack_data: AttackData = preload("res://src/combat/data/water_attack.tres")  # Trainée en avant
-var ice_attack_data: AttackData = preload("res://src/combat/data/ice_attack.tres")  # Gèle au contact
-var lightning_attack_data: AttackData = preload("res://src/combat/data/lightning_attack.tres")  # Zone autour
+var water_attack_data: AttackData = preload("res://src/combat/data/water_attack.tres") # Trainée en avant
+var ice_attack_data: AttackData = preload("res://src/combat/data/ice_attack.tres") # Gèle au contact
+var lightning_attack_data: AttackData = preload("res://src/combat/data/lightning_attack.tres") # Zone autour
+
+# Tumbleweed
+var tumbleweed_scene: PackedScene = preload("res://src/actors/world/tumbleweed.tscn")
+@export var tumbleweed_min_interval: float = 5.0
+@export var tumbleweed_max_interval: float = 15.0
 
 # Mask system
 var available_masks: Array[MaskType] = [MaskType.FIRE, MaskType.GAS, MaskType.WATER, MaskType.ICE, MaskType.LIGHTNING]
@@ -49,7 +54,7 @@ var current_mask_index: int = 0
 # === STATE VARIABLES ===
 var direction: Vector2 = Vector2.ZERO
 var _velocity: Vector2 = Vector2.ZERO
-var _is_boosted: bool = false  # Pour un boost de vitesse (dash/skill)
+var _is_boosted: bool = false # Pour un boost de vitesse (dash/skill)
 
 # Dernière direction de mouvement pour les attaques
 var _last_move_direction: Vector2 = Vector2.DOWN
@@ -75,6 +80,7 @@ var _is_dead: bool = false
 @onready var animation_player: AnimationPlayer = $AnimationPlayer if has_node("AnimationPlayer") else null
 @onready var animation_mask: AnimationPlayer = $AnimationMask if has_node("AnimationMask") else null
 @onready var health_component: HealthComponent = $HealthComponent
+@onready var tumbleweed_timer: Timer = $Tumbleweed/TimerTumbleweed if has_node("Tumbleweed/TimerTumbleweed") else null
 
 
 func _ready() -> void:
@@ -91,6 +97,11 @@ func _ready() -> void:
 
 	# Démarrer avec l'animation Idle
 	_update_animations()
+
+	# Setup tumbleweed timer
+	if tumbleweed_timer:
+		tumbleweed_timer.timeout.connect(_on_tumbleweed_timer_timeout)
+		_start_tumbleweed_timer()
 
 
 func _physics_process(delta: float) -> void:
@@ -152,7 +163,7 @@ func _update_animations() -> void:
 	else:
 		# Essayer l'animation Idle spécifique au masque, sinon fallback sur "Idle"
 		var idle_anim_name = _get_idle_animation_name()
-		var anim_to_play = "Idle"  # Par défaut
+		var anim_to_play = "Idle" # Par défaut
 		
 		if animation_player.has_animation(idle_anim_name):
 			anim_to_play = idle_anim_name
@@ -310,11 +321,11 @@ func take_damage(damage: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
 		
 		# Activer l'état hurt
 		_is_hurt = true
-		_hurt_timer = 0.5  # Ne peut rien faire pendant 0.5s
-		_invulnerability_timer = 0.6  # Invulnérable pendant 0.6s
+		_hurt_timer = 0.5 # Ne peut rien faire pendant 0.5s
+		_invulnerability_timer = 0.6 # Invulnérable pendant 0.6s
 		print("[Player] État hurt activé")
 		
-		if(health_component.current_health <= 0):
+		if (health_component.current_health <= 0):
 			print("[Player] PV à 0 ou moins, déclenchement de la mort")
 			_on_health_depleted()
 			return
@@ -337,7 +348,7 @@ func _on_health_depleted() -> void:
 
 ## Triggers death
 func die() -> void:
-	if _is_dead:  # Déjà mort ou en train de mourir
+	if _is_dead: # Déjà mort ou en train de mourir
 		return
 	
 	print("[Player] Mort du joueur")
@@ -413,7 +424,7 @@ func _get_current_attack_data() -> AttackData:
 		MaskType.LIGHTNING:
 			return lightning_attack_data
 		_:
-			return fire_attack_data  # Fallback
+			return fire_attack_data # Fallback
 
 
 ## Retourne le nom du masque pour le debug
@@ -436,7 +447,7 @@ func _get_mask_name(mask: MaskType) -> String:
 ## Retourne le nom de l'animation Idle correspondant au masque équipé
 func _get_idle_animation_name() -> String:
 	if available_masks.is_empty():
-		return "Idle_FIRE"  # Par défaut
+		return "Idle_FIRE" # Par défaut
 	
 	var current_mask = available_masks[current_mask_index]
 	match current_mask:
@@ -451,7 +462,7 @@ func _get_idle_animation_name() -> String:
 		MaskType.LIGHTNING:
 			return "Idle_LIGHTNING"
 		_:
-			return "Idle_FIRE"  # Fallback
+			return "Idle_FIRE" # Fallback
 
 
 ## Joue une animation sur le personnage ET le masque
@@ -474,7 +485,7 @@ func _spawn_attack(attack_data: AttackData) -> void:
 	
 	# Inverser la direction si spécifié dans les data
 	if attack_data.reverse_direction:
-		attack_direction = -attack_direction
+		attack_direction = - attack_direction
 	
 	# Position de spawn dans la direction de l'attaque
 	var spawn_position = global_position + attack_direction * attack_offset
@@ -483,7 +494,60 @@ func _spawn_attack(attack_data: AttackData) -> void:
 	get_node('/root').find_child("FireballSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
 	get_node('/root').find_child("FireballSoundEffect", true, false).play()
 	# Utiliser le ChemistryManager pour spawn (disponible pour tous les acteurs)
-	ChemistryManager.spawn_attack(attack_data, spawn_position, attack_direction, self)
+	ChemistryManager.spawn_attack(attack_data, spawn_position, attack_direction, self )
 
 	# Démarrer l'état d'attaque
 	_start_attack()
+
+
+## Start the tumbleweed timer with a random interval
+func _start_tumbleweed_timer() -> void:
+	if tumbleweed_timer:
+		var random_time = randf_range(tumbleweed_min_interval, tumbleweed_max_interval)
+		tumbleweed_timer.wait_time = random_time
+		tumbleweed_timer.one_shot = true
+		tumbleweed_timer.start()
+
+
+## Called when the tumbleweed timer times out
+func _on_tumbleweed_timer_timeout() -> void:
+	_spawn_tumbleweed()
+	_start_tumbleweed_timer()
+
+
+## Spawn a tumbleweed that rolls across the screen
+func _spawn_tumbleweed() -> void:
+	if tumbleweed_scene == null:
+		return
+
+	var tumbleweed = tumbleweed_scene.instantiate()
+
+	# Get camera and viewport info
+	var camera = $Camera2D as Camera2D
+	var viewport_size = get_viewport_rect().size
+	var zoom = camera.zoom if camera else Vector2.ONE
+
+	# Calculate visible area based on camera
+	var visible_width = viewport_size.x / zoom.x
+
+	# Random direction (left or right)
+	var tumbleweed_direction = Vector2.LEFT # if randf() > 0.5 else Vector2.RIGHT
+
+	# Spawn position: off-screen on the opposite side
+	var spawn_x: float
+	if tumbleweed_direction == Vector2.RIGHT:
+		spawn_x = global_position.x - visible_width / 2 - 100
+	else:
+		spawn_x = global_position.x + visible_width / 2 + 100
+
+	# Random Y position within the visible area (lower part of screen for ground level)
+	var spawn_y = global_position.y + randf_range(-100, 200)
+
+	tumbleweed.global_position = Vector2(spawn_x, spawn_y)
+
+	# Travel distance: full visible width plus margins on both sides
+	var travel_distance = visible_width + 400.0
+	tumbleweed.setup(tumbleweed_direction, spawn_y, travel_distance)
+
+	# Add to the scene tree (parent of player, usually the level)
+	get_parent().add_child(tumbleweed)

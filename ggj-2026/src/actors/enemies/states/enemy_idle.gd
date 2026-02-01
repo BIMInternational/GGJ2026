@@ -9,6 +9,7 @@ var _enemy: EnemyBase
 func enter() -> void:
 	_enemy = get_parent().get_parent() as EnemyBase
 	_enemy.velocity = Vector2.ZERO
+	# Idle peut rester sur l'animation par défaut (frame 0)
 
 
 func physics_update(_delta: float) -> void:

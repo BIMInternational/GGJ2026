@@ -54,8 +54,8 @@ func _physics_process(delta: float) -> void:
 	# Apply knockback friction (from parent)
 	_knockback_velocity = lerp(_knockback_velocity, Vector2.ZERO, knockback_friction)
 	
-	# Store movement direction before adding knockback
-	var movement_direction = velocity.x
+	# Store AI movement direction before adding knockback
+	var ai_movement_direction = velocity.x
 	
 	# Combine AI movement with knockback
 	velocity += _knockback_velocity
@@ -64,9 +64,10 @@ func _physics_process(delta: float) -> void:
 	# Update z_index for visual sorting
 	z_index = int(global_position.y)
 	
-	# Flip animated sprite based on direction
-	if movement_direction != 0:
-		animated_sprite.flip_h = movement_direction < 0
+	# Flip animated sprite based on AI direction only (not knockback)
+	# Only flip if AI is moving AND there is almost no knockback
+	if ai_movement_direction != 0 and _knockback_velocity.length() < 1.0:
+		animated_sprite.flip_h = ai_movement_direction < 0
 	
 	_update_hitbox_position_boss()
 	_update_boss_animations()
@@ -172,16 +173,17 @@ func get_facing_direction() -> Vector2:
 
 
 ## Override take_damage to ignore damage during entrance
-func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
+func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, _element: AttackData.ElementType = AttackData.ElementType.NONE) -> void:
 	# Optionally make boss invulnerable during entrance
 	if _is_entering:
 		print("[Boss] Immune during entrance!")
 		return
-	
+
+	# Boss has no element immunity, so just call parent logic directly
 	health_component.take_damage(amount)
-	
+
 	if knockback_dir != Vector2.ZERO:
 		apply_knockback(knockback_dir)
-	
+
 	if state_machine and state_machine.states.has("Hurt"):
 		state_machine._on_transition_requested(state_machine.current_state, "Hurt")

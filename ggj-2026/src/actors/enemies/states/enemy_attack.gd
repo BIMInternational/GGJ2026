@@ -3,8 +3,8 @@ class_name EnemyAttackState
 
 ## État d'attaque - l'ennemi attaque le joueur
 
-@export var attack_duration: float = 0.5  # Durée de l'animation d'attaque
-@export var attack_frame_duration: float = 0.2  # Durée de la frame d'attaque
+@export var attack_duration: float = 0.5 # Durée de l'animation d'attaque
+@export var attack_frame_duration: float = 0.2 # Durée de la frame d'attaque
 @export var attack_damage: int = 10
 
 var _enemy: EnemyBase
@@ -15,12 +15,17 @@ var _has_hit: bool = false
 
 func enter() -> void:
 	_enemy = get_parent().get_parent() as EnemyBase
+
 	_enemy.velocity = Vector2.ZERO
 	_timer = attack_duration
 	_frame_timer = attack_frame_duration
 	_has_hit = false
+	_enemy._is_attacking = true
+
+	# Jouer l'animation d'attaque
+	_enemy.play_animation("Attack")
 	
-	# Changer vers la frame d'attaque (frame 1)
+	# Changer vers la frame d'attaque (frame 1) pour compatibilité
 	if _enemy.sprite:
 		_enemy.sprite.frame = 1
 	
@@ -29,6 +34,8 @@ func enter() -> void:
 
 
 func exit() -> void:
+	_enemy._is_attacking = false
+
 	# Désactiver la hitbox
 	_enemy.enable_attack_hitbox(false)
 	
@@ -50,7 +57,7 @@ func physics_update(delta: float) -> void:
 	
 	if _timer <= 0:
 		# Attaque terminée, retourner en Chase
-		transition_requested.emit(self, "Chase")
+		transition_requested.emit(self , "Chase")
 
 
 ## Appelé quand la hitbox touche quelque chose

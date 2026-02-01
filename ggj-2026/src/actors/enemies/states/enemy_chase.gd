@@ -5,6 +5,7 @@ var _enemy: EnemyBase
 
 func enter() -> void:
 	_enemy = get_parent().get_parent() as EnemyBase
+	_enemy.play_animation("Walk")
 
 func physics_update(_delta: float) -> void:
 	if not _enemy or not _enemy.target:
