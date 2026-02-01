@@ -17,16 +17,25 @@ func _ready() -> void:
 	
 	# Create timer for auto-hide
 	_display_timer = Timer.new()
+	_display_timer.name = "_display_timer"
 	_display_timer.one_shot = true
 	_display_timer.timeout.connect(_on_display_timeout)
 	add_child(_display_timer)
 
 
-## Call this to show arrow for a duration
+## Call this to show arrow for a duration (0 = indefinite)
 func display(duration: float = 3.0) -> void:
 	visible = true
 	_start_bob_animation()
-	_display_timer.start(duration)
+	if duration > 0:
+		_display_timer.start(duration)
+
+
+## Call this to show arrow indefinitely
+func show_indefinitely() -> void:
+	visible = true
+	_start_bob_animation()
+	_display_timer.stop()
 
 
 ## Call this to hide immediately
@@ -34,6 +43,7 @@ func hide_arrow() -> void:
 	visible = false
 	if _bob_tween:
 		_bob_tween.kill()
+		_bob_tween = null
 	_display_timer.stop()
 
 

@@ -76,13 +76,13 @@ position = Vector2(18000, -300)
 shape = SubResource("RectangleShape2D_wall")
 
 [node name="Gate1" parent="Environment" unique_id=1447288322 instance=ExtResource("4_j0a6s")]
-position = Vector2(800, 0)
+position = Vector2(3000, 0)
 
 [node name="Gate2" parent="Environment" unique_id=582549273 instance=ExtResource("4_j0a6s")]
-position = Vector2(5000, 0)
+position = Vector2(10500, 0)
 
 [node name="Gate3" parent="Environment" unique_id=220796817 instance=ExtResource("4_j0a6s")]
-position = Vector2(10000, 0)
+position = Vector2(19000, 0)
 
 [node name="HUD" parent="." unique_id=1087319849 instance=ExtResource("5_hud")]
 

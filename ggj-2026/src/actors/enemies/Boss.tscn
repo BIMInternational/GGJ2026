@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://nulh7rl1i48x"]
 
 [ext_resource type="Texture2D" uid="uid://b60j6qoaabat7" path="res://assets/sprites/Boss/boss_spe01.png" id="1_4wn1r"]
-[ext_resource type="Script" path="res://src/actors/enemies/boss.gd" id="1_7gg8e"]
+[ext_resource type="Script" uid="uid://ctl3502gqbpps" path="res://src/actors/enemies/boss.gd" id="1_7gg8e"]
 [ext_resource type="Texture2D" uid="uid://b85u0pkwxvto3" path="res://assets/sprites/Boss/boss_spe02.png" id="2_nh2h2"]
 [ext_resource type="Texture2D" uid="uid://bcafq6n3qqe5n" path="res://assets/sprites/Boss/boss_spe03.png" id="3_y1sus"]
 [ext_resource type="Texture2D" uid="uid://b73ylwdegbhss" path="res://assets/sprites/Boss/boss_walk01.png" id="4_dkht7"]
@@ -66,6 +66,7 @@ height = 684.0
 size = Vector2(205, 98)
 
 [node name="Boss" type="CharacterBody2D" unique_id=549871255]
+scale = Vector2(0.65, 0.65)
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_7gg8e")

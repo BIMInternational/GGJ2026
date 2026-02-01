@@ -10,5 +10,6 @@
 script = ExtResource("2_j77ko")
 subwaves = Array[ExtResource("3_vns5f")]([ExtResource("4_roova"), ExtResource("5_j77ko")])
 boss_scene = ExtResource("1_roova")
-gate_x_position = 10000.0
+boss_spawn_position = Vector2(17350, -350)
+gate_x_position = 19000.0
 metadata/_custom_type_script = "uid://k55qcpowocic"

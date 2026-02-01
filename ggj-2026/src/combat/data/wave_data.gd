@@ -9,6 +9,9 @@ extends Resource
 ## Boss scene to spawn after all subwaves cleared (null = no boss)
 @export var boss_scene: PackedScene
 
+## World position where the boss spawns (specific spot)
+@export var boss_spawn_position: Vector2 = Vector2(1000, 100)
+
 ## X position where the progress gate blocks the player
 @export var gate_x_position: float = 500.0
 
