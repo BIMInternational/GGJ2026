@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://xk45b2t12cna" path="res://src/scenes/ArrowIndicator.tscn" id="5_3ihjg"]
 [ext_resource type="PackedScene" uid="uid://hud" path="res://src/ui/hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" uid="uid://dpxayxbc1hf1y" path="res://src/ui/reward_placeholder.tscn" id="6_naqav"]
-[ext_resource type="Shader" uid="uid://dwmmmejddurk7" path="res://src/scenes/levels/sandstorm_shader.gdshader" id="8_sandstorm"]
+[ext_resource type="Shader" path="res://src/scenes/levels/sandstorm_shader.gdshader" id="8_sandstorm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(11047, 64)

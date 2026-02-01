@@ -30,13 +30,13 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
+"update": 0,
 "values": [4, 5]
 }
 
 [sub_resource type="Animation" id="Animation_aboga"]
 resource_name = "Death"
-length = 2.5
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,10 +44,10 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 12, 13]
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [12, 13]
 }
 
 [sub_resource type="Animation" id="Animation_eghvg"]
@@ -61,7 +61,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(1, 1),
-"update": 1,
+"update": 0,
 "values": [8, 9]
 }
 
@@ -76,7 +76,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
+"update": 0,
 "values": [5]
 }
 
@@ -93,7 +93,7 @@ tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
+"update": 0,
 "values": [0, 1, 2]
 }
 
@@ -106,6 +106,94 @@ _data = {
 &"Walk": SubResource("Animation_vo0du")
 }
 
+[sub_resource type="Animation" id="Animation_hairs_attack"]
+resource_name = "Attack"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2DHairs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_hairs_death"]
+resource_name = "Death"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2DHairs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [12, 13]
+}
+
+[sub_resource type="Animation" id="Animation_hairs_domage"]
+resource_name = "Domage"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2DHairs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8, 9]
+}
+
+[sub_resource type="Animation" id="Animation_hairs_reset"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2DHairs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_hairs_walk"]
+resource_name = "Walk"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2DHairs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0, 1, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hairs"]
+_data = {
+&"Attack": SubResource("Animation_hairs_attack"),
+&"Death": SubResource("Animation_hairs_death"),
+&"Domage": SubResource("Animation_hairs_domage"),
+&"RESET": SubResource("Animation_hairs_reset"),
+&"Walk": SubResource("Animation_hairs_walk")
+}
+
 [node name="EnemyBase" type="CharacterBody2D" unique_id=1397437944]
 collision_layer = 2
 collision_mask = 4
@@ -115,12 +203,6 @@ attack_range = 120.0
 knockback_friction = 0.2
 knockback_force = 60.0
 attack_cooldown = 2.0
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=88651236]
-scale = Vector2(0.7, 0.7)
-texture = ExtResource("2_k1ru1")
-hframes = 2
-region_rect = Rect2(24.626266, 126.51555, 276.42212, 530.48444)
 
 [node name="PunkHairs" parent="." unique_id=1334420857 instance=ExtResource("3_vo0du")]
 position = Vector2(-8, -140)
@@ -159,7 +241,7 @@ scale = Vector2(5.5188, -0.7810318)
 shape = SubResource("RectangleShape2D_frm3g")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=88651236]
-position = Vector2(-36.999996, -35.999996)
+position = Vector2(-37, -37)
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("2_k1ru1")
 hframes = 4
@@ -169,6 +251,18 @@ region_rect = Rect2(24.626266, 126.51555, 276.42212, 530.48444)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1307722590]
 libraries/ = SubResource("AnimationLibrary_rr7jr")
+
+[node name="Sprite2DHairs" type="Sprite2D" parent="." unique_id=1749690298]
+position = Vector2(-37, -37)
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("2_k1ru1")
+hframes = 4
+vframes = 4
+frame = 5
+region_rect = Rect2(24.626266, 126.51555, 276.42212, 530.48444)
+
+[node name="AnimationPlayerHairs" type="AnimationPlayer" parent="." unique_id=1820793395]
+libraries/ = SubResource("AnimationLibrary_hairs")
 
 [connection signal="hit_landed" from="AttackHitbox" to="." method="_on_attack_hit_landed"]
 

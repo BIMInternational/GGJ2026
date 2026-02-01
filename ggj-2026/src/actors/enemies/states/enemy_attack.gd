@@ -22,10 +22,12 @@ func enter() -> void:
 	_has_hit = false
 	_enemy._is_attacking = true
 
-	# Changer vers la frame d'attaque (frame 1)
+	# Jouer l'animation d'attaque
+	_enemy.play_animation("Attack")
+	
+	# Changer vers la frame d'attaque (frame 1) pour compatibilité
 	if _enemy.sprite:
 		_enemy.sprite.frame = 1
-		_enemy.hair.offset = _enemy.get_hair_offset()
 	
 	# Activer la hitbox d'attaque
 	_enemy.enable_attack_hitbox(true)
@@ -40,7 +42,6 @@ func exit() -> void:
 	# Remettre la frame par défaut (frame 0)
 	if _enemy.sprite:
 		_enemy.sprite.frame = 0
-		_enemy.hair.offset = _enemy.get_hair_offset()
 	
 	# Démarrer le cooldown d'attaque
 	_enemy.start_attack_cooldown()

@@ -13,6 +13,7 @@ func enter() -> void:
 	_enemy = get_parent().get_parent() as EnemyBase
 	_enemy.velocity = Vector2.ZERO
 	_timer = hitstun_duration
+	_enemy.play_animation("Domage")
 
 
 func physics_update(delta: float) -> void:
@@ -22,3 +23,6 @@ func physics_update(delta: float) -> void:
 		# Retourner en Chase si toujours vivant
 		if _enemy.health_component.is_alive():
 			transition_requested.emit(self, "Chase")
+		else:
+			# Si mort, ne rien faire (laisser _on_died gérer)
+			pass
