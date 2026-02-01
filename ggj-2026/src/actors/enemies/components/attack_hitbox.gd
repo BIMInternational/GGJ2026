@@ -24,10 +24,12 @@ func _ready() -> void:
 
 
 func activate() -> void:
+	print("[", get_parent().name, "/", name, "] activate() called, _player_in_hitbox=", _player_in_hitbox)
 	_active = true
 	# Si le joueur est déjà dans la hitbox, le toucher immédiatement
 	if _player_in_hitbox:
 		var bodies = get_overlapping_bodies()
+		print("[", get_parent().name, "/", name, "] Bodies in hitbox: ", bodies)
 		for body in bodies:
 			if body.is_in_group("player"):
 				_deal_damage(body)
