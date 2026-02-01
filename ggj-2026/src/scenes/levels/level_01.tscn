@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://cei0nk25e4al2" path="res://assets/fonts/Street.png" id="1_yqen0"]
 [ext_resource type="PackedScene" uid="uid://csh5koo12ks4y" path="res://src/scenes/levels/components/progress_gate.tscn" id="4_j0a6s"]
 [ext_resource type="PackedScene" uid="uid://xk45b2t12cna" path="res://src/scenes/ArrowIndicator.tscn" id="5_3ihjg"]
-[ext_resource type="PackedScene" uid="uid://hud" path="res://src/ui/hud.tscn" id="5_hud"]
 [ext_resource type="PackedScene" uid="uid://dpxayxbc1hf1y" path="res://src/ui/reward_placeholder.tscn" id="6_naqav"]
 [ext_resource type="Shader" uid="uid://dwmmmejddurk7" path="res://src/scenes/levels/sandstorm_shader.gdshader" id="8_sandstorm"]
 [ext_resource type="AudioStream" uid="uid://nm0gopvfmpfa" path="res://assets/music/Aquí a patear culos y a preparar poblanos. Y ya están servidos los poblanos.ogg" id="9_lbvuf"]
@@ -97,10 +96,7 @@ position = Vector2(10500, 0)
 [node name="Gate3" parent="Environment" unique_id=220796817 instance=ExtResource("4_j0a6s")]
 position = Vector2(19000, 0)
 
-[node name="HUD" parent="." unique_id=1087319849 instance=ExtResource("5_hud")]
-
 [node name="ArrowIndicator" parent="." unique_id=1511839058 instance=ExtResource("5_3ihjg")]
-visible = false
 
 [node name="RewardPlaceholder" parent="." unique_id=225742881 instance=ExtResource("6_naqav")]
 
