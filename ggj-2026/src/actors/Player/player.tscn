@@ -10,6 +10,11 @@
 [ext_resource type="Script" uid="uid://cc45vge2xbv2a" path="res://src/scripts/health_component.gd" id="7_health"]
 [ext_resource type="AudioStream" uid="uid://d1uembhw7m4wg" path="res://assets/sounds/scooter.ogg" id="9_ksoi8"]
 [ext_resource type="AudioStream" uid="uid://23tiifik4ujn" path="res://assets/sounds/fireball launch.wav" id="10_7wa16"]
+[ext_resource type="AudioStream" uid="uid://cxxmvyaesiwns" path="res://assets/sounds/water ball.wav" id="11_7dnek"]
+[ext_resource type="AudioStream" uid="uid://b7gxj5apbjx3k" path="res://assets/sounds/fart.wav" id="12_lo26q"]
+[ext_resource type="AudioStream" uid="uid://34w4pq7gg121" path="res://assets/sounds/ice ball.wav" id="13_ngjhu"]
+[ext_resource type="AudioStream" uid="uid://k8aotyn3cp6h" path="res://assets/sounds/electricity.wav" id="14_dq8jy"]
+[ext_resource type="AudioStream" uid="uid://cqqfk1hqstyyl" path="res://assets/sounds/dash.wav" id="15_k06so"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6jq1w"]
 radius = 114.0
@@ -740,6 +745,27 @@ volume_db = -6.386
 [node name="FireballSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=1271636696]
 stream = ExtResource("10_7wa16")
 volume_db = -9.123
+
+[node name="WaterballSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=627989303]
+stream = ExtResource("11_7dnek")
+volume_db = 4.562
+
+[node name="FartSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=2144076003]
+stream = ExtResource("12_lo26q")
+volume_db = -5.474
+
+[node name="IceballSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=1417132035]
+stream = ExtResource("13_ngjhu")
+volume_db = -2.737
+
+[node name="ElectricityballSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=1329016022]
+stream = ExtResource("14_dq8jy")
+volume_db = -4.562
+
+[node name="DashSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=1568316794]
+stream = ExtResource("15_k06so")
+volume_db = -10.0
+
 [node name="Tumbleweed" type="Node" parent="." unique_id=552438982]
 
 [node name="TimerTumbleweed" type="Timer" parent="Tumbleweed" unique_id=857617178]
