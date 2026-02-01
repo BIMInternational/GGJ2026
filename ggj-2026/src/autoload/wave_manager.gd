@@ -275,8 +275,17 @@ func _on_boss_area_visible() -> void:
 	_spawn_boss(phase)
 
 
-func _show_arrow(duration: float = 3.0) -> void:
+func _find_hud() -> Node:
+	# First try level_node
 	var hud = _level_node.get_node_or_null("HUD") if _level_node else null
+	# If not found, try parent (Main scene)
+	if hud == null and _level_node and _level_node.get_parent():
+		hud = _level_node.get_parent().get_node_or_null("HUD")
+	return hud
+
+
+func _show_arrow(duration: float = 3.0) -> void:
+	var hud = _find_hud()
 	
 	if hud and hud.has_method("show_go_indicator"):
 		hud.show_go_indicator()
@@ -285,11 +294,11 @@ func _show_arrow(duration: float = 3.0) -> void:
 			_arrow_indicator.display(duration)
 		else:
 			_arrow_indicator.show()
-	print("[WaveManager] Arrow shown for ", duration, " seconds")
+
 
 
 func _hide_arrow() -> void:
-	var hud = _level_node.get_node_or_null("HUD") if _level_node else null
+	var hud = _find_hud()
 	
 	if hud and hud.has_method("hide_go_indicator"):
 		hud.hide_go_indicator()
@@ -299,9 +308,9 @@ func _hide_arrow() -> void:
 		else:
 			_arrow_indicator.hide()
 
+
 func _show_arrow_indefinitely() -> void:
-	# Get HUD directly from level_node to ensure we use the correct one
-	var hud = _level_node.get_node_or_null("HUD") if _level_node else null
+	var hud = _find_hud()
 	
 	if hud and hud.has_method("show_go_indicator"):
 		hud.show_go_indicator()

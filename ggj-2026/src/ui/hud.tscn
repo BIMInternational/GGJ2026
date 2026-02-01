@@ -17,38 +17,44 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="HBoxContainerP1" type="HBoxContainer" parent="MarginContainer" unique_id=978391751]
+[node name="MainHBox" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
+size_flags_vertical = 0
 
-[node name="VBoxContainerP1" type="VBoxContainer" parent="MarginContainer/HBoxContainerP1" unique_id=645715338]
+[node name="HBoxContainerP1" type="HBoxContainer" parent="MarginContainer/MainHBox" unique_id=978391751]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainerP1" type="VBoxContainer" parent="MarginContainer/MainHBox/HBoxContainerP1" unique_id=645715338]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 5
 
-[node name="NameLabelP1" type="Label" parent="MarginContainer/HBoxContainerP1/VBoxContainerP1" unique_id=1808332002]
+[node name="NameLabelP1" type="Label" parent="MarginContainer/MainHBox/HBoxContainerP1/VBoxContainerP1" unique_id=1808332002]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_4rn03")
 theme_override_font_sizes/font_size = 24
 text = "DONA ROSA"
 
-[node name="HealthBarP1" type="ProgressBar" parent="MarginContainer/HBoxContainerP1/VBoxContainerP1" unique_id=1604005045]
+[node name="HealthBarP1" type="ProgressBar" parent="MarginContainer/MainHBox/HBoxContainerP1/VBoxContainerP1" unique_id=1604005045]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
 value = 100.0
 show_percentage = false
 
-[node name="HBoxContainerScore" type="HBoxContainer" parent="MarginContainer" unique_id=1485423935]
+[node name="HBoxContainerScore" type="HBoxContainer" parent="MarginContainer/MainHBox" unique_id=1485423935]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 1
 
-[node name="VBoxContainerScore" type="VBoxContainer" parent="MarginContainer/HBoxContainerScore" unique_id=497302963]
+[node name="VBoxContainerScore" type="VBoxContainer" parent="MarginContainer/MainHBox/HBoxContainerScore" unique_id=497302963]
 layout_mode = 2
 
-[node name="HBoxContainerScore" type="HBoxContainer" parent="MarginContainer/HBoxContainerScore/VBoxContainerScore" unique_id=1381202975]
+[node name="HBoxContainerScore" type="HBoxContainer" parent="MarginContainer/MainHBox/HBoxContainerScore/VBoxContainerScore" unique_id=1381202975]
 layout_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="MarginContainer/HBoxContainerScore/VBoxContainerScore/HBoxContainerScore" unique_id=819327578]
+[node name="ScoreLabel" type="Label" parent="MarginContainer/MainHBox/HBoxContainerScore/VBoxContainerScore/HBoxContainerScore" unique_id=819327578]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
@@ -56,7 +62,7 @@ theme_override_fonts/font = ExtResource("2_4rn03")
 theme_override_font_sizes/font_size = 35
 text = "Score: 0"
 
-[node name="TimerLabel" type="Label" parent="MarginContainer/HBoxContainerScore/VBoxContainerScore" unique_id=837479002]
+[node name="TimerLabel" type="Label" parent="MarginContainer/MainHBox/HBoxContainerScore/VBoxContainerScore" unique_id=837479002]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 8
@@ -65,28 +71,29 @@ theme_override_fonts/font = ExtResource("2_4rn03")
 theme_override_font_sizes/font_size = 30
 text = "Time: 0:00"
 
-[node name="HBoxContainerP2" type="HBoxContainer" parent="MarginContainer" unique_id=1831727099]
+[node name="HBoxContainerP2" type="HBoxContainer" parent="MarginContainer/MainHBox" unique_id=1831727099]
 layout_mode = 2
+size_flags_horizontal = 3
 alignment = 2
 
-[node name="VBoxContainerP2" type="VBoxContainer" parent="MarginContainer/HBoxContainerP2" unique_id=1384826668]
+[node name="VBoxContainerP2" type="VBoxContainer" parent="MarginContainer/MainHBox/HBoxContainerP2" unique_id=1384826668]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 5
 
-[node name="LivesLabelP2Coin" type="Label" parent="MarginContainer/HBoxContainerP2/VBoxContainerP2" unique_id=1413575276]
+[node name="LivesLabelP2Coin" type="Label" parent="MarginContainer/MainHBox/HBoxContainerP2/VBoxContainerP2" unique_id=1413575276]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_4rn03")
 theme_override_font_sizes/font_size = 30
 text = "INSERT COIN"
 
-[node name="NameLabelP1" type="Label" parent="MarginContainer/HBoxContainerP2/VBoxContainerP2" unique_id=1591085974]
+[node name="NameLabelP1" type="Label" parent="MarginContainer/MainHBox/HBoxContainerP2/VBoxContainerP2" unique_id=1591085974]
 visible = false
 layout_mode = 2
 text = "DON PABLO"
 
-[node name="HealthBarP2" type="ProgressBar" parent="MarginContainer/HBoxContainerP2/VBoxContainerP2" unique_id=596652101]
+[node name="HealthBarP2" type="ProgressBar" parent="MarginContainer/MainHBox/HBoxContainerP2/VBoxContainerP2" unique_id=596652101]
 visible = false
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 2
