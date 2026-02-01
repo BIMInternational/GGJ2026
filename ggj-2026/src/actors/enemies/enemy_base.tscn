@@ -10,11 +10,11 @@
 [ext_resource type="Script" uid="uid://bpej04ywkfsmn" path="res://src/actors/enemies/states/enemy_hurt.gd" id="6_hurt"]
 [ext_resource type="Script" uid="uid://difiev7vnjjug" path="res://src/actors/enemies/states/enemy_attack.gd" id="8_k1ru1"]
 [ext_resource type="Script" uid="uid://b1dkbs86jnsl1" path="res://src/actors/enemies/components/attack_hitbox.gd" id="9_vo0du"]
-[ext_resource type="AudioStream" uid="uid://dkwimd0cdr432" path="res://assets/sounds/punk hurt.wav" id="11_rr7jr"]
+[ext_resource type="FontFile" uid="uid://x0ewq378heow" path="res://assets/fonts/American Captain.ttf" id="11_rr7jr"]
+[ext_resource type="AudioStream" uid="uid://dkwimd0cdr432" path="res://assets/sounds/punk hurt.wav" id="11_tml7w"]
 [ext_resource type="AudioStream" uid="uid://cwqqyh7c8xiro" path="res://assets/sounds/punk dead.wav" id="12_aboga"]
 [ext_resource type="AudioStream" uid="uid://dlyb7kyask5h2" path="res://assets/sounds/punk punch.wav" id="13_eghvg"]
 [ext_resource type="AudioStream" uid="uid://dbj0jg3ch0au5" path="res://assets/sounds/woosh.wav" id="14_nr13x"]
-[ext_resource type="FontFile" uid="uid://x0ewq378heow" path="res://assets/fonts/American Captain.ttf" id="11_rr7jr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
 radius = 84.0
@@ -205,11 +205,8 @@ collision_mask = 4
 script = ExtResource("1_enemy")
 speed = 100.0
 attack_range = 120.0
-detection_range = null
-score_value = null
 knockback_friction = 0.2
 knockback_force = 60.0
-attack_damage = null
 attack_cooldown = 2.0
 
 [node name="PunkHairs" parent="." unique_id=1334420857 instance=ExtResource("3_vo0du")]
@@ -275,7 +272,7 @@ libraries/ = SubResource("AnimationLibrary_hairs")
 [node name="Audio" type="Node" parent="." unique_id=763188720]
 
 [node name="EnemyHurtSoundEffect" type="AudioStreamPlayer" parent="Audio" unique_id=1509636194]
-stream = ExtResource("11_rr7jr")
+stream = ExtResource("11_tml7w")
 volume_db = -6.386
 
 [node name="EnemyDieSoundEffect" type="AudioStreamPlayer" parent="Audio" unique_id=207274520]

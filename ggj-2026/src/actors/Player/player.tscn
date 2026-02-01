@@ -770,7 +770,7 @@ volume_db = -10.0
 
 [node name="AbuelitaHurtSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=1173132192]
 stream = ExtResource("16_ku5n2")
-volume_db = -10.0
+volume_db = -7.263
 
 [node name="AbuelitaDeadSoundEffect" type="AudioStreamPlayer" parent="PlayerSounds" unique_id=1170142923]
 stream = ExtResource("17_c065h")

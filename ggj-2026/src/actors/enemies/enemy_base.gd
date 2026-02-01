@@ -120,10 +120,9 @@ func apply_knockback(direction: Vector2, force: float = knockback_force) -> void
 
 
 func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, element: AttackData.ElementType = AttackData.ElementType.NONE, play_sound: bool = true) -> void:
-	 
 	# Check immunity based on hair color
 	if element != AttackData.ElementType.NONE and element == immune_element:
-		if playsound = true:
+		if play_sound == true:
 			get_node('/root').find_child("WooshSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
 			get_node('/root').find_child("WooshSoundEffect", true, false).play()
 		# Afficher le label d'immunité pendant 2.5 secondes
@@ -134,8 +133,9 @@ func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, element: At
 		return  # Immune to this element
 
 	health_component.take_damage(amount)
-	get_node('/root').find_child("EnemyHurtSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
-	get_node('/root').find_child("EnemyHurtSoundEffect", true, false).play()
+	if play_sound == true:
+		get_node('/root').find_child("EnemyHurtSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
+		get_node('/root').find_child("EnemyHurtSoundEffect", true, false).play()
 
 	# Appliquer le knockback et l'état Hurt même si mort (pour l'animation Domage)
 	if knockback_dir != Vector2.ZERO:
