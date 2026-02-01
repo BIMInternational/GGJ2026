@@ -10,4 +10,5 @@ damage = 5.0
 range_distance = 0.0
 dissipation_time = 8.0
 cooldown = 0.0
+play_sound = false
 visual_effect = ExtResource("2_oawso")

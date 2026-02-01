@@ -85,7 +85,11 @@ func _return_to_main_menu() -> void:
 
 
 func _on_quit_pressed() -> void:
-	get_tree().quit()
+	if OS.has_feature("web"):
+		# Sur web, retourner au menu principal
+		_return_to_main_menu()
+	else:
+		get_tree().quit()
 
 
 func _setup_focus() -> void:

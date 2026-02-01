@@ -10,4 +10,5 @@ damage = 15.0
 range_distance = 80.0
 cooldown = 0.0
 collision_radius = 30.0
+play_sound = false
 visual_effect = ExtResource("2_sfobr")

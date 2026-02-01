@@ -53,5 +53,8 @@ enum ElementType {
 ## Effet de particules pour la trainée (GPUParticles2D)
 @export var trail_particle_effect: PackedScene = null
 
+## Jouer un son lors du spawn de l'attaque (false pour les zones statiques/trainées)
+@export var play_sound: bool = true
+
 ## Effet visuel (particules/sprites)
 @export var visual_effect: PackedScene = null
