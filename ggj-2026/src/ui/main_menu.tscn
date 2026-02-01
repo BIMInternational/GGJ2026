@@ -75,10 +75,6 @@ grow_vertical = 2
 theme = SubResource("Theme_1")
 theme_override_constants/separation = 10
 
-[node name="Title" type="Label" parent="VBoxContainer" unique_id=1558252501]
-layout_mode = 2
-horizontal_alignment = 1
-
 [node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1624285312]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)

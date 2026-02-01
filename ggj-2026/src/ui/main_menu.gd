@@ -15,7 +15,6 @@ func _ready() -> void:
 
 
 func _update_texts() -> void:
-	$VBoxContainer/Title.text = tr("MAIN_MENU_TITLE")
 	$VBoxContainer/StartButton.text = tr("BTN_START")
 	$VBoxContainer/SettingsButton.text = tr("BTN_SETTINGS")
 	$VBoxContainer/CreditsButton.text = tr("BTN_CREDITS")
