@@ -138,6 +138,8 @@ func perform_special_attack() -> void:
 	_is_laser_attacking = true
 	velocity = Vector2.ZERO
 	
+	get_node('/root').find_child("LaserSoundEffect", true, false).play()
+	
 	if target:
 		animated_sprite.flip_h = target.global_position.x < global_position.x
 	
