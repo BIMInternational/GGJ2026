@@ -3,10 +3,14 @@
 [ext_resource type="Texture2D" uid="uid://b60j6qoaabat7" path="res://assets/sprites/Boss/boss_spe01.png" id="1_4wn1r"]
 [ext_resource type="Script" uid="uid://ctl3502gqbpps" path="res://src/actors/enemies/boss.gd" id="1_7gg8e"]
 [ext_resource type="Texture2D" uid="uid://b85u0pkwxvto3" path="res://assets/sprites/Boss/boss_spe02.png" id="2_nh2h2"]
+[ext_resource type="Texture2D" uid="uid://bldw2ba0n8k51" path="res://assets/sprites/Boss/boss_laser01.png" id="3_48mcc"]
 [ext_resource type="Texture2D" uid="uid://bcafq6n3qqe5n" path="res://assets/sprites/Boss/boss_spe03.png" id="3_y1sus"]
+[ext_resource type="Texture2D" uid="uid://bu3kotjp1r28r" path="res://assets/sprites/Boss/boss_laser02.png" id="4_618vn"]
 [ext_resource type="Texture2D" uid="uid://b73ylwdegbhss" path="res://assets/sprites/Boss/boss_walk01.png" id="4_dkht7"]
+[ext_resource type="Texture2D" uid="uid://don68aha5tw0y" path="res://assets/sprites/Boss/boss_laser03.png" id="5_dhdu4"]
 [ext_resource type="Texture2D" uid="uid://dvqjigvrbuoa2" path="res://assets/sprites/Boss/boss_walk02.png" id="5_o2uq7"]
 [ext_resource type="Texture2D" uid="uid://2j4xpd6bq152" path="res://assets/sprites/Boss/boss_walk03.png" id="6_0dpou"]
+[ext_resource type="Texture2D" uid="uid://cw4nu2cli5ln2" path="res://assets/sprites/Boss/boss_laser04.png" id="6_nm8e6"]
 [ext_resource type="Texture2D" uid="uid://8ax7bsxs11v4" path="res://assets/sprites/Boss/boss_walk04.png" id="7_x34rp"]
 [ext_resource type="Script" uid="uid://cc45vge2xbv2a" path="res://src/scripts/health_component.gd" id="8_7gg8e"]
 [ext_resource type="Script" uid="uid://bs6471secjsn" path="res://src/scripts/state_machine.gd" id="10_a8hm0"]
@@ -24,6 +28,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_48mcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_618vn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_dhdu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_nm8e6")
+}],
+"loop": true,
+"name": &"laser",
 "speed": 5.0
 }, {
 "frames": [{
@@ -58,6 +79,43 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="Animation" id="Animation_8m052"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_s2srt"]
+resource_name = "laser"
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2500, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l1jm7"]
+_data = {
+&"RESET": SubResource("Animation_8m052"),
+&"laser": SubResource("Animation_s2srt")
+}
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_icfpw"]
 radius = 244.0
 height = 684.0
@@ -72,8 +130,12 @@ collision_mask = 4
 script = ExtResource("1_7gg8e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1974620946]
+position = Vector2(-2500, 0)
 sprite_frames = SubResource("SpriteFrames_a8hm0")
-animation = &"idle"
+animation = &"special"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=573996452]
+libraries/ = SubResource("AnimationLibrary_l1jm7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=655944404]
 position = Vector2(30, 0)
