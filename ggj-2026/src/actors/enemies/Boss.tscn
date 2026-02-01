@@ -37,10 +37,10 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("4_618vn")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": ExtResource("5_dhdu4")
 }, {
-"duration": 1.0,
+"duration": 5.0,
 "texture": ExtResource("6_nm8e6")
 }],
 "loop": true,
@@ -79,43 +79,6 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="Animation" id="Animation_8m052"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_s2srt"]
-resource_name = "laser"
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:offset")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2500, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_l1jm7"]
-_data = {
-&"RESET": SubResource("Animation_8m052"),
-&"laser": SubResource("Animation_s2srt")
-}
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_icfpw"]
 radius = 244.0
 height = 684.0
@@ -130,15 +93,14 @@ collision_mask = 4
 script = ExtResource("1_7gg8e")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1974620946]
-position = Vector2(-2500, 0)
+position = Vector2(-200.00002, -320.00003)
 sprite_frames = SubResource("SpriteFrames_a8hm0")
-animation = &"special"
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D" unique_id=573996452]
-libraries/ = SubResource("AnimationLibrary_l1jm7")
+animation = &"walk"
+frame_progress = 0.616301
+centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=655944404]
-position = Vector2(30, 0)
+position = Vector2(18.461536, 16.923079)
 shape = SubResource("CapsuleShape2D_icfpw")
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1828787666]
