@@ -219,6 +219,12 @@ func _handle_input() -> void:
 		Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
 	).normalized()
 	
+	if(direction.length() > 0):
+		if(get_node('/root').find_child("ScooterSoundEffect", true, false).playing == false):
+			get_node('/root').find_child("ScooterSoundEffect", true, false).play()
+	else:
+		get_node('/root').find_child("ScooterSoundEffect", true, false).stop()
+	
 	# Mettre à jour la dernière direction si le joueur bouge
 	if direction.length() > 0.1:
 		_last_move_direction = direction
@@ -226,11 +232,11 @@ func _handle_input() -> void:
 	# Dash
 	if Input.is_action_just_pressed("dash") and _dash_cooldown_timer <= 0:
 		_perform_dash()
+		get_node('/root').find_child("DashSoundEffect", true, false).play()
 	
 	# Attack avec Espace (jump)
 	if Input.is_action_just_pressed("jump"):
 		_spawn_attack(_get_current_attack_data())
-
 
 func _apply_movement(_delta: float) -> void:
 	if _is_dashing:
@@ -483,6 +489,22 @@ func _spawn_attack(attack_data: AttackData) -> void:
 	
 	# Position de spawn dans la direction de l'attaque
 	var spawn_position = global_position + attack_direction * attack_offset
+	match available_masks[current_mask_index]: 
+		MaskType.FIRE:
+			get_node('/root').find_child("FireballSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
+			get_node('/root').find_child("FireballSoundEffect", true, false).play()
+		MaskType.GAS:
+			get_node('/root').find_child("FartSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
+			get_node('/root').find_child("FartSoundEffect", true, false).play()
+		MaskType.WATER:
+			get_node('/root').find_child("WaterballSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
+			get_node('/root').find_child("WaterballSoundEffect", true, false).play()
+		MaskType.ICE:
+			get_node('/root').find_child("IceballSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
+			get_node('/root').find_child("IceballSoundEffect", true, false).play()
+		MaskType.LIGHTNING:
+			get_node('/root').find_child("ElectricityballSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
+			get_node('/root').find_child("ElectricityballSoundEffect", true, false).play()
 
 	# Utiliser le ChemistryManager pour spawn (disponible pour tous les acteurs)
 	ChemistryManager.spawn_attack(attack_data, spawn_position, attack_direction, self )
