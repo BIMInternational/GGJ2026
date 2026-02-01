@@ -79,6 +79,25 @@ func start_waves(camera: Camera2D, gates: Array, arrow: Control, reward: CanvasL
 	_start_next_phase()
 
 
+## Stop all wave processes and clean up
+func stop_waves() -> void:
+	is_running = false
+	_waiting_for_boss_area_visible = false
+	
+	# Clean up enemies
+	for enemy in enemies_alive:
+		if is_instance_valid(enemy):
+			enemy.queue_free()
+	enemies_alive.clear()
+	
+	# Clean up boss
+	if current_boss and is_instance_valid(current_boss):
+		current_boss.queue_free()
+	current_boss = null
+	
+	print("[WaveManager] Stopped all waves")
+
+
 func _setup_initial_gates() -> void:
 	for i in range(_gates.size()):
 		var gate = _gates[i]

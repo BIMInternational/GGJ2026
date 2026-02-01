@@ -48,7 +48,7 @@ var tumbleweed_scene: PackedScene = preload("res://src/actors/world/tumbleweed.t
 @export var tumbleweed_max_interval: float = 15.0
 
 # Mask system
-var available_masks: Array[MaskType] = [MaskType.FIRE, MaskType.GAS, MaskType.WATER, MaskType.ICE, MaskType.LIGHTNING]
+var available_masks: Array[MaskType] = [MaskType.FIRE, MaskType.WATER, MaskType.ICE, MaskType.LIGHTNING, MaskType.GAS]
 var current_mask_index: int = 0
 
 # === STATE VARIABLES ===
@@ -379,13 +379,9 @@ func die() -> void:
 	
 	# Attendre la fin de l'animation de mort (1.5 secondes)
 	await get_tree().create_timer(1.5).timeout
-	print("[Player] Game Over! Changement vers l'écran de fin...")
+	print("[Player] Animation de mort terminée")
 	
-	# Déclencher le Game Over
-	GameManager.end_game()
-	
-	# Changer vers l'écran de game over
-	get_tree().change_scene_to_file("res://src/ui/game_over.tscn")
+	# Le level_01.gd gère le game over via le signal died
 
 
 ## Switch entre les masques disponibles

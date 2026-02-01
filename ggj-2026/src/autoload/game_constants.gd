@@ -25,6 +25,7 @@ const AUDIO_BUS_SFX: String = "SFX"
 
 # Audio Music files
 const MUSIC_LOGO: String = "res://assets/music/BranquesInteractive.ogg"
+const MUSIC_GAMEOVER: String = "res://assets/music/abuelita dead.ogg"
 
 # Audio Effects files
 const PLAYER_WALK: String = "res://assets/sounds/scooter.ogg"

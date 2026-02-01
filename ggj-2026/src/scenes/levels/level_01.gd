@@ -36,7 +36,10 @@ func _setup_wave_system() -> void:
 	WaveManager.start_waves(camera, gates, arrow, reward, self)
 
 func _on_player_died() -> void:
+	print("[Level01] Player died - emitting signal")
 	player_died.emit()
+
+	
 
 func _on_victory() -> void:
 	print("Level completed!")

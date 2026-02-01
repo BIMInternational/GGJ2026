@@ -66,6 +66,11 @@ func _show_game_over() -> void:
 	print("[GameOver] Timer de 30s démarré pour retour automatique au menu principal")
 
 
+## Méthode publique pour démarrer le game over depuis l'extérieur
+func start_gameover() -> void:
+	_show_game_over()
+
+
 func _on_restart_pressed() -> void:
 	get_tree().paused = false
 	control.hide()

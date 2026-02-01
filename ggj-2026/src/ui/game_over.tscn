@@ -83,6 +83,9 @@ theme_override_constants/separation = 20
 
 [node name="Title" type="Label" parent="Control/VBoxContainer" unique_id=1054378688]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_ioouv")
+theme_override_font_sizes/font_size = 50
+text = "Game Over"
 horizontal_alignment = 1
 vertical_alignment = 1
 
