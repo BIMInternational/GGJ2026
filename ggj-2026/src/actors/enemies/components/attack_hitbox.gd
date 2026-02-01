@@ -69,6 +69,6 @@ func _deal_damage(body: Node2D) -> void:
 		var enemy_position = get_parent().global_position if get_parent() else global_position
 		var knockback_dir = (body.global_position - enemy_position).normalized()
 		print("[AttackHitbox] Enemy pos=", enemy_position, " Player pos=", body.global_position, " Direction=", knockback_dir)
-		body.take_damage(damage, knockback_dir)
+		body.take_damage(damage, knockback_dir, AttackData.ElementType.NONE, true)
 	else:
 		print("[AttackHitbox] Joueur touché mais pas de méthode take_damage!")

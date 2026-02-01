@@ -119,7 +119,8 @@ func apply_knockback(direction: Vector2, force: float = knockback_force) -> void
 	_knockback_velocity = direction.normalized() * force
 
 
-func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, element: AttackData.ElementType = AttackData.ElementType.NONE) -> void:
+func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, element: AttackData.ElementType = AttackData.ElementType.NONE, play_sound: bool = true) -> void:
+	 
 	# Check immunity based on hair color
 	if element != AttackData.ElementType.NONE and element == immune_element:
 		if playsound = true:

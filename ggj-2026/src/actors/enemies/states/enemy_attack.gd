@@ -69,5 +69,5 @@ func on_attack_hit(body: Node2D) -> void:
 		_has_hit = true
 		# Calculer la direction du knockback depuis l'ennemi vers le joueur
 		var knockback_dir = (body.global_position - _enemy.global_position).normalized()
-		body.take_damage(attack_damage, knockback_dir)
+		body.take_damage(attack_damage, knockback_dir, AttackData.ElementType.NONE, true)
 		print("Enemy hit player for ", attack_damage, " damage!")

@@ -308,7 +308,7 @@ func respawn(spawn_position: Vector2) -> void:
 
 
 ## Handles taking damage (optional health system integration)
-func take_damage(damage: int, knockback_dir: Vector2 = Vector2.ZERO) -> void:
+func take_damage(damage: int, knockback_dir: Vector2 = Vector2.ZERO, _element: AttackData.ElementType = AttackData.ElementType.NONE, _play_sound: bool = true) -> void:
 	print("[Player] take_damage appelé, damage=", damage, " knockback_dir=", knockback_dir)
 	# Ignorer si mort ou invulnérable
 	if _is_dead or _invulnerability_timer > 0:

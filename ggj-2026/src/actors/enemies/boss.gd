@@ -173,7 +173,7 @@ func get_facing_direction() -> Vector2:
 
 
 ## Override take_damage to ignore damage during entrance
-func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, _element: AttackData.ElementType = AttackData.ElementType.NONE) -> void:
+func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, _element: AttackData.ElementType = AttackData.ElementType.NONE, _play_sound: bool = true) -> void:
 	# Optionally make boss invulnerable during entrance
 	if _is_entering:
 		print("[Boss] Immune during entrance!")
