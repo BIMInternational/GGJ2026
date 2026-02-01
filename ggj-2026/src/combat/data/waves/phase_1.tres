@@ -12,4 +12,5 @@ subwaves = Array[ExtResource("2_t53wa")]([ExtResource("4_w5cd5"), ExtResource("5
 boss_scene = ExtResource("1_jchdp")
 boss_spawn_position = Vector2(2550, -350)
 gate_x_position = 3000.0
+show_reward_after_boss = false
 metadata/_custom_type_script = "uid://k55qcpowocic"

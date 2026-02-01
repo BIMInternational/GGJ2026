@@ -138,6 +138,8 @@ func perform_special_attack() -> void:
 	_is_laser_attacking = true
 	velocity = Vector2.ZERO
 	
+	get_node('/root').find_child("LaserSoundEffect", true, false).play()
+	
 	if target:
 		animated_sprite.flip_h = target.global_position.x < global_position.x
 	
@@ -174,7 +176,7 @@ func get_facing_direction() -> Vector2:
 	return Vector2(-1, 0) if animated_sprite.flip_h else Vector2(1, 0)
 
 
-## Override take_damage to ignore damage during entrance
+## Override  az zto ignore damage during entrance
 func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, _element: AttackData.ElementType = AttackData.ElementType.NONE, _play_sound: bool = true) -> void:
 	# Optionally make boss invulnerable during entrance
 	if not _has_entered:

@@ -4,7 +4,7 @@ class_name MainMenu
 
 
 func _ready() -> void:
-	AudioManager.play_music(preload(GameConstants.MUSIC_LOGO))
+	get_node('/root').find_child("TitleMusic", true, false).play()
 	_update_texts()
 	_initialize_signals()
 	_setup_focus()
@@ -35,6 +35,7 @@ func _on_language_changed(_locale: String) -> void:
 
 
 func _on_start_pressed() -> void:
+	get_node('/root').find_child("TitleMusic", true, false).stop()
 	SceneManager.change_scene(GameConstants.SCENE_MAIN_GAME)
 
 

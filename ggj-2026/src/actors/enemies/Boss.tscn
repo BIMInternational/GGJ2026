@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://difiev7vnjjug" path="res://src/actors/enemies/states/enemy_attack.gd" id="13_48mcc"]
 [ext_resource type="Script" uid="uid://bpej04ywkfsmn" path="res://src/actors/enemies/states/enemy_hurt.gd" id="14_618vn"]
 [ext_resource type="Script" uid="uid://b1dkbs86jnsl1" path="res://src/actors/enemies/components/attack_hitbox.gd" id="15_dhdu4"]
+[ext_resource type="AudioStream" uid="uid://cyk6m33ks0c8p" path="res://assets/sounds/laser.ogg" id="20_618vn"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_a8hm0"]
 animations = [{
@@ -190,6 +191,11 @@ shape = SubResource("RectangleShape2D_48mcc")
 
 [node name="LaserAnimationPlayer" type="AnimationPlayer" parent="." unique_id=203299847]
 libraries/ = SubResource("AnimationLibrary_dhdu4")
+
+[node name="Audio" type="Node" parent="." unique_id=1108816347]
+
+[node name="LaserSoundEffect" type="AudioStreamPlayer" parent="Audio" unique_id=1698348752]
+stream = ExtResource("20_618vn")
 
 [connection signal="hit_landed" from="AttackHitbox" to="." method="_on_attack_hit_landed"]
 [connection signal="hit_landed" from="LaserHitbox" to="." method="_on_laser_hit_landed"]

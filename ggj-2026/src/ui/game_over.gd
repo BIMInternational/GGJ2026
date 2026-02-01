@@ -41,6 +41,8 @@ func _update_texts(_locale: String = "") -> void:
 
 
 func _on_game_over() -> void:
+	get_node('/root').find_child("InGameMusic", true, false).stop()
+	get_node('/root').find_child("GameOverMusic", true, false).play()
 	_show_game_over()
 
 
