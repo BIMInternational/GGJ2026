@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://bpej04ywkfsmn" path="res://src/actors/enemies/states/enemy_hurt.gd" id="6_hurt"]
 [ext_resource type="Script" uid="uid://difiev7vnjjug" path="res://src/actors/enemies/states/enemy_attack.gd" id="8_k1ru1"]
 [ext_resource type="Script" uid="uid://b1dkbs86jnsl1" path="res://src/actors/enemies/components/attack_hitbox.gd" id="9_vo0du"]
+[ext_resource type="FontFile" uid="uid://x0ewq378heow" path="res://assets/fonts/American Captain.ttf" id="11_rr7jr"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1"]
 radius = 84.0
@@ -263,6 +264,15 @@ region_rect = Rect2(24.626266, 126.51555, 276.42212, 530.48444)
 
 [node name="AnimationPlayerHairs" type="AnimationPlayer" parent="." unique_id=1820793395]
 libraries/ = SubResource("AnimationLibrary_hairs")
+
+[node name="Label" type="Label" parent="." unique_id=321619867]
+offset_left = -87.0
+offset_top = -217.0
+offset_right = 36.0
+offset_bottom = -166.0
+theme_override_fonts/font = ExtResource("11_rr7jr")
+theme_override_font_sizes/font_size = 50
+text = "iMMUNE"
 
 [connection signal="hit_landed" from="AttackHitbox" to="." method="_on_attack_hit_landed"]
 
