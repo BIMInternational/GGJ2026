@@ -27,7 +27,7 @@ const AUDIO_BUS_SFX: String = "SFX"
 const MUSIC_LOGO: String = "res://assets/music/BranquesInteractive.ogg"
 
 # Audio Effects files
-const PLAYER_WALK: String = "res://assets/sounds/swim.ogg"
+const PLAYER_WALK: String = "res://assets/sounds/scooter.ogg"
 
 # Game settings
 const GAME_DURATION: float = 180.0 # 3 minutes (en secondes)
