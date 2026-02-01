@@ -130,6 +130,8 @@ scale = Vector2(0.65, 0.65)
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_7gg8e")
+knockback_friction = 0.5
+knockback_force = 200.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1974620946]
 position = Vector2(0, 20)
