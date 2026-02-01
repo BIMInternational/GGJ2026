@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://34w4pq7gg121"
+path="res://.godot/imported/ice ball.wav-64884f282c4089783e600d41df371936.sample"
+
+[deps]
+
+source_file="res://assets/sounds/ice ball.wav"
+dest_files=["res://.godot/imported/ice ball.wav-64884f282c4089783e600d41df371936.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

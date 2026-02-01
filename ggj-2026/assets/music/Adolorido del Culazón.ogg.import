@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b8shm6t03ore5"
+path="res://.godot/imported/Adolorido del Culazón.ogg-91116b8792952cbda7a3d84b43e4ef26.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Adolorido del Culazón.ogg"
+dest_files=["res://.godot/imported/Adolorido del Culazón.ogg-91116b8792952cbda7a3d84b43e4ef26.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

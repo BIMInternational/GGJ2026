@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://nm0gopvfmpfa"
+path="res://.godot/imported/Aquí a patear culos y a preparar poblanos. Y ya están servidos los poblanos.ogg-f58d7ce520732eb01c2a11fd2ed1404e.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/music/Aquí a patear culos y a preparar poblanos. Y ya están servidos los poblanos.ogg"
+dest_files=["res://.godot/imported/Aquí a patear culos y a preparar poblanos. Y ya están servidos los poblanos.ogg-f58d7ce520732eb01c2a11fd2ed1404e.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

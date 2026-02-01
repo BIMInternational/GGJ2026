@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dkwimd0cdr432"
+path="res://.godot/imported/punk hurt.wav-cb6c54135ad43389070c5addaab553f7.sample"
+
+[deps]
+
+source_file="res://assets/sounds/punk hurt.wav"
+dest_files=["res://.godot/imported/punk hurt.wav-cb6c54135ad43389070c5addaab553f7.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2
