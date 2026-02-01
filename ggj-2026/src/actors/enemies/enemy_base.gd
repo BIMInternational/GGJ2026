@@ -10,8 +10,8 @@ signal died(enemy: EnemyBase)
 @export var attack_range: float = 50.0
 @export var detection_range: float = 2000.0
 @export var score_value: int = 100
-@export var knockback_friction: float = 1.0
-@export var knockback_force: float = 20.0
+@export var knockback_friction: float = 0.05
+@export var knockback_force: float = 800.0
 @export var attack_damage: int = 10
 @export var attack_cooldown: float = 1.5
 
@@ -49,8 +49,8 @@ func _physics_process(delta: float) -> void:
 	# Appliquer la décélération du knockback
 	_knockback_velocity = lerp(_knockback_velocity, Vector2.ZERO, knockback_friction)
 
-	# Stocker la direction avant d'ajouter le knockback
-	var movement_direction = velocity.x
+	# Stocker la direction AI avant d'ajouter le knockback
+	var ai_movement_direction = velocity.x
 	
 	# Combiner le mouvement AI avec le knockback
 	velocity += _knockback_velocity
@@ -59,9 +59,12 @@ func _physics_process(delta: float) -> void:
 	# Mise à jour du z_index pour le tri visuel
 	z_index = int(global_position.y)
 
-	# Orienter le sprite selon la direction (seulement si mouvement volontaire, pas knockback)
-	if movement_direction != 0:
-		sprite.flip_h = movement_direction < 0
+	# Orienter le sprite selon la direction AI uniquement (pas le knockback)
+	# Ne retourner que si c'est un mouvement volontaire, qu'il n'y a presque pas de knockback
+	# et que l'ennemi n'est pas en train d'attaquer
+	var is_attacking = state_machine.current_state is EnemyAttackState
+	if ai_movement_direction != 0 and _knockback_velocity.length() < 1.0 and not is_attacking:
+		sprite.flip_h = ai_movement_direction < 0
 		
 	_update_hitbox_position()
 
