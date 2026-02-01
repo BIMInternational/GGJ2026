@@ -11,7 +11,7 @@ class_name GameOver
 @onready var quit_button: Button = $Control/VBoxContainer/ButtonsContainer/QuitButton
 
 var current_scene_path: String = ""
-var _auto_return_timer: float = 30.0
+var _auto_return_timer: float = 120.0
 var _timer_active: bool = false
 
 
@@ -41,12 +41,11 @@ func _update_texts(_locale: String = "") -> void:
 
 
 func _on_game_over() -> void:
-	get_node('/root').find_child("InGameMusic", true, false).stop()
-	get_node('/root').find_child("GameOverMusic", true, false).play()
 	_show_game_over()
 
 
 func _show_game_over() -> void:
+	get_node('/root').find_child("GameOverMusic", true, false).play()
 	if SceneManager.current_scene:
 		current_scene_path = SceneManager.current_scene.scene_file_path
 	score_label.text = tr("GAME_OVER_SCORE") % GameManager.score
@@ -62,10 +61,10 @@ func _show_game_over() -> void:
 	get_tree().paused = false  # Ne pas mettre en pause pour permettre le timer
 	restart_button.grab_focus()
 	
-	# Démarrer le timer de retour automatique (30 secondes)
-	_auto_return_timer = 30.0
+	# Démarrer le timer de retour automatique (120 secondes)
+	_auto_return_timer = 120.0
 	_timer_active = true
-	print("[GameOver] Timer de 30s démarré pour retour automatique au menu principal")
+	print("[GameOver] Timer de 120s démarré pour retour automatique au menu principal")
 
 
 ## Méthode publique pour démarrer le game over depuis l'extérieur
