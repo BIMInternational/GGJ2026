@@ -8,6 +8,10 @@ func _ready() -> void:
 	_update_texts()
 	_initialize_signals()
 	_setup_focus()
+	
+	# Cacher le bouton Quitter sur web car quit() ne fonctionne pas
+	if OS.has_feature("web"):
+		$VBoxContainer/QuitButton.visible = false
 
 
 func _update_texts() -> void:
@@ -43,7 +47,11 @@ func _on_credits_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	get_tree().quit()
+	if OS.has_feature("web"):
+		# Sur web, on ne peut pas quitter, retourner au menu
+		SceneManager.change_scene(GameConstants.SCENE_MAIN_MENU)
+	else:
+		get_tree().quit()
 
 
 func _setup_focus() -> void:

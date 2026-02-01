@@ -9,3 +9,4 @@ damage = 2.0
 range_distance = 80.0
 dissipation_time = 10.0
 cooldown = 0.0
+play_sound = false

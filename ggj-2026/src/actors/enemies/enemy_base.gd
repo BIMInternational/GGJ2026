@@ -25,6 +25,7 @@ signal died(enemy: EnemyBase)
 @onready var punk_hairs: Node2D = get_node_or_null("PunkHairs")
 var hair: Sprite2D = null
 @onready var attack_hitbox: Area2D = $AttackHitbox
+@onready var immune_label: Label = get_node_or_null("Label")
 
 # === STATE ===
 var target: Node2D = null
@@ -37,6 +38,10 @@ func _ready() -> void:
 	add_to_group("enemies")
 	y_sort_enabled = true
 	health_component.died.connect(_on_died)
+
+	# Cacher le label d'immunité
+	if immune_label:
+		immune_label.hide()
 
 	# Randomize hair color
 	_randomize_hair_color()
@@ -120,6 +125,11 @@ func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, element: At
 		if playsound = true:
 			get_node('/root').find_child("WooshSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
 			get_node('/root').find_child("WooshSoundEffect", true, false).play()
+		# Afficher le label d'immunité pendant 2.5 secondes
+		if immune_label:
+			immune_label.show()
+			await get_tree().create_timer(2.5).timeout
+			immune_label.hide()
 		return  # Immune to this element
 
 	health_component.take_damage(amount)

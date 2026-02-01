@@ -10,7 +10,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$ProjectPath = Join-Path $PSScriptRoot "ggj-2026"
+$ProjectPath = $PSScriptRoot
 $ProjectFile = Join-Path $ProjectPath "project.godot"
 
 Write-Host "==================================================" -ForegroundColor Cyan

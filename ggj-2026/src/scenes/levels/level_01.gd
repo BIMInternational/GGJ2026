@@ -33,7 +33,7 @@ func _setup_wave_system() -> void:
 	WaveManager.all_phases_completed.connect(_on_victory)
 	
 	print("Starting WaveManager...")
-	WaveManager.start_waves(camera, gates, arrow, reward)
+	WaveManager.start_waves(camera, gates, arrow, reward, self)
 
 func _on_player_died() -> void:
 	player_died.emit()

@@ -3,7 +3,7 @@ extends CanvasLayer
 class_name HUD
 
 @onready var score_label: Label = $MarginContainer/HBoxContainerScore/VBoxContainerScore/HBoxContainerScore/ScoreLabel
-@onready var timer_label: Label = $MarginContainer/HBoxContainerScore/VBoxContainerScore/TimerLabel
+#@onready var timer_label: Label = $MarginContainer/HBoxContainerScore/VBoxContainerScore/TimerLabel
 @onready var health_bar: ProgressBar = $MarginContainer/HBoxContainerP1/VBoxContainerP1/HealthBarP1
 @onready var name_label_p1: Label = $MarginContainer/HBoxContainerP1/VBoxContainerP1/NameLabelP1
 
@@ -16,9 +16,9 @@ var _current_time: float = 0.0
 func _ready() -> void:
 	GameManager.score_changed.connect(_on_score_changed)
 	
-	# Initialiser le compte à rebours
-	_current_time = countdown_time
-	_update_timer_display()
+	# Timer désactivé
+	#_current_time = countdown_time
+	#_update_timer_display()
 	
 	# Trouver le joueur dans la scène
 	await get_tree().process_frame
@@ -26,13 +26,14 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# Décompter le temps
-	if _current_time > 0:
-		_current_time -= delta
-		_current_time = max(_current_time, 0.0)  # Ne pas descendre en dessous de 0
-		_update_timer_display()
-	elif _current_time == 0:
-		_on_timer_finished()
+	# Timer désactivé
+	pass
+	#if _current_time > 0:
+		#_current_time -= delta
+		#_current_time = max(_current_time, 0.0)  # Ne pas descendre en dessous de 0
+		#_update_timer_display()
+	#elif _current_time == 0:
+		#_on_timer_finished()
 
 
 func _find_player() -> void:
@@ -93,12 +94,13 @@ func _on_score_changed(new_score: int) -> void:
 
 
 func _update_timer_display() -> void:
-	var time_int: int = int(_current_time)
-	if time_int != _last_time_displayed:
-		_last_time_displayed = time_int
-		var minutes: int = int(time_int / 60.0)
-		var seconds: int = time_int % 60
-		timer_label.text = "Time: %d:%02d" % [minutes, seconds]
+	pass
+	#var time_int: int = int(_current_time)
+	#if time_int != _last_time_displayed:
+		#_last_time_displayed = time_int
+		#var minutes: int = int(time_int / 60.0)
+		#var seconds: int = time_int % 60
+		#timer_label.text = "Time: %d:%02d" % [minutes, seconds]
 
 
 func _on_timer_finished() -> void:
