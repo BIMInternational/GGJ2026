@@ -112,8 +112,10 @@ func _on_attack_hit_landed(body: Node2D) -> void:
 	# Propager au state machine si en état Attack
 	if state_machine.current_state is EnemyAttackState:
 		state_machine.current_state.on_attack_hit(body)
-		get_node('/root').find_child("EnemyPunchSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
-		get_node('/root').find_child("EnemyPunchSoundEffect", true, false).play()
+		var punch_sound = get_node('/root').find_child("EnemyPunchSoundEffect", true, false)
+		if punch_sound:
+			punch_sound.pitch_scale = randf_range(0.85, 1.15)
+			punch_sound.play()
 
 func apply_knockback(direction: Vector2, force: float = knockback_force) -> void:
 	_knockback_velocity = direction.normalized() * force
@@ -123,8 +125,10 @@ func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, element: At
 	# Check immunity based on hair color
 	if element != AttackData.ElementType.NONE and element == immune_element:
 		if play_sound == true:
-			get_node('/root').find_child("WooshSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
-			get_node('/root').find_child("WooshSoundEffect", true, false).play()
+			var woosh_sound = get_node('/root').find_child("WooshSoundEffect", true, false)
+			if woosh_sound:
+				woosh_sound.pitch_scale = randf_range(0.85, 1.15)
+				woosh_sound.play()
 		# Afficher le label d'immunité pendant 2.5 secondes
 		if immune_label:
 			immune_label.show()
@@ -134,8 +138,10 @@ func take_damage(amount: int, knockback_dir: Vector2 = Vector2.ZERO, element: At
 
 	health_component.take_damage(amount)
 	if play_sound == true:
-		get_node('/root').find_child("EnemyHurtSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
-		get_node('/root').find_child("EnemyHurtSoundEffect", true, false).play()
+		var hurt_sound = get_node('/root').find_child("EnemyHurtSoundEffect", true, false)
+		if hurt_sound:
+			hurt_sound.pitch_scale = randf_range(0.85, 1.15)
+			hurt_sound.play()
 
 	# Appliquer le knockback et l'état Hurt même si mort (pour l'animation Domage)
 	if knockback_dir != Vector2.ZERO:
@@ -177,8 +183,10 @@ func _on_died() -> void:
 	if animation_player and animation_player.has_animation("Death"):
 		print("[Enemy] Lecture de l'animation Death")
 		play_animation("Death")
-		get_node('/root').find_child("EnemyDieSoundEffect", true, false).pitch_scale = randf_range(0.85, 1.15)
-		get_node('/root').find_child("EnemyDieSoundEffect", true, false).play()
+		var die_sound = get_node('/root').find_child("EnemyDieSoundEffect", true, false)
+		if die_sound:
+			die_sound.pitch_scale = randf_range(0.85, 1.15)
+			die_sound.play()
 		# Attendre la fin de l'animation avant de détruire
 		await animation_player.animation_finished
 		print("[Enemy] Animation Death terminée")
