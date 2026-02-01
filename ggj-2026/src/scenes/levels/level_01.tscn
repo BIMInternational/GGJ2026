@@ -65,7 +65,7 @@ scale = Vector2(2, -3)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Environment/Ground" unique_id=295017074]
-position = Vector2(8000, 250)
+position = Vector2(8008, 154)
 scale = Vector2(2, 3)
 shape = SubResource("RectangleShape2D_ground")
 
