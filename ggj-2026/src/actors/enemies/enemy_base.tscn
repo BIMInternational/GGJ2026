@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://cc45vge2xbv2a" path="res://src/scripts/health_component.gd" id="2_health"]
 [ext_resource type="Texture2D" uid="uid://co683j56ipyxb" path="res://assets/sprites/punk.png" id="2_k1ru1"]
 [ext_resource type="Script" uid="uid://bs6471secjsn" path="res://src/scripts/state_machine.gd" id="3_sm"]
-[ext_resource type="PackedScene" path="res://src/actors/enemies/components/punk-hairs.tscn" id="3_vo0du"]
+[ext_resource type="PackedScene" uid="uid://voyl5yshrhi1" path="res://src/actors/enemies/components/punk-hairs.tscn" id="3_vo0du"]
 [ext_resource type="Script" uid="uid://dj63b1mquoys3" path="res://src/actors/enemies/states/enemy_idle.gd" id="4_idle"]
 [ext_resource type="Script" uid="uid://cywm0e4wtknag" path="res://src/actors/enemies/states/enemy_chase.gd" id="5_chase"]
 [ext_resource type="Script" uid="uid://bpej04ywkfsmn" path="res://src/actors/enemies/states/enemy_hurt.gd" id="6_hurt"]
