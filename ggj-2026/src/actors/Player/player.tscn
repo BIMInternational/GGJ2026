@@ -677,7 +677,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=775830643]
-collision_mask = 4
+collision_mask = 20
 script = ExtResource("1_player")
 attack_offset = 100.0
 
